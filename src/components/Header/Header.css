@@ -1,3 +1,121 @@
 .header {
   background: #212526;
+  color: #FFFFFF;
+}
+
+.header__container {
+  max-width: 1300px;
+  margin: 0 auto;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 30px;
+}
+
+.header__logo {
+  width: 90px;
+  height: 56px;
+  background: url('../../images/logo.svg') no-repeat;
+  flex-shrink: 0;
+}
+
+.header__time-work {
+  font-family: Raleway;
+  font-size: 16px;
+  font-weight: 500;
+  line-height: 20px;
+  /* margin-right: auto; */
+  /* margin-left: 130px; */
+}
+
+.header__contacts {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 10px;
+}
+
+.header__phone {
+  font-family: Raleway;
+  font-size: 18px;
+  font-weight: 600;
+  line-height: 20px;
+}
+
+.header__callme {
+  font-family: Raleway;
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 16px;
+  text-decoration-line: underline;
+  color: #FC573B;
+  transition: opacity 0.2s;
+}
+
+.header__callme:hover {
+  opacity: 0.7;
+}
+
+.header__list {
+  display: flex;
+  align-items: center;
+  list-style: none;
+  gap: 1px;
+}
+
+.header__item {
+  width: 96px;
+  height: 96px;
+  background: #3B3B3B;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+.header__item:hover {
+  background: #F05A00;
+}
+
+.header__link {
+  width: 100%;
+  height: 100%;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-decoration: none;
+  color: #fff;
+}
+
+.header__link-favorite {
+  background: url('../../images/favorite-icon.svg') no-repeat 50%/32px;
+}
+
+.header__link-cart {
+  background: url('../../images/cart-icon.svg') no-repeat 50%/32px;
+}
+
+.header__link-profile {
+  background: url('../../images/profile-icon.svg') no-repeat 50%/32px;
+}
+
+.header__counter {
+  width: 22px;
+  height: 22px;
+  background: #F05A00;
+  border-radius: 50%;
+  position: absolute;
+  top: 24px;
+  left: 50px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-family: Raleway;
+  font-size: 13px;
+  font-weight: 500;
+  line-height: 12px;
+  transition: background 0.2s;
+}
+
+.header__item:hover .header__counter {
+  background: #3B3B3B;
 }
