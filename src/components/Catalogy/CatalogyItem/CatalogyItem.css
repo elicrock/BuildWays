@@ -1,0 +1,48 @@
+.catalogy__item {
+  max-width: 310px;
+  aspect-ratio: 1/1.12;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background-color: #ffffff;
+  cursor: pointer;
+  overflow: hidden;
+  transition: scale 0.2s;
+}
+
+.catalogy__item:hover .catalogy__name {
+  background-color: #f05a00;
+}
+
+.catalogy__item:hover .catalogy__image {
+  scale: 1.2;
+}
+
+.catalogy__name {
+  font-family: Raleway;
+  font-size: 16px;
+  font-weight: 500;
+  line-height: 20px;
+  color: #ffffff;
+  text-align: center;
+  background-color: #212526;
+  padding: 20px 0 20px 0;
+  width: 100%;
+  z-index: 1;
+}
+
+.catalogy__image {
+  width: 100%;
+  aspect-ratio: 1/1;
+  object-fit: contain;
+  overflow: hidden;
+  transition: scale 0.2s;
+}
+
+@media screen and (max-width: 600px) {
+  .catalogy__name {
+    font-size: 13px;
+    padding: 15px 0 15px 0;
+  }
+}
