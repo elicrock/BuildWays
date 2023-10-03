@@ -1,0 +1,21 @@
+.sidebar {
+  padding: 70px 70px 0 70px;
+}
+
+.sidebar__list {
+  max-width: 310px;
+  list-style: none;
+  background-color: #212526;
+}
+
+@media screen and (max-width: 900px) {
+  .sidebar__list {
+    max-width: 250px;
+  }
+}
+
+/* @media screen and (max-width: 525px) {
+  .sidebar__list {
+    max-width: 200px;
+  }
+} */
