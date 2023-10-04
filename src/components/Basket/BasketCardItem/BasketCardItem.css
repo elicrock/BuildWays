@@ -1,0 +1,55 @@
+.basket__card-item {
+  padding: 15px 40px;
+  background-color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  box-shadow: 0px -10px 20px 0px rgba(0, 0, 0, 0.03), 0px 10px 20px 0px rgba(0, 0, 0, 0.03);
+}
+
+.basket__flex-box {
+  display: flex;
+  align-items: center;
+}
+
+.basket__flex-box_name-item {
+  display: flex;
+  flex-direction: column;
+  margin-left: 20px;
+}
+
+.basket-card-image {
+  width: 60px;
+  height: 60px;
+  object-fit: cover;
+}
+
+.basket__count-box {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+.basket__card-minus-btn {
+  background: url('../../../images/basket__card-minus.svg') no-repeat center;
+  width: 14px;
+  height: 14px;
+  border: none;
+  cursor: pointer;
+}
+
+.basket__card-plus-btn {
+  background: url('../../../images/basket__card-plus.svg') no-repeat center;
+  width: 14px;
+  height: 14px;
+  border: none;
+  cursor: pointer;
+}
+
+.basket__card-delete-btn {
+  background: url('../../../images/basket__card-delete-btn.svg') no-repeat center;
+  width: 12px;
+  height: 12px;
+  border: none;
+  cursor: pointer;
+}
