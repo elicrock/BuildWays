@@ -11,13 +11,13 @@ function BasketCardItem() {
           <p className='basket__card-name'>Название товара</p>
         </div>
       </div>
-      <p className='basket-card-price'>500 ₽</p>
+      <p className='basket-card-price'>500 ₽</p>
       <div className='basket__count-box'>
         <button className='basket__card-minus-btn'></button>
         <p>5</p>
         <button className='basket__card-plus-btn'></button>
       </div>
-      <p className='basket__total-price'>1000 ₽</p>
+      <p className='basket__total-price'>1000 ₽</p>
       <button className='basket__card-delete-btn'></button>
     </li>
   );
