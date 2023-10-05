@@ -1,3 +1,4 @@
+import { Link } from 'react-router-dom';
 import './Header.css';
 import Navigation from '../Navigation/Navigation';
 
@@ -14,14 +15,14 @@ function Header() {
         </div>
         <ul className="header__list">
           <li className="header__item">
-            <a href="#" className="header__link header__link-favorite">
+            <Link to="/favorite" className="header__link header__link-favorite">
               <span className="header__counter">0</span>
-            </a>
+            </Link>
           </li>
           <li className="header__item">
-            <a href="#" className="header__link header__link-cart">
+            <Link to="/cart" className="header__link header__link-cart">
               <span className="header__counter">2</span>
-            </a>
+            </Link>
           </li>
           <li className="header__item">
             <a href="#" className="header__link header__link-profile"></a>
