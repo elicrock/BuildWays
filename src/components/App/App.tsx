@@ -8,13 +8,13 @@ import Basket from '../Basket/Basket';
 
 function App() {
   return (
-    <> 
+    <>
       <Routes>
-        <Route path='/' element={<Home />} />
-        <Route path='/catalogy' element={<Catalogy />} />
-        <Route path='/signup' element={<Register />} />
-        <Route path='/signin' element={<Login />} />
-        <Route path='/cart' element={<Basket />} />
+        <Route path="/" element={<Home />} />
+        <Route path="/catalogy" element={<Catalogy />} />
+        <Route path="/signup" element={<Register />} />
+        <Route path="/signin" element={<Login />} />
+        <Route path="/cart" element={<Basket />} />
       </Routes>
     </>
   );

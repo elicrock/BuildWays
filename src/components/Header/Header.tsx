@@ -1,7 +1,6 @@
-import { Link } from 'react-router-dom';
+import {Link} from 'react-router-dom';
 import './Header.css';
 import Navigation from '../Navigation/Navigation';
-
 
 function Header() {
   return (
@@ -11,7 +10,9 @@ function Header() {
         <p className="header__time-work">Время работы: 10:00–20:00</p>
         <div className="header__contacts">
           <p className="header__phone">+7 495 120-32-14</p>
-          <a href="#" className="header__callme">Заказать звонок</a>
+          <a href="#" className="header__callme">
+            Заказать звонок
+          </a>
         </div>
         <ul className="header__list">
           <li className="header__item">
@@ -31,7 +32,7 @@ function Header() {
       </div>
       <Navigation />
     </header>
-  )
+  );
 }
 
-export default Header
+export default Header;
