@@ -7,11 +7,11 @@ function BasketCardItem() {
       <div className='basket__flex-box'>
         <img className='basket__card-image' src={Img} alt='item'></img>
         <div className='basket__flex-box_name-item'>
-          <p>Категория</p>
-          <p>Название товара</p>
+          <p className='basket__card-category'>Категория</p>
+          <p className='basket__card-name'>Название товара</p>
         </div>
       </div>
-      <p>500 ₽</p>
+      <p className='basket-card-price'>500 ₽</p>
       <div className='basket__count-box'>
         <button className='basket__card-minus-btn'></button>
         <p>5</p>
