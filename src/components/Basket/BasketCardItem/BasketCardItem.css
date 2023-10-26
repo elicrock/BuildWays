@@ -1,8 +1,10 @@
 .basket__card-item {
   padding: 15px 40px;
+  gap: 9px;
   background-color: #fff;
   display: grid;
-  grid-template-columns: 2fr 1fr 1fr 1fr 0.2fr;
+  grid-template-columns: 1fr 3fr 1fr 1fr 1fr 1fr;
+  grid-template-areas: 'img cardName price counter totalPrice deleteBtn';
   align-items: center;
   box-shadow: 0px -10px 20px 0px rgba(0, 0, 0, 0.03), 0px 10px 20px 0px rgba(0, 0, 0, 0.03);
 }
@@ -15,10 +17,26 @@
 .basket__flex-box_name-item {
   display: flex;
   flex-direction: column;
-  margin-left: 20px;
+  grid-area: cardName;
 }
 
-.basket-card-image {
+.basket__card-category {
+}
+
+.basket__card-name {
+}
+
+.basket__card-price {
+  justify-self: center;
+  grid-area: price;
+}
+
+.basket__total-price {
+  justify-self: center;
+  grid-area: totalPrice;
+}
+
+.basket__card-image {
   width: 60px;
   height: 60px;
   object-fit: cover;
@@ -28,6 +46,8 @@
   display: flex;
   align-items: center;
   gap: 20px;
+  justify-self: center;
+  grid-area: counter;
 }
 
 .basket__card-minus-btn {
@@ -52,14 +72,45 @@
   height: 12px;
   border: none;
   cursor: pointer;
+  justify-self: end;
+  grid-area: deleteBtn;
+}
+
+.basket__card-delete-btn:hover {
+  opacity: 0.8;
 }
 
 @media screen and (max-width: 700px) {
   .basket__card-item {
-    padding: 10px 20px;
-    display: flex;
+    grid-template-columns: auto minmax(0%, 1fr) auto;
+    grid-template-rows: auto;
+    grid-template-areas:
+      'img cardName deleteBtn'
+      'counter totalPrice totalPrice'
+      'price totalPrice totalPrice';
   }
+
+  .basket__total-price {
+    align-self: end;
+    justify-self: end;
+  }
+
+  .basket__flex-box {
+    /* align-items: flex-start; */
+  }
+
   .basket__card-delete-btn {
     text-align: center;
+  }
+
+  .basket__card-image {
+    width: 80px;
+    height: 80px;
+  }
+
+  .basket__box-fd-column {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
   }
 }
