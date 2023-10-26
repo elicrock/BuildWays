@@ -20,6 +20,21 @@ function Basket() {
             <BasketCardItem />
             <BasketCardItem />
           </ul>
+          <div className="basket__box-total-amount">
+            <div className="basket__sum-section">
+              <span className="basket__sum">Сумма</span>
+              <span className="basket__sum-price">4550 ₽</span>
+            </div>
+            <div className="basket__sum-section">
+              <span>Скидка</span>
+              <span>-250 ₽</span>
+            </div>
+            <div className="basket__sum-section">
+              <span>К оплате</span>
+              <span>4200 ₽</span>
+            </div>
+            <button className="basket__">Перейти к оформлению</button>
+          </div>
         </div>
       </section>
     </>
