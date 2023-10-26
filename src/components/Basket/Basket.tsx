@@ -31,7 +31,7 @@ function Basket() {
             </div>
             <div className="basket__sum-section">
               <span>К оплате</span>
-              <span>4200 ₽</span>
+              <span>4200 ₽</span>
             </div>
             <button className="basket__">Перейти к оформлению</button>
           </div>
