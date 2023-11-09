@@ -20,12 +20,6 @@
   grid-area: cardName;
 }
 
-.basket__card-category {
-}
-
-.basket__card-name {
-}
-
 .basket__card-price {
   justify-self: center;
   grid-area: price;
@@ -93,10 +87,6 @@
   .basket__total-price {
     align-self: end;
     justify-self: end;
-  }
-
-  .basket__flex-box {
-    /* align-items: flex-start; */
   }
 
   .basket__card-delete-btn {
