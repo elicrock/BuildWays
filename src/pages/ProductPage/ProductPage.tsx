@@ -1,9 +1,9 @@
-import './Product.css';
+import './ProductPage.css';
 import ProductSrc from '../../images/product-item__example.png';
 import Header from '../../components/Header/Header';
 import Footer from '../../components/Footer/Footer';
 
-function Product() {
+function ProductPage() {
   return (
     <>
       <Header />
@@ -31,4 +31,4 @@ function Product() {
   );
 }
 
-export default Product;
+export default ProductPage;

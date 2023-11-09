@@ -6,7 +6,7 @@ import Register from '../../pages/Register/Register';
 import Login from '../../pages/Login/Login';
 import Basket from '../../pages/Basket/Basket';
 import PageNotFound from '../../pages/PageNotFound/PageNotFound';
-import Product from '../../pages/Product/Product';
+import ProductPage from '../../pages/ProductPage/ProductPage';
 import UserProfile from '../../pages/UserProfile/UserProfile';
 
 function App() {
@@ -19,7 +19,7 @@ function App() {
         <Route path="/basket" element={<Basket />} />
         <Route path="/user-profile" element={<UserProfile />} />
         <Route path="/catalogy" element={<Catalogy />} />
-        <Route path="/product" element={<Product />} />
+        <Route path="/product" element={<ProductPage />} />
         <Route path="*" element={<PageNotFound />} />
       </Routes>
     </div>
