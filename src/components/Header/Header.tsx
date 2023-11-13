@@ -1,4 +1,4 @@
-import {Link} from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import './Header.css';
 import Navigation from '../Navigation/Navigation';
 
@@ -21,7 +21,7 @@ function Header() {
             </Link>
           </li>
           <li className="header__item">
-            <Link to="/cart" className="header__link header__link-cart">
+            <Link to="/basket" className="header__link header__link-cart">
               <span className="header__counter">2</span>
             </Link>
           </li>
