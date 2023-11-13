@@ -90,9 +90,9 @@
   width: 396px;
 }
 
-.auth__button_disabled {
+.auth__button:disabled {
   background-color: grey;
-  cursor: auto;
+  pointer-events: none;
 }
 
 .auth__button:hover {
@@ -129,18 +129,22 @@
     align-items: center;
     padding: 90px 30px 0;
   }
+
   .auth__form {
     width: 100%;
   }
+
   .auth__button {
     font-size: 14px;
     line-height: 15px;
     width: 100%;
   }
+
   .auth__text {
     font-size: 13px;
     line-height: 15px;
   }
+
   .auth__link {
     font-size: 13px;
     line-height: 15px;

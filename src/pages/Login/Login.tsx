@@ -87,7 +87,7 @@ function Login() {
 
           <div className="auth__flex-box">
             <span className="auth__server-error"></span>
-            <button disabled={!isValid} className={`auth__button  ${!isValid ? 'auth__button_disabled' : ''}`} type="submit">
+            <button disabled={!isValid} className="auth__button" type="submit">
               Войти
             </button>
             <p className="auth__text">
