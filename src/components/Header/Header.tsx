@@ -26,7 +26,9 @@ function Header() {
             </Link>
           </li>
           <li className="header__item">
-            <a href="#" className="header__link header__link-profile"></a>
+            <Link to="/user-profile" className="header__link header__link-profile">
+              {/* <a href="#" className="header__link header__link-profile"></a> */}
+            </Link>
           </li>
         </ul>
       </div>
