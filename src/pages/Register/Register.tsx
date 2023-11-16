@@ -23,7 +23,7 @@ function Register() {
 
   const handleRegistration: SubmitHandler<RegisterFormData> = async () => {
     // evt.preventDefault();
-    console.log('hey register');
+    console.log();
   };
 
   return (
