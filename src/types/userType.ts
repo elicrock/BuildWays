@@ -1,21 +1,22 @@
-export interface User {
+export type User = {
   id?: number;
   name?: string;
   email: string;
   password?: string;
   role?: string;
-}
+};
 
-// export interface UserDataRegister {
+// export type UserDataRegister = {
 //   name: string;
 //   email: string;
 //   password: string;
-// }
+// };
 
-// export interface UserDataLogin {
+// export type UserDataLogin = {
+//   name?: string;
 //   email: string;
 //   password: string;
-// }
+// };
 
 // export interface UserProfile {
 //   id: number;

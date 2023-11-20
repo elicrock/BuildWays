@@ -1,8 +1,8 @@
 import { Link, useNavigate } from 'react-router-dom';
 import { useForm, SubmitHandler } from 'react-hook-form';
 import { useAppDispatch } from '../../hooks/redux';
-import { useLoginUserMutation } from '../../Api/authApi';
 import Logo from '../../images/logo-dark.svg';
+import { useLoginUserMutation } from '../../Api/authApi';
 import { setUser } from '../../redux/authSlice';
 
 interface LoginFormData {
@@ -16,13 +16,15 @@ function Login() {
     handleSubmit,
     formState: { errors, isValid },
   } = useForm<LoginFormData>({ mode: 'onChange' });
+
   const dispatch = useAppDispatch();
   const [loginUser] = useLoginUserMutation();
   const navigate = useNavigate();
 
-  const handleLogin: SubmitHandler<LoginFormData> = async (data) => {
+  const handleLogin: SubmitHandler<LoginFormData> = async data => {
     try {
       const result = await loginUser(data);
+
       if ('data' in result) {
         dispatch(setUser(result.data));
         navigate('/');
@@ -73,7 +75,6 @@ function Login() {
             />
           </label>
           <span className={`auth__error ${errors.email ? 'auth__error_active' : ''}`}>{errors?.email?.message}</span>
-
           <label className="auth__label" htmlFor="inputPassword">
             Пароль
             <input
@@ -98,8 +99,9 @@ function Login() {
               })}
             />
           </label>
-          <span className={`auth__error ${errors.password ? 'auth__error_active' : ''}`}>{errors?.password?.message}</span>
-
+          <span className={`auth__error ${errors.password ? 'auth__error_active' : ''}`}>
+            {errors?.password?.message}
+          </span>
           <div className="auth__flex-box">
             <span className="auth__server-error"></span>
             <button disabled={!isValid} className="auth__button" type="submit">

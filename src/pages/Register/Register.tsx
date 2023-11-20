@@ -1,4 +1,3 @@
-// import { FormEvent } from 'react';
 import { Link } from 'react-router-dom';
 import { useForm, SubmitHandler } from 'react-hook-form';
 import { useAppDispatch } from '../../hooks/redux';
@@ -78,7 +77,6 @@ function Register() {
             />
           </label>
           <span className={`auth__error ${errors.name ? 'auth__error_active' : ''}`}>{errors?.name?.message}</span>
-
           <label className="auth__label" htmlFor="inputEmail">
             E-mail
             <input
@@ -109,7 +107,6 @@ function Register() {
             />
           </label>
           <span className={`auth__error ${errors.email ? 'auth__error_active' : ''}`}>{errors?.email?.message}</span>
-
           <label className="auth__label" htmlFor="inputPassword">
             Пароль
             <input
@@ -160,7 +157,6 @@ function Register() {
           <span className={`auth__error ${errors.confirmPassword ? 'auth__error_active' : ''}`}>
             {errors?.confirmPassword?.message}
           </span>
-
           <div className="auth__flex-box">
             <span className="auth__server-error"></span>
             <button className="auth__button" type="submit" disabled={!isValid}>

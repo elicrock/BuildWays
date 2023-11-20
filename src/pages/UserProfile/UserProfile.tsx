@@ -1,16 +1,16 @@
-import { useEffect } from 'react';
 import './UserProfile.css';
 import Header from '../../components/Header/Header';
 import Footer from '../../components/Footer/Footer';
-import { useAppDispatch } from '../../hooks/redux';
-import { setUser } from '../../redux/authSlice';
-import { useGetUserProfileQuery, useUpdateUserProfileMutation } from '../../Api/authApi';
+import { useEffect } from 'react';
 import { useForm, SubmitHandler } from 'react-hook-form';
+import { useAppDispatch } from '../../hooks/redux';
+import { useGetUserProfileQuery, useUpdateUserProfileMutation } from '../../Api/authApi';
+import { setUser } from '../../redux/authSlice';
 
-interface ProfileFormData {
+type ProfileFormData = {
   name: string;
   email: string;
-}
+};
 
 function UserProfile() {
   const {
@@ -22,23 +22,23 @@ function UserProfile() {
 
   const dispatch = useAppDispatch();
   const { data: userProfileData } = useGetUserProfileQuery();
-  const [updateProfile, { isLoading }] = useUpdateUserProfileMutation();
-
-  const handleEditProfile: SubmitHandler<ProfileFormData> = async ({ name, email }) => {
-    try {
-      await updateProfile({ name, email });
-    } catch (error) {
-      console.log(error);
-    }
-  };
+  const [updateUserProfile, { isLoading }] = useUpdateUserProfileMutation();
 
   useEffect(() => {
     if (userProfileData) {
       dispatch(setUser(userProfileData));
-      setValue('name', userProfileData.name || '');
-      setValue('email', userProfileData.email || '');
+      setValue('name', userProfileData?.name || '');
+      setValue('email', userProfileData?.email || '');
     }
-  }, [dispatch, userProfileData, setValue]);
+  }, [userProfileData, dispatch, setValue]);
+
+  const handleEditProfile: SubmitHandler<ProfileFormData> = async ({ name, email }) => {
+    try {
+      await updateUserProfile({ name, email });
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
   return (
     <>
