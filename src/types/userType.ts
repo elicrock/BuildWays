@@ -17,3 +17,10 @@ export type User = {
 //   email: string;
 //   password: string;
 // };
+
+// export interface UserProfile {
+//   id: number;
+//   name: string;
+//   email: string;
+//   role: string;
+// }

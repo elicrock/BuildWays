@@ -5,7 +5,6 @@ import './Register.css';
 import Logo from '../../images/logo-dark.svg';
 import { useRegisterUserMutation, useLoginUserMutation } from '../../Api/authApi';
 import { setUser } from '../../redux/authSlice';
-
 interface RegisterFormData {
   name: string;
   email: string;
@@ -159,7 +158,7 @@ function Register() {
           </span>
           <div className="auth__flex-box">
             <span className="auth__server-error"></span>
-            <button disabled={!isValid} className="auth__button" type="submit">
+            <button className="auth__button" type="submit" disabled={!isValid}>
               Зарегистрироваться
             </button>
             <p className="auth__text">

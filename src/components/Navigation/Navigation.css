@@ -57,3 +57,9 @@
     background-position: calc((100vw - 768px)/(1300 - 768) * (16 - 9) + 9px);
   }
 }
+
+@media screen and (max-width: 768px) {
+  .navigation__container {
+    /* display: none; */
+  }
+}
