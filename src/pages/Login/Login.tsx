@@ -1,6 +1,9 @@
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { useForm, SubmitHandler } from 'react-hook-form';
+import { useAppDispatch } from '../../hooks/redux';
+import { useLoginUserMutation } from '../../Api/authApi';
 import Logo from '../../images/logo-dark.svg';
+import { setUser } from '../../redux/authSlice';
 
 interface LoginFormData {
   email: string;
@@ -13,10 +16,22 @@ function Login() {
     handleSubmit,
     formState: { errors, isValid },
   } = useForm<LoginFormData>({ mode: 'onChange' });
+  const dispatch = useAppDispatch();
+  const [loginUser] = useLoginUserMutation();
+  const navigate = useNavigate();
 
-  const handleLogin: SubmitHandler<LoginFormData> = async () => {
-    // evt.preventDefault();
-    console.log('hey login');
+  const handleLogin: SubmitHandler<LoginFormData> = async (data) => {
+    try {
+      const result = await loginUser(data);
+      if ('data' in result) {
+        dispatch(setUser(result.data));
+        navigate('/');
+      } else {
+        console.log(result.error);
+      }
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   return (

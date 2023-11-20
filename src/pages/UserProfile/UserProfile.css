@@ -91,10 +91,23 @@
   font-size: 16px;
   font-weight: 500;
   line-height: 17px;
+  transition: border-color 0.2s;
 }
 
 .user-profile__input:focus {
   border-color: #f05a00;
+}
+
+.user-profile__error {
+  color: #f05a00;
+  font-size: 11px;
+  font-weight: 500;
+  line-height: 13px;
+  opacity: 0;
+}
+
+.user-profile__error_active {
+  opacity: 1;
 }
 
 .user-profile__submit-btn {
@@ -109,10 +122,16 @@
   color: #fff;
   background-color: #f05a00;
   cursor: pointer;
+  transition: opacity 0.2s;
 }
 
 .user-profile__submit-btn:hover {
   opacity: 0.7;
+}
+
+.user-profile__submit-btn:disabled {
+  background-color: grey;
+  pointer-events: none;
 }
 
 @media screen and (max-width: 915px) {
@@ -131,6 +150,7 @@
   .user-profile {
     padding: 0 15px;
   }
+
   .user-profile__container {
     flex-direction: column;
   }
@@ -140,14 +160,17 @@
   .user-profile__title {
     font-size: 24px;
   }
+
   .user-profile__form {
     padding: 15px 20px;
     min-width: 260px;
     /* width: 100%; */
   }
+
   .user-profile__box-category {
     width: 100%;
   }
+
   .user-profile__category {
     padding: 25px 15px;
   }
