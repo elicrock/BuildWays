@@ -93,6 +93,7 @@
 .auth__button_disabled {
   background-color: grey;
   cursor: auto;
+  pointer-events: none;
 }
 
 .auth__button:hover {
