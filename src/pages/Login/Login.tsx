@@ -19,7 +19,6 @@ function Login() {
 
   const dispatch = useAppDispatch();
   const [loginUser] = useLoginUserMutation();
-
   const navigate = useNavigate();
 
   const handleLogin: SubmitHandler<LoginFormData> = async data => {

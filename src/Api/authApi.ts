@@ -3,7 +3,7 @@ import { User } from '../types/userType';
 
 export const authApi = createApi({
   reducerPath: 'authApi',
-  baseQuery: fetchBaseQuery({ baseUrl: 'http://localhost:4000/api/', credentials: 'include' }),
+  baseQuery: fetchBaseQuery({ baseUrl: 'http://localhost:3000/api/', credentials: 'include' }),
   endpoints: builder => ({
     registerUser: builder.mutation({
       query: (newUserData: User) => ({
@@ -13,10 +13,10 @@ export const authApi = createApi({
       }),
     }),
     loginUser: builder.mutation({
-      query: (userApi: User) => ({
+      query: (userData: User) => ({
         url: 'signin',
         method: 'POST',
-        body: userApi,
+        body: userData,
       }),
     }),
     getUserProfile: builder.query<User, void>({
@@ -32,9 +32,5 @@ export const authApi = createApi({
   }),
 });
 
-export const {
-  useRegisterUserMutation,
-  useLoginUserMutation,
-  useGetUserProfileQuery,
-  useUpdateUserProfileMutation,
-} = authApi;
+export const { useRegisterUserMutation, useLoginUserMutation, useGetUserProfileQuery, useUpdateUserProfileMutation } =
+  authApi;

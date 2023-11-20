@@ -108,7 +108,6 @@ function Register() {
             />
           </label>
           <span className={`auth__error ${errors.email ? 'auth__error_active' : ''}`}>{errors?.email?.message}</span>
-
           <label className="auth__label" htmlFor="inputPassword">
             Пароль
             <input
@@ -136,7 +135,6 @@ function Register() {
           <span className={`auth__error ${errors.password ? 'auth__error_active' : ''}`}>
             {errors?.password?.message}
           </span>
-
           <label className="auth__label" htmlFor="inputConfirmPassword">
             Подтвердите Пароль
             <input
