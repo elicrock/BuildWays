@@ -1,4 +1,5 @@
-import { Link } from 'react-router-dom';
+import { useState } from 'react';
+import { Link, useNavigate } from 'react-router-dom';
 import { useForm, SubmitHandler } from 'react-hook-form';
 import { useAppDispatch } from '../../hooks/redux';
 import './Register.css';
@@ -22,20 +23,26 @@ function Register() {
   const dispatch = useAppDispatch();
   const [registerUser] = useRegisterUserMutation();
   const [loginUser] = useLoginUserMutation();
+  const [isLoading, setIsLoading] = useState(false);
 
+  const navigate = useNavigate();
   const password = watch('password', '');
 
   const handleRegistration: SubmitHandler<RegisterFormData> = async ({ name, email, password }) => {
+    setIsLoading(true);
     try {
       await registerUser({ name, email, password });
       const result = await loginUser({ email, password });
       if ('data' in result) {
         dispatch(setUser(result.data));
+        navigate('/');
       } else {
         console.log(result.error);
       }
     } catch (error) {
       console.log(error);
+    } finally {
+      setIsLoading(false);
     }
   };
 
@@ -50,7 +57,6 @@ function Register() {
           <label className="auth__label" htmlFor="inputName">
             Имя
             <input
-              // disabled={isLoading}
               className="auth__input"
               id="inputName"
               type="text"
@@ -59,6 +65,7 @@ function Register() {
               minLength={2}
               maxLength={30}
               autoComplete="username"
+              disabled={isLoading}
               {...register('name', {
                 required: 'Поле обязательно для заполнения',
                 minLength: {
@@ -88,6 +95,7 @@ function Register() {
               minLength={5}
               maxLength={30}
               autoComplete="email"
+              disabled={isLoading}
               {...register('email', {
                 required: 'Поле обязательно для заполнения',
                 pattern: {
@@ -118,6 +126,7 @@ function Register() {
               minLength={3}
               maxLength={30}
               autoComplete="new-password"
+              disabled={isLoading}
               {...register('password', {
                 required: 'Поле обязательно для заполнения',
                 minLength: {
@@ -146,6 +155,7 @@ function Register() {
               minLength={3}
               maxLength={30}
               autoComplete="new-password"
+              disabled={isLoading}
               {...register('confirmPassword', {
                 required: 'Поле обязательно для заполнения',
                 validate: value => {
@@ -159,8 +169,8 @@ function Register() {
           </span>
           <div className="auth__flex-box">
             <span className="auth__server-error"></span>
-            <button className="auth__button" type="submit" disabled={!isValid}>
-              Зарегистрироваться
+            <button className="auth__button" type="submit" disabled={!isValid || isLoading}>
+              {isLoading ? 'Регистрация...' : 'Зарегистрироваться'}
             </button>
             <p className="auth__text">
               Уже зарегистрированы?

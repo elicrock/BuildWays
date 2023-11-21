@@ -118,7 +118,7 @@ function UserProfile() {
                   {errors?.email?.message}
                 </span>
                 <button className="user-profile__submit-btn" type="submit" disabled={!isValid || isLoading}>
-                  Сохранить
+                  {isLoading ? 'Сохранение' : 'Сохранить'}
                 </button>
               </form>
             </div>

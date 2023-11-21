@@ -18,7 +18,7 @@ function Login() {
   } = useForm<LoginFormData>({ mode: 'onChange' });
 
   const dispatch = useAppDispatch();
-  const [loginUser] = useLoginUserMutation();
+  const [loginUser, { isLoading }] = useLoginUserMutation();
   const navigate = useNavigate();
 
   const handleLogin: SubmitHandler<LoginFormData> = async data => {
@@ -47,7 +47,6 @@ function Login() {
           <label className="auth__label" htmlFor="inputEmail">
             E-mail
             <input
-              // disabled={isLoading}
               className="auth__input"
               id="inputEmail"
               type="email"
@@ -56,6 +55,7 @@ function Login() {
               minLength={5}
               maxLength={30}
               autoComplete="email"
+              disabled={isLoading}
               {...register('email', {
                 required: 'Поле обязательно для заполнения',
                 pattern: {
@@ -86,6 +86,7 @@ function Login() {
               minLength={3}
               maxLength={30}
               autoComplete="current-password"
+              disabled={isLoading}
               {...register('password', {
                 required: 'Поле обязательно для заполнения',
                 minLength: {
@@ -104,8 +105,8 @@ function Login() {
           </span>
           <div className="auth__flex-box">
             <span className="auth__server-error"></span>
-            <button disabled={!isValid} className="auth__button" type="submit">
-              Войти
+            <button className="auth__button" type="submit" disabled={!isValid || isLoading}>
+              {isLoading ? 'Вход...' : 'Войти'}
             </button>
             <p className="auth__text">
               Ещё не зарегистрированы?
