@@ -17,6 +17,7 @@ function UserProfile() {
     register,
     handleSubmit,
     setValue,
+    watch,
     formState: { errors, isValid },
   } = useForm<ProfileFormData>({ mode: 'onChange' });
 
@@ -31,6 +32,10 @@ function UserProfile() {
       setValue('email', userProfileData?.email || '');
     }
   }, [userProfileData, dispatch, setValue]);
+
+  const name = watch('name');
+  const email = watch('email');
+  const isFormChanged = userProfileData?.name !== name || userProfileData?.email !== email;
 
   const handleEditProfile: SubmitHandler<ProfileFormData> = async ({ name, email }) => {
     try {
@@ -117,7 +122,11 @@ function UserProfile() {
                 <span className={`user-profile__error ${errors.email ? 'user-profile__error_active' : ''}`}>
                   {errors?.email?.message}
                 </span>
-                <button className="user-profile__submit-btn" type="submit" disabled={!isValid || isLoading}>
+                <button
+                  className="user-profile__submit-btn"
+                  type="submit"
+                  disabled={!isValid || !isFormChanged || isLoading}
+                >
                   {isLoading ? 'Сохранение' : 'Сохранить'}
                 </button>
               </form>

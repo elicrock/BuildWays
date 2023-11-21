@@ -2,10 +2,6 @@ import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
 import { User } from '../types/userType';
 
-type UserState = {
-  auth: AuthState;
-};
-
 type AuthState = {
   isLoggedIn: boolean;
   currentUser: User | null;
@@ -31,6 +27,5 @@ const authSlice = createSlice({
   },
 });
 
-export const selectUser = (state: UserState) => state.auth.currentUser;
 export const { setUser, logout } = authSlice.actions;
 export default authSlice.reducer;
