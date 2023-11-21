@@ -1,4 +1,4 @@
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { useForm, SubmitHandler } from 'react-hook-form';
 import { useAppDispatch } from '../../hooks/redux';
 import './Register.css';
@@ -23,6 +23,7 @@ function Register() {
   const [registerUser] = useRegisterUserMutation();
   const [loginUser] = useLoginUserMutation();
 
+  const navigate = useNavigate();
   const password = watch('password', '');
 
   const handleRegistration: SubmitHandler<RegisterFormData> = async ({ name, email, password }) => {
@@ -31,6 +32,7 @@ function Register() {
       const result = await loginUser({ email, password });
       if ('data' in result) {
         dispatch(setUser(result.data));
+        navigate('/');
       } else {
         console.log(result.error);
       }
