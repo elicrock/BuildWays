@@ -127,6 +127,14 @@
   opacity: 0.7;
 }
 
+.auth__server-error {
+  margin-bottom: 20px;
+  color: #f05a00;
+  font-size: 15px;
+  font-weight: 500;
+  line-height: 13px;
+}
+
 @media screen and (max-width: 500px) {
   .auth__container {
     align-items: center;

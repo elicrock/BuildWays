@@ -1,15 +1,16 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-
 import { User } from '../types/userType';
 
 type AuthState = {
   isLoggedIn: boolean;
   currentUser: User | null;
+  error: string | null;
 };
 
 const initialState: AuthState = {
   isLoggedIn: false,
   currentUser: null,
+  error: null,
 };
 
 const authSlice = createSlice({
@@ -24,8 +25,11 @@ const authSlice = createSlice({
       state.isLoggedIn = false;
       state.currentUser = null;
     },
+    setError: (state, action: PayloadAction<string>) => {
+      state.error = action.payload;
+    },
   },
 });
 
-export const { setUser, logout } = authSlice.actions;
+export const { setUser, setError, logout } = authSlice.actions;
 export default authSlice.reducer;

@@ -1,11 +1,11 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { useForm, SubmitHandler } from 'react-hook-form';
-import { useAppDispatch } from '../../hooks/redux';
+import { useAppDispatch, useAppSelector } from '../../hooks/redux';
 import './Register.css';
 import Logo from '../../images/logo-dark.svg';
 import { useRegisterUserMutation, useLoginUserMutation } from '../../Api/authApi';
-import { setUser } from '../../redux/authSlice';
+import { setUser, setError } from '../../redux/authSlice';
 interface RegisterFormData {
   name: string;
   email: string;
@@ -23,21 +23,34 @@ function Register() {
   const dispatch = useAppDispatch();
   const [registerUser] = useRegisterUserMutation();
   const [loginUser] = useLoginUserMutation();
+  const errorApi = useAppSelector(state => state.auth.error);
   const [isLoading, setIsLoading] = useState(false);
 
   const navigate = useNavigate();
-  const password = watch('password', '');
+  const inputName = watch('name');
+  const inputEmail = watch('email');
+  const inputPassword = watch('password', '');
+  const inputConfirmPassword = watch('confirmPassword', '');
+
+  useEffect(() => {
+    dispatch(setError(''));
+  }, [dispatch, inputName, inputEmail, inputPassword, inputConfirmPassword]);
 
   const handleRegistration: SubmitHandler<RegisterFormData> = async ({ name, email, password }) => {
     setIsLoading(true);
     try {
-      await registerUser({ name, email, password });
-      const result = await loginUser({ email, password });
-      if ('data' in result) {
-        dispatch(setUser(result.data));
-        navigate('/');
+      const response = await registerUser({ name, email, password });
+
+      if ('data' in response) {
+        const result = await loginUser({ email, password });
+        if ('data' in result) {
+          dispatch(setUser(result.data));
+          navigate('/');
+        }
+      } else if ('status' in response.error && response.error.status === 409) {
+        dispatch(setError('Пользователь с таким email уже существует'));
       } else {
-        console.log(result.error);
+        dispatch(setError('При регистрации пользователя произошла ошибка'));
       }
     } catch (error) {
       console.log(error);
@@ -158,7 +171,7 @@ function Register() {
               {...register('confirmPassword', {
                 required: 'Поле обязательно для заполнения',
                 validate: value => {
-                  return value === password || 'Пароли должны совпадать';
+                  return value === inputPassword || 'Пароли должны совпадать';
                 },
               })}
             />
@@ -167,7 +180,7 @@ function Register() {
             {errors?.confirmPassword?.message}
           </span>
           <div className="auth__flex-box">
-            <span className="auth__server-error"></span>
+            <span className="auth__server-error">{errorApi}</span>
             <button className="auth__button" type="submit" disabled={!isValid || isLoading}>
               {isLoading ? 'Регистрация...' : 'Зарегистрироваться'}
             </button>

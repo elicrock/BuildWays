@@ -3,9 +3,9 @@ import Header from '../../components/Header/Header';
 import Footer from '../../components/Footer/Footer';
 import { useEffect } from 'react';
 import { useForm, SubmitHandler } from 'react-hook-form';
-import { useAppDispatch } from '../../hooks/redux';
-import { useGetUserProfileQuery, useUpdateUserProfileMutation } from '../../Api/authApi';
-import { setUser } from '../../redux/authSlice';
+import { useAppDispatch, useAppSelector } from '../../hooks/redux';
+import { useUpdateUserProfileMutation } from '../../Api/authApi';
+import { setError, setUser } from '../../redux';
 
 type ProfileFormData = {
   name: string;
@@ -22,24 +22,36 @@ function UserProfile() {
   } = useForm<ProfileFormData>({ mode: 'onChange' });
 
   const dispatch = useAppDispatch();
-  const { data: userProfileData } = useGetUserProfileQuery();
+  const currentUser = useAppSelector(state => state.auth.currentUser);
+  const errorApi = useAppSelector(state => state.auth.error);
+
   const [updateUserProfile, { isLoading }] = useUpdateUserProfileMutation();
 
-  useEffect(() => {
-    if (userProfileData) {
-      dispatch(setUser(userProfileData));
-      setValue('name', userProfileData?.name || '');
-      setValue('email', userProfileData?.email || '');
-    }
-  }, [userProfileData, dispatch, setValue]);
+  const inputName = watch('name');
+  const inputEmail = watch('email');
+  const isFormChanged = currentUser?.name !== inputName || currentUser?.email !== inputEmail;
 
-  const name = watch('name');
-  const email = watch('email');
-  const isFormChanged = userProfileData?.name !== name || userProfileData?.email !== email;
+  useEffect(() => {
+    if (currentUser) {
+      setValue('name', currentUser?.name || '');
+      setValue('email', currentUser?.email || '');
+    }
+  }, [currentUser, dispatch, setValue]);
+
+  useEffect(() => {
+    dispatch(setError(''));
+  }, [dispatch, inputName, inputEmail]);
 
   const handleEditProfile: SubmitHandler<ProfileFormData> = async ({ name, email }) => {
     try {
-      await updateUserProfile({ name, email });
+      const response = await updateUserProfile({ name, email });
+      if ('data' in response) {
+        dispatch(setUser({ name, email }));
+      } else if ('status' in response.error && response.error.status === 409) {
+        dispatch(setError('Пользователь с таким email уже существует!'));
+      } else {
+        dispatch(setError('Произошла ошибка при обновлении данных'));
+      }
     } catch (error) {
       console.log(error);
     }
@@ -129,7 +141,9 @@ function UserProfile() {
                 >
                   {isLoading ? 'Сохранение' : 'Сохранить'}
                 </button>
+                <span className="user-profile__error-api">{errorApi}</span>
               </form>
+              <button className="user-profile__logoutBtn">Выйти из аккаунта</button>
             </div>
           </div>
         </section>

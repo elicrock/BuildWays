@@ -1,9 +1,10 @@
+import { useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { useForm, SubmitHandler } from 'react-hook-form';
-import { useAppDispatch } from '../../hooks/redux';
+import { useAppDispatch, useAppSelector } from '../../hooks/redux';
 import Logo from '../../images/logo-dark.svg';
 import { useLoginUserMutation } from '../../Api/authApi';
-import { setUser } from '../../redux/authSlice';
+import { setError, setUser } from '../../redux/authSlice';
 
 interface LoginFormData {
   email: string;
@@ -14,22 +15,32 @@ function Login() {
   const {
     register,
     handleSubmit,
+    watch,
     formState: { errors, isValid },
   } = useForm<LoginFormData>({ mode: 'onChange' });
 
   const dispatch = useAppDispatch();
   const [loginUser, { isLoading }] = useLoginUserMutation();
+  const errorApi = useAppSelector(state => state.auth.error);
   const navigate = useNavigate();
+  const inputEmail = watch('email');
+  const inputPassword = watch('password');
+
+  useEffect(() => {
+    dispatch(setError(''));
+  }, [dispatch, inputEmail, inputPassword]);
 
   const handleLogin: SubmitHandler<LoginFormData> = async data => {
     try {
-      const result = await loginUser(data);
+      const response = await loginUser(data);
 
-      if ('data' in result) {
-        dispatch(setUser(result.data));
+      if ('data' in response) {
+        dispatch(setUser(response.data));
         navigate('/');
+      } else if ('status' in response.error && response.error.status === 401) {
+        dispatch(setError('Неправильная почта или пароль'));
       } else {
-        console.log(result.error);
+        dispatch(setError('При авторизации произошла ошибка'));
       }
     } catch (error) {
       console.log(error);
@@ -104,7 +115,7 @@ function Login() {
             {errors?.password?.message}
           </span>
           <div className="auth__flex-box">
-            <span className="auth__server-error"></span>
+            <span className="auth__server-error">{errorApi}</span>
             <button className="auth__button" type="submit" disabled={!isValid || isLoading}>
               {isLoading ? 'Вход...' : 'Войти'}
             </button>
