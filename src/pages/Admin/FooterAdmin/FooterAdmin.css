@@ -1,0 +1,8 @@
+.footer__links-list_admin {
+  gap: 40px;
+  display: flex;
+  align-items: center;
+  list-style: none;
+  padding-top: 30px;
+  padding-bottom: 30px;
+}

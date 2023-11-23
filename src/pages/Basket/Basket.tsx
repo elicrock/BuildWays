@@ -1,6 +1,6 @@
-import Header from '../../components/Header/Header';
-import Footer from '../../components/Footer/Footer';
 import './Basket.css';
+import Footer from '../../components/FooterProfile/Footer';
+import Header from '../../components/Header/Header';
 import BasketCardItem from './BasketCardItem/BasketCardItem';
 
 function Basket() {

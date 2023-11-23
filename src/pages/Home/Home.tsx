@@ -1,5 +1,5 @@
 // import { useState, useEffect } from 'react';
-import Footer from '../../components/Footer/Footer';
+import Footer from '../../components/FooterProfile/Footer';
 import Header from '../../components/Header/Header';
 import HomeCatalogyList from './HomeCatalogyList/HomeCatalogyList';
 import ProductCardItem from '../../components/ProductCardItem/ProductCardItem';

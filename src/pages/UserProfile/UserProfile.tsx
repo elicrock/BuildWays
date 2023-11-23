@@ -1,6 +1,6 @@
 import './UserProfile.css';
+import Footer from '../../components/FooterProfile/Footer';
 import Header from '../../components/Header/Header';
-import Footer from '../../components/Footer/Footer';
 import { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useForm, SubmitHandler } from 'react-hook-form';
@@ -69,6 +69,7 @@ function UserProfile() {
       if ('data' in response) {
         dispatch(logout());
         navigate('/');
+        localStorage.clear();
       } else {
         dispatch(setError('Произошла ошибка при выходе из аккаунта'));
       }

@@ -1,7 +1,7 @@
 import './ProductPage.css';
-import ProductSrc from '../../images/product-item__example.png';
+import Footer from '../../components/FooterProfile/Footer';
 import Header from '../../components/Header/Header';
-import Footer from '../../components/Footer/Footer';
+import ProductSrc from '../../images/product-item__example.png';
 
 function ProductPage() {
   return (
@@ -15,7 +15,8 @@ function ProductPage() {
               <h2 className="product__name">Краска Farbitex Для садовых деревьев</h2>
               <p className="product__available">В наличии</p>
               <p className="product__description">
-                Быстросохнущая, высокоукрывистая, защита от водорослей, мха, лишайника, защита от грибка, светостойкая, термостойкая, защита от вредителей
+                Быстросохнущая, высокоукрывистая, защита от водорослей, мха, лишайника, защита от грибка, светостойкая,
+                термостойкая, защита от вредителей
               </p>
               <span className="product__price">500 ₽</span>
               <div className="product__flex-box">

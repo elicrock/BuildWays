@@ -1,6 +1,6 @@
 .header {
   background: #212526;
-  color: #FFFFFF;
+  color: #ffffff;
 }
 
 .header__container {
@@ -47,7 +47,7 @@
   font-weight: 500;
   line-height: 16px;
   text-decoration-line: underline;
-  color: #FC573B;
+  color: #fc573b;
   transition: opacity 0.2s;
 }
 
@@ -65,13 +65,13 @@
 .header__item {
   width: 96px;
   height: 96px;
-  background: #3B3B3B;
+  background: #3b3b3b;
   cursor: pointer;
   transition: background 0.2s;
 }
 
 .header__item:hover {
-  background: #F05A00;
+  background: #f05a00;
 }
 
 .header__link {
@@ -100,7 +100,7 @@
 .header__counter {
   width: 22px;
   height: 22px;
-  background: #F05A00;
+  background: #f05a00;
   border-radius: 50%;
   position: absolute;
   top: 24px;
@@ -116,18 +116,18 @@
 }
 
 .header__item:hover .header__counter {
-  background: #3B3B3B;
+  background: #3b3b3b;
 }
 
 @media screen and (max-width: 1300px) {
   .header__logo {
-    width: calc((100vw - 768px)/(1300 - 768) * (90 - 78) + 70px);
-    height: calc((100vw - 768px)/(1300 - 768) * (56 - 48) + 48px);
+    width: calc((100vw - 768px) / (1300 - 768) * (90 - 78) + 70px);
+    height: calc((100vw - 768px) / (1300 - 768) * (56 - 48) + 48px);
     background-size: contain;
   }
 
   .header__time-work {
-    font-size: calc((100vw - 768px)/(1300 - 768) * (16 - 14) + 14px);
+    font-size: calc((100vw - 768px) / (1300 - 768) * (16 - 14) + 14px);
   }
 
   .header__contacts {
@@ -135,28 +135,28 @@
   }
 
   .header__phone {
-    font-size: calc((100vw - 768px)/(1300 - 768) * (18 - 15) + 15px);
+    font-size: calc((100vw - 768px) / (1300 - 768) * (18 - 15) + 15px);
   }
 
   .header__callme {
-    font-size: calc((100vw - 768px)/(1300 - 768) * (14 - 12) + 12px);
+    font-size: calc((100vw - 768px) / (1300 - 768) * (14 - 12) + 12px);
   }
 
   .header__item {
-    width: calc((100vw - 768px)/(1300 - 768) * (96 - 48) + 48px);
-    height: calc((100vw - 768px)/(1300 - 768) * (96 - 48) + 48px);
+    width: calc((100vw - 768px) / (1300 - 768) * (96 - 48) + 48px);
+    height: calc((100vw - 768px) / (1300 - 768) * (96 - 48) + 48px);
   }
 
   .header__link {
-    background-size: calc((100vw - 768px)/(1300 - 768) * (32 - 22) + 22px);
+    background-size: calc((100vw - 768px) / (1300 - 768) * (32 - 22) + 22px);
   }
 
   .header__counter {
-    width: calc((100vw - 768px)/(1300 - 768) * (22 - 16) + 16px);
-    height: calc((100vw - 768px)/(1300 - 768) * (22 - 16) + 16px);
-    font-size: calc((100vw - 768px)/(1300 - 768) * (13 - 11) + 11px);
-    top: calc((100vw - 768px)/(1300 - 768) * (24 - 8) + 8px);
-    left: calc((100vw - 768px)/(1300 - 768) * (50 - 27) + 27px);
+    width: calc((100vw - 768px) / (1300 - 768) * (22 - 16) + 16px);
+    height: calc((100vw - 768px) / (1300 - 768) * (22 - 16) + 16px);
+    font-size: calc((100vw - 768px) / (1300 - 768) * (13 - 11) + 11px);
+    top: calc((100vw - 768px) / (1300 - 768) * (24 - 8) + 8px);
+    left: calc((100vw - 768px) / (1300 - 768) * (50 - 27) + 27px);
   }
 }
 
@@ -166,12 +166,12 @@
     margin-right: 0;
   }
 
-  .header__contacts {
-    /* display: none; */
+  /* .header__contacts {
+    display: none;
   }
 
   .header__list {
-    /* display: none; */
-    /* margin-right: auto; */
-  }
+    display: none;
+    margin-right: auto;
+  } */
 }

@@ -1,6 +1,7 @@
 import { ReactNode } from 'react';
-
 import './Catalogy.css';
+import Footer from '../../components/FooterProfile/Footer';
+import Header from '../../components/Header/Header';
 import CatalogyItem from './CatalogyItem/CatalogyItem';
 import PaintingProducts from '../../images/5290615002185.png.webp';
 import ElectricalEquipment from '../../images/Bulgarian.png';
@@ -8,8 +9,6 @@ import Workwear from '../../images/Rectangle 1399.png';
 import Seasonal from '../../images/sadovyi_instrument.jpg';
 import Brick from '../../images/fe66c63e25ea9f4f73e490fe41ae1409.jpg';
 import Hammer from '../../images/51392379.jpg';
-import Header from '../../components/Header/Header';
-import Footer from '../../components/Footer/Footer';
 
 function Catalogy({ children }: { children?: ReactNode }) {
   return (
