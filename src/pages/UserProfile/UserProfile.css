@@ -113,9 +113,18 @@
   opacity: 1;
 }
 
-.user-profile__error-api {
+.user-profile__error-message {
   padding-top: 10px;
   color: #f05a00;
+  font-size: 11px;
+  font-weight: 500;
+  line-height: 13px;
+  text-align: center;
+}
+
+.user-profile__success-message {
+  padding-top: 10px;
+  color: green;
   font-size: 11px;
   font-weight: 500;
   line-height: 13px;
