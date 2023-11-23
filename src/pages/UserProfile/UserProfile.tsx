@@ -2,10 +2,11 @@ import './UserProfile.css';
 import Header from '../../components/Header/Header';
 import Footer from '../../components/Footer/Footer';
 import { useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { useForm, SubmitHandler } from 'react-hook-form';
 import { useAppDispatch, useAppSelector } from '../../hooks/redux';
-import { useUpdateUserProfileMutation } from '../../Api/authApi';
-import { setError, setUser } from '../../redux';
+import { useUpdateUserProfileMutation, useLogoutUserMutation } from '../../Api/authApi';
+import { setError, setSuccessMessage, setUser, logout } from '../../redux';
 
 type ProfileFormData = {
   name: string;
@@ -23,9 +24,12 @@ function UserProfile() {
 
   const dispatch = useAppDispatch();
   const currentUser = useAppSelector(state => state.auth.currentUser);
-  const errorApi = useAppSelector(state => state.auth.error);
+  const errorMessage = useAppSelector(state => state.auth.error);
+  const successMessage = useAppSelector(state => state.auth.successMessage);
+  const navigate = useNavigate();
 
   const [updateUserProfile, { isLoading }] = useUpdateUserProfileMutation();
+  const [logoutUser] = useLogoutUserMutation();
 
   const inputName = watch('name');
   const inputEmail = watch('email');
@@ -40,6 +44,7 @@ function UserProfile() {
 
   useEffect(() => {
     dispatch(setError(''));
+    dispatch(setSuccessMessage(''));
   }, [dispatch, inputName, inputEmail]);
 
   const handleEditProfile: SubmitHandler<ProfileFormData> = async ({ name, email }) => {
@@ -47,10 +52,25 @@ function UserProfile() {
       const response = await updateUserProfile({ name, email });
       if ('data' in response) {
         dispatch(setUser({ name, email }));
+        dispatch(setSuccessMessage('Данные пользователя успешно обновлены!'));
       } else if ('status' in response.error && response.error.status === 409) {
         dispatch(setError('Пользователь с таким email уже существует!'));
       } else {
         dispatch(setError('Произошла ошибка при обновлении данных'));
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  const handleLogout = async () => {
+    try {
+      const response = await logoutUser();
+      if ('data' in response) {
+        dispatch(logout());
+        navigate('/');
+      } else {
+        dispatch(setError('Произошла ошибка при выходе из аккаунта'));
       }
     } catch (error) {
       console.log(error);
@@ -141,9 +161,12 @@ function UserProfile() {
                 >
                   {isLoading ? 'Сохранение' : 'Сохранить'}
                 </button>
-                <span className="user-profile__error-api">{errorApi}</span>
+                <span className="user-profile__error-message">{errorMessage}</span>
+                <span className="user-profile__success-message">{successMessage}</span>
               </form>
-              <button className="user-profile__logoutBtn">Выйти из аккаунта</button>
+              <button className="user-profile__logoutBtn" onClick={handleLogout}>
+                Выйти из аккаунта
+              </button>
             </div>
           </div>
         </section>

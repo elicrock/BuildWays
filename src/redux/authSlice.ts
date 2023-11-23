@@ -5,12 +5,14 @@ type AuthState = {
   isLoggedIn: boolean;
   currentUser: User | null;
   error: string | null;
+  successMessage: string | null;
 };
 
 const initialState: AuthState = {
   isLoggedIn: false,
   currentUser: null,
   error: null,
+  successMessage: null,
 };
 
 const authSlice = createSlice({
@@ -28,8 +30,11 @@ const authSlice = createSlice({
     setError: (state, action: PayloadAction<string>) => {
       state.error = action.payload;
     },
+    setSuccessMessage: (state, action: PayloadAction<string>) => {
+      state.successMessage = action.payload;
+    },
   },
 });
 
-export const { setUser, setError, logout } = authSlice.actions;
+export const { setUser, setError, setSuccessMessage, logout } = authSlice.actions;
 export default authSlice.reducer;
