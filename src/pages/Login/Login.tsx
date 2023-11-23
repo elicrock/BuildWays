@@ -1,5 +1,5 @@
 import { useEffect } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link, useNavigate, Navigate } from 'react-router-dom';
 import { useForm, SubmitHandler } from 'react-hook-form';
 import { useAppDispatch, useAppSelector } from '../../hooks/redux';
 import Logo from '../../images/logo-dark.svg';
@@ -22,6 +22,7 @@ function Login() {
   const dispatch = useAppDispatch();
   const [loginUser, { isLoading }] = useLoginUserMutation();
   const errorApi = useAppSelector(state => state.auth.error);
+  const isLoggedIn = useAppSelector(state => state.auth.isLoggedIn);
   const navigate = useNavigate();
   const inputEmail = watch('email');
   const inputPassword = watch('password');
@@ -37,6 +38,7 @@ function Login() {
       if ('data' in response) {
         dispatch(setUser(response.data));
         navigate('/');
+        localStorage.setItem('isLoggedIn', JSON.stringify(true));
       } else if ('status' in response.error && response.error.status === 401) {
         dispatch(setError('Неправильная почта или пароль'));
       } else {
@@ -46,6 +48,10 @@ function Login() {
       console.log(error);
     }
   };
+
+  if (isLoggedIn) {
+    return <Navigate to="/" />;
+  }
 
   return (
     <main className="auth">

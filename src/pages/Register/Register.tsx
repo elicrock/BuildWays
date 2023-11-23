@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link, useNavigate, Navigate } from 'react-router-dom';
 import { useForm, SubmitHandler } from 'react-hook-form';
 import { useAppDispatch, useAppSelector } from '../../hooks/redux';
 import './Register.css';
@@ -24,6 +24,7 @@ function Register() {
   const [registerUser] = useRegisterUserMutation();
   const [loginUser] = useLoginUserMutation();
   const errorApi = useAppSelector(state => state.auth.error);
+  const isLoggedIn = useAppSelector(state => state.auth.isLoggedIn);
   const [isLoading, setIsLoading] = useState(false);
 
   const navigate = useNavigate();
@@ -46,6 +47,7 @@ function Register() {
         if ('data' in result) {
           dispatch(setUser(result.data));
           navigate('/');
+          localStorage.setItem('isLoggedIn', JSON.stringify(true));
         }
       } else if ('status' in response.error && response.error.status === 409) {
         dispatch(setError('Пользователь с таким email уже существует'));
@@ -58,6 +60,10 @@ function Register() {
       setIsLoading(false);
     }
   };
+
+  if (isLoggedIn) {
+    return <Navigate to="/" />;
+  }
 
   return (
     <main className="auth">
