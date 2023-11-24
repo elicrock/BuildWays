@@ -17,6 +17,7 @@
   align-items: center;
   list-style: none;
   gap: 60px;
+  padding: 10px 0;
 }
 
 .navigation__link {
@@ -60,6 +61,24 @@
 
 @media screen and (max-width: 768px) {
   .navigation__container {
-    /* display: none; */
+    flex-direction: column-reverse;
+    padding: 20px;
+    gap: 30px;
+  }
+
+  .navigation__list {
+    gap: 30px;
+  }
+
+  .navigation__link {
+    font-size: 16px;
+  }
+
+  .navigation__catalogy {
+    padding: 10px;
+    padding-left: 42px;
+    background-size: 16px;
+    background-position: 14px;
+    font-size: 14px;
   }
 }
