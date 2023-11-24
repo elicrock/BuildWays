@@ -1,5 +1,5 @@
 import './Basket.css';
-import Footer from '../../components/FooterProfile/Footer';
+import Footer from '../../components/Footer/Footer';
 import Header from '../../components/Header/Header';
 import BasketCardItem from './BasketCardItem/BasketCardItem';
 

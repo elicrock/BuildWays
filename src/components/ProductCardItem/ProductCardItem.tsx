@@ -1,5 +1,4 @@
 import './ProductCardItem.css';
-// import React from 'react';
 import Image from '../../images/card-product__image.jpg';
 
 function ProductCardItem() {

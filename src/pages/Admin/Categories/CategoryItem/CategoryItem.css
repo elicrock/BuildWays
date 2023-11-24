@@ -1,0 +1,34 @@
+.category-item {
+  max-width: 300px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background-color: #fff;
+}
+
+.category-item__title {
+  margin-top: 10px;
+  margin-bottom: 10px;
+  font-size: 16px;
+}
+
+.category-item__flex-box-up {
+  padding: 13px 13px 0 0;
+  display: flex;
+  align-self: flex-end;
+}
+
+.category-item__add-editBtn {
+  width: 30px;
+  height: 28px;
+  border: none;
+  background: url('../../../../images/edit-icon.svg') no-repeat center;
+  background-size: 30px 28px;
+  cursor: pointer;
+  transition: scale 0.3s ease-in-out;
+}
+
+.category-item__add-editBtn:hover {
+  scale: 1.2;
+}

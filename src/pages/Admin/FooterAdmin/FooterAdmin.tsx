@@ -6,7 +6,7 @@ function Footer() {
       <div className="footer__container">
         <nav>
           <ul className="footer__links-list_admin">
-            <h2>Created by</h2>
+            <h2 className="footer-admin__createdBy">Created by</h2>
             <li className="footer__contact">
               <a className="footer__contact-link" href="https://github.com/elicrock/" target="_blank">
                 @Paul

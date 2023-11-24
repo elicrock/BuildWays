@@ -6,3 +6,21 @@
   padding-top: 30px;
   padding-bottom: 30px;
 }
+.footer-admin__createdBy {
+  font-size: 20px;
+}
+
+@media screen and (max-width: 600px) {
+  .footer-admin__createdBy {
+    font-size: 15px;
+  }
+  .footer__links-list_admin {
+    gap: 30px;
+  }
+}
+
+@media screen and (max-width: 425px) {
+  .footer__links-list_admin {
+    gap: 10px;
+  }
+}

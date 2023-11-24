@@ -1,5 +1,5 @@
 import './ProductPage.css';
-import Footer from '../../components/FooterProfile/Footer';
+import Footer from '../../components/Footer/Footer';
 import Header from '../../components/Header/Header';
 import ProductSrc from '../../images/product-item__example.png';
 

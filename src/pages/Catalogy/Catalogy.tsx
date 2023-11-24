@@ -1,6 +1,6 @@
 import { ReactNode } from 'react';
 import './Catalogy.css';
-import Footer from '../../components/FooterProfile/Footer';
+import Footer from '../../components/Footer/Footer';
 import Header from '../../components/Header/Header';
 import CatalogyItem from './CatalogyItem/CatalogyItem';
 import PaintingProducts from '../../images/5290615002185.png.webp';

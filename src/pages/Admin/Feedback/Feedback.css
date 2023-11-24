@@ -1,0 +1,16 @@
+.feedback {
+  max-width: 1300px;
+  margin: 0 auto;
+  padding: 0 30px;
+  padding-top: 50px;
+  display: flex;
+  flex-direction: column;
+}
+
+.feedback__title {
+  font-family: Prosto One;
+  font-size: 30px;
+  font-weight: 400;
+  line-height: 48px;
+  letter-spacing: 0em;
+}
