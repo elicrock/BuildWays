@@ -12,10 +12,11 @@ function ModalContent({ children, onClose, titleModal }: ModalContentProps) {
   return (
     <div className="modal">
       <div className="modal__content">
-        <h2>{titleModal}</h2>
+        <div className="modal__flex-box">
+          <h2 className="modal__title">{titleModal}</h2>
+          <button className="modal__submitBtn" onClick={onClose}></button>
+        </div>
         {children}
-        <></>
-        <button onClick={onClose}>Закрыть</button>
       </div>
     </div>
   );

@@ -1,5 +1,4 @@
 import './Categories.css';
-
 import CategoryItem from './CategoryItem/CategoryItem';
 import Modal from '../../../components/Modal/Modal';
 import Form from '../../../components/Form/Form';

@@ -13,7 +13,7 @@ function CategoryItem() {
   return (
     <li className="category-item">
       <div className="category-item__flex-box-up">
-        <Modal classBtn="category-item__add-editBtn" titleModal="Краски">
+        <Modal classBtn="category-item__add-editBtn" titleModal="Редактирование категории">
           <Form nameForm="categoryItem" onSubmit={handleSubmit} submitBtnName="Сохранить">
             <Input type="text" inputId="inputName" placeholder="Название" />
             <InputFile />
