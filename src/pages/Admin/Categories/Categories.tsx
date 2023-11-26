@@ -1,18 +1,25 @@
 import './Categories.css';
+
 import CategoryItem from './CategoryItem/CategoryItem';
+import Modal from '../../../components/Modal/Modal';
 
 function Categories() {
   return (
     <section className="categories">
       <div className="catagories__flex-box">
         <h2 className="categories__title">Категории товаров</h2>
-        <button className="catagories__createBtn" type="submit">
-          Создать категорию
-        </button>
+        {/* <button className="catagories__createBtn" type="button"> */}
+        <Modal text={'Cоздать категорию'} classBtn="catagories__createBtn" titleModal="Создание категории">
+          {/* <div className="create-category__content"> */}
+          <form>
+            <input type="text"></input>
+            <input type="file"></input>
+          </form>
+          {/* </div> */}
+        </Modal>
+        {/* </button> */}
       </div>
       <ul className="categories__list">
-        <CategoryItem />
-        <CategoryItem />
         <CategoryItem />
         <CategoryItem />
         <CategoryItem />
