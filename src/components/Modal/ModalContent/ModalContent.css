@@ -1,4 +1,5 @@
 .modal {
+  padding: 0 10px;
   align-items: center;
   background-color: rgba(0, 0, 0, 0.5);
   bottom: 0;
@@ -22,6 +23,7 @@
   display: flex;
   flex-direction: column;
   max-width: 430px;
+  width: 100%;
   padding: 34px 36px 37px;
 }
 
@@ -55,7 +57,6 @@
 
 @media screen and (max-width: 450px) {
   .modal__content {
-    max-width: 282px;
     padding: 20px 18px;
   }
   .modal__title {
