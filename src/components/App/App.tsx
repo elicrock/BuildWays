@@ -20,6 +20,7 @@ function App() {
   const dispatch = useAppDispatch();
   const { data: userProfileData, isError, error, isLoading } = useGetUserProfileQuery();
   const isLoggedIn = useAppSelector(state => state.auth.isLoggedIn);
+  const currentUser = useAppSelector(state => state.auth.currentUser);
 
   useEffect(() => {
     if (userProfileData) {
@@ -44,7 +45,7 @@ function App() {
         <Route path="/user-profile" element={<ProtectedClientRouteElement element={<UserProfile />} />} />
         <Route path="/catalogy" element={<Catalogy />} />
         <Route path="/product" element={<ProductPage />} />
-        {isLoggedIn && userProfileData?.role === 'ADMIN' && <Route path="/admin/*" element={<Admin />} />}
+        {isLoggedIn && currentUser?.role === 'ADMIN' && <Route path="/admin/*" element={<Admin />} />}
         <Route path="*" element={<PageNotFound />} />
       </Routes>
     </div>

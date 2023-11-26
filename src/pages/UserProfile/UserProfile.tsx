@@ -51,7 +51,8 @@ function UserProfile() {
     try {
       const response = await updateUserProfile({ name, email });
       if ('data' in response) {
-        dispatch(setUser({ name, email }));
+        dispatch(setUser({ id: currentUser?.id, name, email, role: currentUser?.role }));
+        console.log(currentUser);
         dispatch(setSuccessMessage('Данные пользователя успешно обновлены!'));
       } else if ('status' in response.error && response.error.status === 409) {
         dispatch(setError('Пользователь с таким email уже существует!'));

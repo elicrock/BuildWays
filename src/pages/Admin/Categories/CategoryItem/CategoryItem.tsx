@@ -7,19 +7,26 @@ import InputFile from '../../../../components/InputFile/InputFile';
 
 function CategoryItem() {
   const handleSubmit = () => {
-    console.log('asfasf');
+    console.log('создать');
+  };
+
+  const handleDelete = () => {
+    console.log('удалить');
   };
 
   return (
     <li className="category-item">
       <div className="category-item__flex-box-up">
         <Modal classBtn="category-item__add-editBtn" titleModal="Редактирование категории">
-          <Form nameForm="categoryItem" onSubmit={handleSubmit} submitBtnName="Сохранить">
-            <Input type="text" inputId="inputName" placeholder="Название" />
+          <Form
+            nameForm="categoryItem"
+            onSubmit={handleSubmit}
+            onDelete={handleDelete}
+            submitBtnName="Сохранить"
+            deleteBtnName="Удалить"
+          >
+            <Input type="text" inputId="inputName" placeholder="Название категории" />
             <InputFile />
-            <button type="button" className="category-item__delete">
-              Удалить
-            </button>
           </Form>
         </Modal>
       </div>

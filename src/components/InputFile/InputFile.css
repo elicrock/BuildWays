@@ -1,11 +1,11 @@
-.input__file {
+.form__file {
   opacity: 0;
   visibility: hidden;
   position: absolute;
   left: 0px;
 }
 
-.input__file-button {
+.form__file-label {
   width: 156px;
   height: 40px;
   background-color: initial;
@@ -24,11 +24,11 @@
   letter-spacing: 0.10000000149011612px;
 }
 
-.input__file-button:hover {
+.form__file-label:hover {
   opacity: 0.8;
 }
 
-.input__file-button-text {
+.form__file-button-text {
   color: #f05a00;
   line-height: 1;
   margin-top: 1px;
