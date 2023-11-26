@@ -11,6 +11,7 @@ import { setError, setSuccessMessage, setUser, logout } from '../../redux';
 type ProfileFormData = {
   name: string;
   email: string;
+  role?: string;
 };
 
 function UserProfile() {
