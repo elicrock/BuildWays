@@ -10,13 +10,11 @@ interface InputProps {
 const Input: React.FC<InputProps> = ({ type, placeholder, inputId }: InputProps) => {
   return (
     <>
-      <div className="input-box">
-        <input className="input-box__input" id={inputId} placeholder={placeholder} type={type} />
-        <span className="input-box__error">Ошибка</span>
-        <label className="input-box__label-input" htmlFor={inputId}>
-          {placeholder}
-        </label>
-      </div>
+      <label className="form__label" htmlFor={inputId}>
+        {placeholder}
+        <input className="form__input" id={inputId} placeholder={placeholder} type={type} />
+      </label>
+      <span className="form__input-error">Ошибка</span>
     </>
   );
 };

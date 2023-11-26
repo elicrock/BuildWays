@@ -8,9 +8,9 @@ interface InputFileProps {
 const InputFile: React.FC<InputFileProps> = ({ onChange }) => {
   return (
     <>
-      <input className="input__file" name="file" type="file" accept="image/*" id="input__file" onChange={onChange} />
-      <label htmlFor="input__file" className="input__file-button">
-        <span className="input__file-button-text">Добавить фото</span>
+      <input className="form__file" name="file" type="file" accept="image/*" id="inputFile" onChange={onChange} />
+      <label htmlFor="inputFile" className="form__file-label">
+        <span className="form__file-button-text">Добавить фото</span>
       </label>
     </>
   );

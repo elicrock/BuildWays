@@ -1,0 +1,13 @@
+.form {}
+
+.form_buttons {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.form__submit-btn {
+  background: transparent;
+  border: 1px solid green;
+  /* background: green; */
+}
