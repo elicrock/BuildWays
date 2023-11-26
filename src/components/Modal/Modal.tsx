@@ -7,7 +7,7 @@ type ModalProps = {
   text?: string;
   classBtn?: string;
   id?: number;
-  titleModal: string;
+  titleModal?: string;
 };
 
 function Modal({ children, text, classBtn, titleModal }: ModalProps) {

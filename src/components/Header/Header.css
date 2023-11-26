@@ -29,6 +29,13 @@
 .header__title {
   font-size: 16px;
   font-family: Prosto One;
+  text-decoration: none;
+  color: #fff;
+  transition: color 0.2s;
+}
+
+.header__title:hover {
+  color: #f05a00;
 }
 
 .header__list {
