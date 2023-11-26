@@ -6,9 +6,7 @@ function CategoryItem() {
   return (
     <li className="category-item">
       <div className="category-item__flex-box-up">
-        {/* <button type="button" className="category-item__add-editBtn"> */}
-        <Modal classBtn="category-item__add-editBtn"></Modal>
-        {/* </button> */}
+        <Modal classBtn="category-item__add-editBtn" titleModal="Редактировать"></Modal>
       </div>
       <img src={Image} alt="Изображение товара" className="category-item__image"></img>
       <h2 className="category-item__title">Эмаль Condor ПФ-115</h2>
