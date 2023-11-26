@@ -7,7 +7,7 @@ import InputFile from '../../../components/InputFile/InputFile';
 
 function Categories() {
   const handleSubmit = () => {
-    console.log('asfasf');
+    console.log('submit');
   };
   return (
     <section className="categories">
@@ -15,7 +15,7 @@ function Categories() {
         <h2 className="categories__title">Категории товаров</h2>
         <Modal text={'Cоздать категорию'} classBtn="catagories__createBtn" titleModal="Создание категории">
           <Form nameForm="createCatagory" onSubmit={handleSubmit} submitBtnName="Создать">
-            <Input type="text" inputId="inputName" placeholder="Название категории" />
+            <Input labelName="Название" type="text" inputId="inputName" placeholder="Категория" />
             <InputFile />
           </Form>
         </Modal>

@@ -1,4 +1,7 @@
-.form {}
+.form {
+  display: flex;
+  flex-direction: column;
+}
 
 .form_buttons {
   display: flex;
