@@ -1,6 +1,8 @@
 import { useState, ReactNode, useEffect } from 'react';
 import { createPortal } from 'react-dom';
 import ModalContent from './ModalContent/ModalContent';
+// import { useAppDispatch, useAppSelector } from '../../hooks/redux';
+// import { closeModal, openModal } from '../../redux/modalSlice';
 
 type ModalProps = {
   children?: ReactNode;
@@ -12,25 +14,28 @@ type ModalProps = {
 
 function Modal({ children, text, classBtn, titleModal }: ModalProps) {
   const [showModal, setShowModal] = useState(false);
+  // const dispatch = useAppDispatch();
+  // const closeModal = useAppSelector(state => state.modal.showModal);
 
-  function openModal() {
+  function handleOpenModal() {
     setShowModal(true);
   }
 
-  function closeModal() {
+  function handleCloseModal() {
     setShowModal(false);
+    // setShowModal(closeModal);
   }
 
   useEffect(() => {
     function handleEscClose(evt: KeyboardEvent) {
       if (evt.key === 'Escape') {
-        closeModal();
+        handleCloseModal();
       }
     }
     const handleCloseOverlayClick = (evt: MouseEvent) => {
       const target = evt.target;
       if (target && (target as Element).classList.contains('modal')) {
-        closeModal();
+        handleCloseModal();
       }
     };
 
@@ -45,11 +50,14 @@ function Modal({ children, text, classBtn, titleModal }: ModalProps) {
 
   return (
     <>
-      <button onClick={openModal} className={classBtn}>
+      <button onClick={handleOpenModal} className={classBtn}>
         {text}
       </button>
       {showModal &&
-        createPortal(<ModalContent children={children} onClose={closeModal} titleModal={titleModal} />, document.body)}
+        createPortal(
+          <ModalContent children={children} onClose={handleCloseModal} titleModal={titleModal} />,
+          document.body,
+        )}
     </>
   );
 }

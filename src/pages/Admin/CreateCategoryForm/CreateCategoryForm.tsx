@@ -1,0 +1,115 @@
+import './CreateCategoryForm.css';
+import { useState, ChangeEvent } from 'react';
+import { useForm, SubmitHandler } from 'react-hook-form';
+import { useCreateCategoryMutation } from '../../../Api/categoryApi';
+import { useAppDispatch } from '../../../hooks/redux';
+import { closeModal } from '../../../redux/modalSlice';
+
+interface CategoryFormData {
+  name: string;
+  image: File | null | undefined;
+}
+
+type CreateCategoryFormProps = {
+  submitBtnName?: string;
+  deleteBtnName?: string;
+};
+
+type ImageFile = {
+  file: File;
+  preview: string;
+};
+
+// ModalCategoryForm - переименовать если получится с редактированием
+function CreateCategoryForm({ submitBtnName, deleteBtnName }: CreateCategoryFormProps) {
+  const {
+    register,
+    handleSubmit,
+    formState: { errors, isValid },
+  } = useForm<CategoryFormData>({ mode: 'onChange' });
+
+  // const closeModal = useAppSelector((state) => state.modal.showModal);
+  const [selectedImageFile, setSelectedImageFile] = useState<ImageFile>();
+
+  const dispatch = useAppDispatch();
+  const [createCatagory] = useCreateCategoryMutation();
+
+  const handleImageFileInputChange = (event: ChangeEvent<HTMLInputElement>) => {
+    const file = event.target.files?.[0];
+
+    if (file) {
+      const reader = new FileReader();
+
+      reader.onloadend = () => {
+        const newFile: ImageFile = {
+          file: file,
+          preview: reader.result as string,
+        };
+        setSelectedImageFile(newFile);
+      };
+      reader.readAsDataURL(file);
+    }
+  };
+
+  const handleAddCategory: SubmitHandler<CategoryFormData> = async ({ name, image }) => {
+    try {
+      await createCatagory({ name, image });
+      dispatch(closeModal());
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  return (
+    <form className="category-form" name="createCatagory" onSubmit={handleSubmit(handleAddCategory)}>
+      <label className="category-form__label" htmlFor="nameCategory">
+        Название
+        <input
+          className="category-form__input"
+          id="nameCategory"
+          placeholder="Категория"
+          type="text"
+          {...register('name', {
+            required: 'Поле обязательно для заполнения',
+            minLength: {
+              value: 2,
+              message: 'Введите не менее 2 символов',
+            },
+            maxLength: {
+              value: 30,
+              message: 'Введите менее 30 символов',
+            },
+            pattern: {
+              value: /^[a-zA-Z-0-9\u0430-\u044f\u0410-\u042fёЁ\s]*$/,
+              message: 'Введите корректное имя',
+            },
+          })}
+        />
+        <span className="category-form__input_error">{errors?.name?.message}</span>
+      </label>
+      <input
+        className="category-form__file"
+        type="file"
+        accept="image/*"
+        id="inputFile"
+        onChange={handleImageFileInputChange}
+      />
+      {selectedImageFile ? <img className="category-form__image" src={selectedImageFile.preview} /> : null}
+      <label htmlFor="inputFile" className="category-form__file-label">
+        <span className="category-form__file-button-text">Добавить фото</span>
+      </label>
+      <div className="category-form__box-Btns">
+        <button type="submit" className="category-form__submit-btn" disabled={!isValid}>
+          {submitBtnName}
+        </button>
+        {deleteBtnName && (
+          <button type="submit" className="category-form__delete-btn">
+            {deleteBtnName}
+          </button>
+        )}
+      </div>
+    </form>
+  );
+}
+
+export default CreateCategoryForm;

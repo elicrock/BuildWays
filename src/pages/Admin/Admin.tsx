@@ -6,6 +6,7 @@ import Main from './Main/Main';
 import Categories from './Categories/Categories';
 import Products from './Products/Products';
 import Feedback from './Feedback/Feedback';
+import Interview from './Interview/Interview';
 
 function Admin() {
   return (
@@ -18,6 +19,7 @@ function Admin() {
           <Route path="/categories" element={<Categories />} />
           <Route path="/products" element={<Products />} />
           <Route path="/feedback" element={<Feedback />} />
+          <Route path="/interview" element={<Interview />}></Route>
         </Routes>
       </main>
       <FooterAdmin />

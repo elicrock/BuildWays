@@ -14,6 +14,11 @@ function Header() {
             <li className="header__item">
               <Link to="/user-profile" className="header__link header__link-profile" />
             </li>
+            <li className="header__item">
+              <Link to="/admin/interview" className="header__link ">
+                Interview
+              </Link>
+            </li>
           </ul>
         </div>
       </div>

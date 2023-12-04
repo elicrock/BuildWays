@@ -1,0 +1,27 @@
+.interview {
+  max-width: 1300px;
+  margin: 0 auto;
+  padding: 0 30px;
+  padding-top: 50px;
+  padding-bottom: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.interview__list {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.interview__item {
+  display: flex;
+  font-size: 18px;
+}
+
+.interview__item_number {
+  font-weight: 900;
+  margin-right: 5px;
+}

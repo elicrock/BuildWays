@@ -1,24 +1,20 @@
 import './CategoryItem.css';
 import Image from '../../../../images/card-product__image.jpg';
 import Modal from '../../../../components/Modal/Modal';
-import Form from '../../../../components/Form/Form';
-import Input from '../../../../components/Input/Input';
-import InputFile from '../../../../components/InputFile/InputFile';
+
+import CreateCategoryForm from '../../CreateCategoryForm/CreateCategoryForm';
 
 function CategoryItem() {
-  const handleSubmit = () => {
-    console.log('создать');
-  };
-
-  const handleDelete = () => {
-    console.log('удалить');
-  };
+  // const handleDelete = () => {
+  //   console.log('удалить');
+  // };
 
   return (
     <li className="category-item">
       <div className="category-item__flex-box-up">
         <Modal classBtn="category-item__add-editBtn" titleModal="Редактирование категории">
-          <Form
+          <CreateCategoryForm submitBtnName="Создать" deleteBtnName="Удалить" />
+          {/* <Form
             nameForm="categoryItem"
             onSubmit={handleSubmit}
             onDelete={handleDelete}
@@ -27,7 +23,7 @@ function CategoryItem() {
           >
             <Input type="text" inputId="inputName" placeholder="Название категории" />
             <InputFile />
-          </Form>
+          </Form> */}
         </Modal>
       </div>
       <img src={Image} alt="Изображение товара" className="category-item__image"></img>
