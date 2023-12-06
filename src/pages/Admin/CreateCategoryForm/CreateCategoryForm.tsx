@@ -102,7 +102,7 @@ function CreateCategoryForm({ submitBtnName, deleteBtnName, handleCloseModal }: 
           {submitBtnName}
         </button>
         {deleteBtnName && (
-          <button type="submit" className="category-form__delete-btn">
+          <button type="button" className="category-form__delete-btn">
             {deleteBtnName}
           </button>
         )}
