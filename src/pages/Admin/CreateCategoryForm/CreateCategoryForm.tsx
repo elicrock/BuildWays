@@ -7,9 +7,10 @@ import { CategoryFormData, ImageFile } from '../../../types/categoryType';
 type CreateCategoryFormProps = {
   submitBtnName?: string;
   deleteBtnName?: string;
+  handleCloseModal?: () => void;
 };
 
-function CreateCategoryForm({ submitBtnName, deleteBtnName }: CreateCategoryFormProps) {
+function CreateCategoryForm({ submitBtnName, deleteBtnName, handleCloseModal }: CreateCategoryFormProps) {
   const {
     register,
     handleSubmit,
@@ -17,7 +18,6 @@ function CreateCategoryForm({ submitBtnName, deleteBtnName }: CreateCategoryForm
   } = useForm<CategoryFormData>({ mode: 'onChange' });
 
   const [selectedImageFile, setSelectedImageFile] = useState<ImageFile>();
-
   const [createCatagory] = useCreateCategoryMutation();
 
   const handleImageFileInputChange = (event: ChangeEvent<HTMLInputElement>) => {
@@ -38,13 +38,22 @@ function CreateCategoryForm({ submitBtnName, deleteBtnName }: CreateCategoryForm
   };
 
   const handleAddCategory: SubmitHandler<CategoryFormData> = async ({ name }) => {
+    // unwrap()
     try {
       const formData = new FormData();
       formData.append('name', name);
       if (selectedImageFile) {
         formData.append('img', selectedImageFile?.file || '');
       }
-      await createCatagory(formData);
+      const response = await createCatagory(formData);
+      if ('error' in response) {
+        if ('status' in response.error) {
+          console.log(response.error.status);
+        }
+      }
+      if ('data' in response && handleCloseModal) {
+        handleCloseModal();
+      }
     } catch (error) {
       console.log(error);
     }
