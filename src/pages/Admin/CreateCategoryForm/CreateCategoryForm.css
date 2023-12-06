@@ -74,6 +74,7 @@
   line-height: 20px;
   transition: background 0.3s, outline 0.3s, color 0.3s;
 }
+
 .category-form__file-label:hover {
   opacity: 0.8;
   background-color: #f05a00;
@@ -120,6 +121,12 @@
 .category-form__submit-btn:hover {
   background: rgb(14, 95, 14);
   color: #fff;
+}
+
+.category-form__submit-btn:disabled {
+  outline: 1px solid rgb(117, 117, 117);
+  color: rgba(117, 117, 117);
+  pointer-events: none;
 }
 
 .category-form__delete-btn {

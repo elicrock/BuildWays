@@ -5,30 +5,51 @@
   align-items: center;
   justify-content: center;
   background-color: #fff;
+  position: relative;
+  overflow: hidden;
+}
+
+/* .category-item__flex-box-up {
+  padding: 13px 13px 0 0;
+  display: flex;
+  align-self: flex-end;
+} */
+
+.category-item__add-editBtn {
+  width: 30px;
+  height: 28px;
+  border: none;
+  outline: none;
+  background: url('../../../../images/edit-icon.svg') no-repeat center;
+  background-size: 30px 28px;
+  cursor: pointer;
+  transition: scale 0.3s ease-in-out;
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  z-index: 1;
+}
+
+.category-item__add-editBtn:hover {
+  scale: 1.2;
+}
+
+.category-item__image {
+  /* display: flex; */
+  /* align-items: center; */
+  width: 100%;
+  aspect-ratio: 1/0.7;
+  object-fit: contain;
+  transition: scale 0.3s ease-in-out;
+}
+
+.category-item__image:hover {
+  scale: 1.2;
 }
 
 .category-item__title {
   margin-top: 10px;
   margin-bottom: 10px;
   font-size: 16px;
-}
-
-.category-item__flex-box-up {
-  padding: 13px 13px 0 0;
-  display: flex;
-  align-self: flex-end;
-}
-
-.category-item__add-editBtn {
-  width: 30px;
-  height: 28px;
-  border: none;
-  background: url('../../../../images/edit-icon.svg') no-repeat center;
-  background-size: 30px 28px;
-  cursor: pointer;
-  transition: scale 0.3s ease-in-out;
-}
-
-.category-item__add-editBtn:hover {
-  scale: 1.2;
+  z-index: 1;
 }

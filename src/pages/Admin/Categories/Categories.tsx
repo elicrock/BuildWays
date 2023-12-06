@@ -8,7 +8,7 @@ import { Category } from '../../../types/categoryType';
 
 function Categories() {
   const { data: myCategories } = useGetCategoriesQuery();
-  console.log(myCategories);
+  // console.log(myCategories);
   // useEffect(() => {
   //   useGetCategoriesQuery();
   // }, [getCategories]);
