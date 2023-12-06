@@ -16,7 +16,7 @@ function Header() {
             </li>
             <li className="header__item">
               <Link to="/admin/interview" className="header__link ">
-                Interview
+                Q
               </Link>
             </li>
           </ul>

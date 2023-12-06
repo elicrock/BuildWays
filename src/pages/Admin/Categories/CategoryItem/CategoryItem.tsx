@@ -1,10 +1,15 @@
 import './CategoryItem.css';
-import Image from '../../../../images/card-product__image.jpg';
 import Modal from '../../../../components/Modal/Modal';
-
 import CreateCategoryForm from '../../CreateCategoryForm/CreateCategoryForm';
+import { Category } from '../../../../types/categoryType';
 
-function CategoryItem() {
+interface CategoryItemProps {
+  category: Category;
+}
+
+function CategoryItem({ category }: CategoryItemProps) {
+  // const srcImage = category.img ? `http://localhost:3000/api/categories${category.img}` : category.img;
+  const srcTest = `http://localhost:3000/images/category/${category.img}`;
   // const handleDelete = () => {
   //   console.log('удалить');
   // };
@@ -14,20 +19,10 @@ function CategoryItem() {
       <div className="category-item__flex-box-up">
         <Modal classBtn="category-item__add-editBtn" titleModal="Редактирование категории">
           <CreateCategoryForm submitBtnName="Создать" deleteBtnName="Удалить" />
-          {/* <Form
-            nameForm="categoryItem"
-            onSubmit={handleSubmit}
-            onDelete={handleDelete}
-            submitBtnName="Сохранить"
-            deleteBtnName="Удалить"
-          >
-            <Input type="text" inputId="inputName" placeholder="Название категории" />
-            <InputFile />
-          </Form> */}
         </Modal>
       </div>
-      <img src={Image} alt="Изображение товара" className="category-item__image"></img>
-      <h2 className="category-item__title">Эмаль Condor ПФ-115</h2>
+      <img src={srcTest!} alt="Изображение категории" className="category-item__image"></img>
+      <h2 className="category-item__title">{category.name}</h2>
     </li>
   );
 }

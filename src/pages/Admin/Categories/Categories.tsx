@@ -1,12 +1,18 @@
 import './Categories.css';
-import { memo } from 'react';
+// import { memo, useEffect } from 'react';
 import CategoryItem from './CategoryItem/CategoryItem';
 import Modal from '../../../components/Modal/Modal';
 import CreateCategoryForm from '../CreateCategoryForm/CreateCategoryForm';
-
-const CategoryItemMemo = memo(CategoryItem);
+import { useGetCategoriesQuery } from '../../../Api/categoryApi';
+import { Category } from '../../../types/categoryType';
 
 function Categories() {
+  const { data: myCategories } = useGetCategoriesQuery();
+  console.log(myCategories);
+  // useEffect(() => {
+  //   useGetCategoriesQuery();
+  // }, [getCategories]);
+
   return (
     <section className="categories">
       <div className="catagories__flex-box">
@@ -17,11 +23,9 @@ function Categories() {
       </div>
 
       <ul className="categories__list">
-        <CategoryItemMemo />
-        <CategoryItem />
-        <CategoryItem />
-        <CategoryItem />
-        <CategoryItem />
+        {myCategories
+          ? myCategories.map((category: Category) => <CategoryItem key={category.id} category={category} />)
+          : 'У вас пока что нету категорий'}
       </ul>
     </section>
   );

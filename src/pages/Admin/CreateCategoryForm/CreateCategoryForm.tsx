@@ -2,25 +2,13 @@ import './CreateCategoryForm.css';
 import { useState, ChangeEvent } from 'react';
 import { useForm, SubmitHandler } from 'react-hook-form';
 import { useCreateCategoryMutation } from '../../../Api/categoryApi';
-import { useAppDispatch } from '../../../hooks/redux';
-import { closeModal } from '../../../redux/modalSlice';
-
-interface CategoryFormData {
-  name: string;
-  image: File | null | undefined;
-}
+import { CategoryFormData, ImageFile } from '../../../types/categoryType';
 
 type CreateCategoryFormProps = {
   submitBtnName?: string;
   deleteBtnName?: string;
 };
 
-type ImageFile = {
-  file: File;
-  preview: string;
-};
-
-// ModalCategoryForm - переименовать если получится с редактированием
 function CreateCategoryForm({ submitBtnName, deleteBtnName }: CreateCategoryFormProps) {
   const {
     register,
@@ -28,10 +16,8 @@ function CreateCategoryForm({ submitBtnName, deleteBtnName }: CreateCategoryForm
     formState: { errors, isValid },
   } = useForm<CategoryFormData>({ mode: 'onChange' });
 
-  // const closeModal = useAppSelector((state) => state.modal.showModal);
   const [selectedImageFile, setSelectedImageFile] = useState<ImageFile>();
 
-  const dispatch = useAppDispatch();
   const [createCatagory] = useCreateCategoryMutation();
 
   const handleImageFileInputChange = (event: ChangeEvent<HTMLInputElement>) => {
@@ -51,10 +37,14 @@ function CreateCategoryForm({ submitBtnName, deleteBtnName }: CreateCategoryForm
     }
   };
 
-  const handleAddCategory: SubmitHandler<CategoryFormData> = async ({ name, image }) => {
+  const handleAddCategory: SubmitHandler<CategoryFormData> = async ({ name }) => {
     try {
-      await createCatagory({ name, image });
-      dispatch(closeModal());
+      const formData = new FormData();
+      formData.append('name', name);
+      if (selectedImageFile) {
+        formData.append('img', selectedImageFile?.file || '');
+      }
+      await createCatagory(formData);
     } catch (error) {
       console.log(error);
     }

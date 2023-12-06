@@ -1,7 +1,6 @@
 // Ulbi https://www.youtube.com/watch?v=NErrGZ64OdE&t=1131s
 
 // 1 Линейный поиск
-
 let countLinear = 0; // O(n)  n - количество элементов
 function linearSearch(array, item) {
   for (let i = 0; i < array.length; i++) {
