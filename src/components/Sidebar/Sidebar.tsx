@@ -1,17 +1,17 @@
 import './Sidebar.css';
 import SidebarItem from './SidebarItem/SidebarItem';
-import Arrow from '../../images/arrow-left.svg';
+import { useAppSelector } from '../../hooks/redux';
+import { Category } from '../../types/categoryType';
 
 function Sidebar() {
+  const myCategories = useAppSelector(state => state.categories);
+
   return (
-    <section className='sidebar'>
-      <ul className='sidebar__list'>
-        <SidebarItem title='Малярные товары' src={Arrow} alt='Стрелка' />
-        <SidebarItem title='Электрооборудование' src={Arrow} alt='Стрелка' />
-        <SidebarItem title='Спецодежда' src={Arrow} alt='Стрелка' />
-        <SidebarItem title='Сезонное' src={Arrow} alt='Стрелка' />
-        <SidebarItem title='Для дома и дачи' src={Arrow} alt='Стрелка' />
-        <SidebarItem title='Инструменты' src={Arrow} alt='Стрелка' />
+    <section className="sidebar">
+      <ul className="sidebar__list">
+        {myCategories.map((category: Category) => (
+          <SidebarItem key={category.id} title={category?.name} />
+        ))}
       </ul>
     </section>
   );

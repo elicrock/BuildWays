@@ -9,6 +9,9 @@
   line-height: 20px;
   color: #fff;
   border-bottom: 1px solid #3b3b3b;
+  background-image: url('../../../images/arrow-left.svg');
+  background-repeat: no-repeat;
+  background-position: center right 20px;
   cursor: pointer;
 }
 

@@ -1,5 +1,6 @@
 .sidebar {
-  padding: 70px 70px 0 70px;
+  padding-top: 30px;
+  /* padding: 70px 70px 0 70px; */
 }
 
 .sidebar__list {

@@ -5,7 +5,6 @@ interface InputProps {
   type: string;
   placeholder: string;
   inputId: string;
-  // errors?;
 }
 
 const Input: React.FC<InputProps> = ({ labelName, type, placeholder, inputId }: InputProps) => {

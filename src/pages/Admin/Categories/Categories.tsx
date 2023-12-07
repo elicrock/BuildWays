@@ -1,15 +1,14 @@
 import './Categories.css';
-
 import CategoryItem from './CategoryItem/CategoryItem';
 import Modal from '../../../components/Modal/Modal';
 import CreateCategoryForm from '../CreateCategoryForm/CreateCategoryForm';
-import { useGetCategoriesQuery } from '../../../Api/categoryApi';
+import { useAppSelector } from '../../../hooks/redux';
 import { Category } from '../../../types/categoryType';
 import useTogglePopup from '../../../hooks/useTogglePopup';
 
 function Categories() {
-  const { data: myCategories } = useGetCategoriesQuery();
   const { showModal, handleCloseModal, handleOpenModal } = useTogglePopup();
+  const myCategories = useAppSelector(state => state.categories);
 
   return (
     <section className="categories">

@@ -4,6 +4,7 @@ import { Routes, Route } from 'react-router-dom';
 import { useAppDispatch, useAppSelector } from '../../hooks/redux';
 import { setUser } from '../../redux/authSlice';
 import { useGetUserProfileQuery } from '../../Api/authApi';
+import { useGetCategoriesQuery } from '../../Api/categoryApi';
 import Admin from '../../pages/Admin/Admin';
 import Home from '../../pages/Home/Home';
 import Catalogy from '../../pages/Catalogy/Catalogy';
@@ -15,12 +16,22 @@ import ProductPage from '../../pages/ProductPage/ProductPage';
 import UserProfile from '../../pages/UserProfile/UserProfile';
 import ProtectedClientRouteElement from '../ProtectedRoute/ProtectedRoute';
 import Preloader from '../Preloader/Preloader';
+import { setCategories } from '../../redux/categorySlice';
 
 function App() {
   const dispatch = useAppDispatch();
   const { data: userProfileData, isError, error, isLoading } = useGetUserProfileQuery();
+  const { data: myCategories, isError: categoriesIsError, error: categoriesError } = useGetCategoriesQuery();
   const isLoggedIn = useAppSelector(state => state.auth.isLoggedIn);
   const currentUser = useAppSelector(state => state.auth.currentUser);
+
+  useEffect(() => {
+    if (myCategories) {
+      dispatch(setCategories(myCategories));
+    } else if (categoriesIsError) {
+      console.error('Произошла ошибка при получении категорий', categoriesError);
+    }
+  }, [categoriesError, categoriesIsError, dispatch, error, myCategories]);
 
   useEffect(() => {
     if (userProfileData) {
@@ -28,6 +39,7 @@ function App() {
       localStorage.setItem('isLoggedIn', JSON.stringify(true));
     } else if (isError) {
       console.error('Произошла ошибка при получении пользователя', error);
+      localStorage.removeItem('isLoggedIn');
     }
   }, [dispatch, userProfileData, isError, error]);
 

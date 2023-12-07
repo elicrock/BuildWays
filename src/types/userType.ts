@@ -5,22 +5,3 @@ export type User = {
   password?: string;
   role?: string;
 };
-
-// export type UserDataRegister = {
-//   name: string;
-//   email: string;
-//   password: string;
-// };
-
-// export type UserDataLogin = {
-//   name?: string;
-//   email: string;
-//   password: string;
-// };
-
-// export interface UserProfile {
-//   id: number;
-//   name: string;
-//   email: string;
-//   role: string;
-// }

@@ -2,17 +2,10 @@ import './SidebarItem.css';
 
 type SidebarItemProps = {
   title: string;
-  src: string;
-  alt: string;
 };
 
-function SidebarItem({ title, src, alt }: SidebarItemProps) {
-  return (
-    <li className='sidebar__item'>
-      {title}
-      <img className='sidebar__arrow' src={src} alt={alt} />
-    </li>
-  );
+function SidebarItem({ title }: SidebarItemProps) {
+  return <li className="sidebar__item">{title}</li>;
 }
 
 export default SidebarItem;
