@@ -5,8 +5,11 @@ import { authApi } from '../Api/authApi';
 import { categoryApi } from '../Api/categoryApi';
 import { productApi } from '../Api/productApi';
 
+import errorSlice from './errorSlice';
+
 export const store = configureStore({
   reducer: {
+    error: errorSlice,
     auth: authReducer,
     categories: categorySlice,
     [authApi.reducerPath]: authApi.reducer,

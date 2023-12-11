@@ -1,7 +1,7 @@
 import './Categories.css';
 import CategoryItem from './CategoryItem/CategoryItem';
 import Modal from '../../../components/Modal/Modal';
-import CreateCategoryForm from '../CreateCategoryForm/CreateCategoryForm';
+import CreateCategoryForm from './CreateCategoryForm/CreateCategoryForm';
 import { useAppSelector } from '../../../hooks/redux';
 import { Category } from '../../../types/categoryType';
 import useTogglePopup from '../../../hooks/useTogglePopup';
@@ -25,7 +25,6 @@ function Categories() {
           <CreateCategoryForm submitBtnName="Создать" handleCloseModal={handleCloseModal} />
         </Modal>
       </div>
-
       <ul className="categories__list">
         {myCategories
           ? myCategories.map((category: Category) => <CategoryItem key={category.id} category={category} />)

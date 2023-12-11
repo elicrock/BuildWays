@@ -4,7 +4,8 @@ import { useForm, SubmitHandler } from 'react-hook-form';
 import { useAppDispatch, useAppSelector } from '../../hooks/redux';
 import Logo from '../../images/logo-dark.svg';
 import { useLoginUserMutation } from '../../Api/authApi';
-import { setError, setUser } from '../../redux/authSlice';
+import { setUser } from '../../redux/authSlice';
+import { setError, clearError } from '../../redux/errorSlice';
 
 interface LoginFormData {
   email: string;
@@ -21,31 +22,30 @@ function Login() {
 
   const dispatch = useAppDispatch();
   const [loginUser, { isLoading }] = useLoginUserMutation();
-  const errorApi = useAppSelector(state => state.auth.error);
+  const errorApi = useAppSelector(state => state.error.message);
   const isLoggedIn = useAppSelector(state => state.auth.isLoggedIn);
   const navigate = useNavigate();
   const inputEmail = watch('email');
   const inputPassword = watch('password');
 
   useEffect(() => {
-    dispatch(setError(''));
+    dispatch(clearError());
   }, [dispatch, inputEmail, inputPassword]);
 
   const handleLogin: SubmitHandler<LoginFormData> = async data => {
     try {
-      const response = await loginUser(data);
-
-      if ('data' in response) {
-        dispatch(setUser(response.data));
-        navigate('/');
-        localStorage.setItem('isLoggedIn', JSON.stringify(true));
-      } else if ('status' in response.error && response.error.status === 401) {
+      const response = await loginUser(data).unwrap();
+      console.log(response);
+      dispatch(setUser(response));
+      navigate('/');
+      localStorage.setItem('isLoggedIn', JSON.stringify(true));
+    } catch (error) {
+      console.log(error.status);
+      if (error.status === 401) {
         dispatch(setError('Неправильная почта или пароль'));
       } else {
         dispatch(setError('При авторизации произошла ошибка'));
       }
-    } catch (error) {
-      console.log(error);
     }
   };
 

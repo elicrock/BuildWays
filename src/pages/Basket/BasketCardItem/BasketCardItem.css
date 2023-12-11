@@ -61,7 +61,7 @@
 }
 
 .basket__card-delete-btn {
-  background: url('../../../images/basket__card-delete-btn.svg') no-repeat center;
+  background: url('../../../images/cross-icon.svg') no-repeat center;
   width: 12px;
   height: 12px;
   border: none;

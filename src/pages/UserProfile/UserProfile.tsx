@@ -6,7 +6,8 @@ import { useNavigate } from 'react-router-dom';
 import { useForm, SubmitHandler } from 'react-hook-form';
 import { useAppDispatch, useAppSelector } from '../../hooks/redux';
 import { useUpdateUserProfileMutation, useLogoutUserMutation } from '../../Api/authApi';
-import { setError, setSuccessMessage, setUser, logout } from '../../redux';
+import { setSuccessMessage, setUser, logout } from '../../redux';
+import { setError, clearError } from '../../redux/errorSlice';
 
 type ProfileFormData = {
   name: string;
@@ -25,7 +26,7 @@ function UserProfile() {
 
   const dispatch = useAppDispatch();
   const currentUser = useAppSelector(state => state.auth.currentUser);
-  const errorMessage = useAppSelector(state => state.auth.error);
+  const errorApi = useAppSelector(state => state.error.message);
   const successMessage = useAppSelector(state => state.auth.successMessage);
   const navigate = useNavigate();
 
@@ -44,23 +45,23 @@ function UserProfile() {
   }, [currentUser, dispatch, setValue]);
 
   useEffect(() => {
-    dispatch(setError(''));
+    dispatch(clearError());
     dispatch(setSuccessMessage(''));
   }, [dispatch, inputName, inputEmail]);
 
   const handleEditProfile: SubmitHandler<ProfileFormData> = async ({ name, email }) => {
     try {
-      const response = await updateUserProfile({ name, email });
-      if ('data' in response) {
+      const response = await updateUserProfile({ name, email }).unwrap();
+      if (response) {
         dispatch(setUser({ id: currentUser?.id, name, email, role: currentUser?.role }));
         dispatch(setSuccessMessage('Данные пользователя успешно обновлены!'));
-      } else if ('status' in response.error && response.error.status === 409) {
+      }
+    } catch (error) {
+      if (error.status === 409) {
         dispatch(setError('Пользователь с таким email уже существует!'));
       } else {
         dispatch(setError('Произошла ошибка при обновлении данных'));
       }
-    } catch (error) {
-      console.log(error);
     }
   };
 
@@ -163,7 +164,7 @@ function UserProfile() {
                 >
                   {isLoading ? 'Сохранение' : 'Сохранить'}
                 </button>
-                <span className="user-profile__error-message">{errorMessage}</span>
+                <span className="user-profile__error-message">{errorApi}</span>
                 <span className="user-profile__success-message">{successMessage}</span>
               </form>
               <button className="user-profile__logoutBtn" onClick={handleLogout}>

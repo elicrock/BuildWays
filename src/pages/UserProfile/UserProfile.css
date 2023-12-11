@@ -102,7 +102,7 @@
 }
 
 .user-profile__error {
-  color: #f05a00;
+  color: red;
   font-size: 11px;
   font-weight: 500;
   line-height: 13px;
@@ -115,7 +115,7 @@
 
 .user-profile__error-message {
   padding-top: 10px;
-  color: #f05a00;
+  color: red;
   font-size: 11px;
   font-weight: 500;
   line-height: 13px;

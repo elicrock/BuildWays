@@ -138,3 +138,10 @@
   background: rgb(170, 11, 11);
   color: #fff;
 }
+
+.category-form__error-api {
+  color: red;
+  font-size: 13px;
+  font-weight: 500;
+  line-height: 13px;
+}

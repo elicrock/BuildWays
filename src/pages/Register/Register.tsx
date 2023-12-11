@@ -5,7 +5,8 @@ import { useAppDispatch, useAppSelector } from '../../hooks/redux';
 import './Register.css';
 import Logo from '../../images/logo-dark.svg';
 import { useRegisterUserMutation, useLoginUserMutation } from '../../Api/authApi';
-import { setUser, setError } from '../../redux/authSlice';
+import { setUser } from '../../redux/authSlice';
+import { setError, clearError } from '../../redux/errorSlice';
 interface RegisterFormData {
   name: string;
   email: string;
@@ -23,10 +24,9 @@ function Register() {
   const dispatch = useAppDispatch();
   const [registerUser] = useRegisterUserMutation();
   const [loginUser] = useLoginUserMutation();
-  const errorApi = useAppSelector(state => state.auth.error);
+  const errorApi = useAppSelector(state => state.error.message);
   const isLoggedIn = useAppSelector(state => state.auth.isLoggedIn);
   const [isLoading, setIsLoading] = useState(false);
-
   const navigate = useNavigate();
   const inputName = watch('name');
   const inputEmail = watch('email');
@@ -34,28 +34,25 @@ function Register() {
   const inputConfirmPassword = watch('confirmPassword', '');
 
   useEffect(() => {
-    dispatch(setError(''));
+    dispatch(clearError());
   }, [dispatch, inputName, inputEmail, inputPassword, inputConfirmPassword]);
 
   const handleRegistration: SubmitHandler<RegisterFormData> = async ({ name, email, password }) => {
     setIsLoading(true);
     try {
-      const response = await registerUser({ name, email, password });
-
-      if ('data' in response) {
-        const result = await loginUser({ email, password });
-        if ('data' in result) {
-          dispatch(setUser(result.data));
-          navigate('/');
-          localStorage.setItem('isLoggedIn', JSON.stringify(true));
-        }
-      } else if ('status' in response.error && response.error.status === 409) {
+      const response = await registerUser({ name, email, password }).unwrap();
+      if (response) {
+        await loginUser({ email, password });
+        dispatch(setUser(response));
+        navigate('/');
+        localStorage.setItem('isLoggedIn', JSON.stringify(true));
+      }
+    } catch (error) {
+      if (error.status === 409) {
         dispatch(setError('Пользователь с таким email уже существует'));
       } else {
         dispatch(setError('При регистрации пользователя произошла ошибка'));
       }
-    } catch (error) {
-      console.log(error);
     } finally {
       setIsLoading(false);
     }

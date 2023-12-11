@@ -1,6 +1,6 @@
 import './CategoryItem.css';
 import Modal from '../../../../components/Modal/Modal';
-import CreateCategoryForm from '../../CreateCategoryForm/CreateCategoryForm';
+import EditCategoryForm from '../EditCategoryForm/EditCategoryForm';
 import { Category } from '../../../../types/categoryType';
 import useTogglePopup from '../../../../hooks/useTogglePopup';
 
@@ -21,7 +21,7 @@ function CategoryItem({ category }: CategoryItemProps) {
         handleCloseModal={handleCloseModal}
         handleOpenModal={handleOpenModal}
       >
-        <CreateCategoryForm submitBtnName="Редактировать" deleteBtnName="Удалить" handleCloseModal={handleCloseModal} />
+        <EditCategoryForm submitBtnName="Редактировать" handleCloseModal={handleCloseModal} category={category} />
       </Modal>
       <img src={srcImage} alt="Изображение категории" className="category-item__image"></img>
       <h2 className="category-item__title">{category.name}</h2>

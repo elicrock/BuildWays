@@ -24,7 +24,27 @@ export const categoryApi = createApi({
       },
       invalidatesTags: [{ type: 'Categories', id: 'LIST' }],
     }),
+    deleteCategory: builder.mutation({
+      query: (id: number) => {
+        return {
+          url: `categories/${id}`,
+          method: 'DELETE',
+        };
+      },
+      invalidatesTags: [{ type: 'Categories', id: 'LIST' }],
+    }),
+    editCategory: builder.mutation<unknown, { formData: FormData; id: number }>({
+      query: ({ formData, id }) => {
+        return {
+          url: `categories/${id}`,
+          method: 'PATCH',
+          body: formData,
+          formData: true,
+        };
+      },
+    }),
   }),
 });
 
-export const { useCreateCategoryMutation, useGetCategoriesQuery } = categoryApi;
+export const { useCreateCategoryMutation, useGetCategoriesQuery, useDeleteCategoryMutation, useEditCategoryMutation } =
+  categoryApi;

@@ -1,16 +1,17 @@
 import './CreateCategoryForm.css';
-import { useState, ChangeEvent } from 'react';
+import { useState, useEffect, ChangeEvent } from 'react';
 import { useForm, SubmitHandler } from 'react-hook-form';
-import { useCreateCategoryMutation } from '../../../Api/categoryApi';
-import { CategoryFormData, ImageFile } from '../../../types/categoryType';
+import { useCreateCategoryMutation } from '../../../../Api/categoryApi';
+import { CategoryFormData, ImageFile } from '../../../../types/categoryType';
+import { useAppSelector, useAppDispatch } from '../../../../hooks/redux';
+import { setError, clearError } from '../../../../redux/errorSlice';
 
 type CreateCategoryFormProps = {
   submitBtnName?: string;
-  deleteBtnName?: string;
   handleCloseModal?: () => void;
 };
 
-function CreateCategoryForm({ submitBtnName, deleteBtnName, handleCloseModal }: CreateCategoryFormProps) {
+function CreateCategoryForm({ submitBtnName, handleCloseModal }: CreateCategoryFormProps) {
   const {
     register,
     handleSubmit,
@@ -19,13 +20,18 @@ function CreateCategoryForm({ submitBtnName, deleteBtnName, handleCloseModal }: 
 
   const [selectedImageFile, setSelectedImageFile] = useState<ImageFile>();
   const [createCatagory] = useCreateCategoryMutation();
+  const dispatch = useAppDispatch();
+  const errorApi = useAppSelector(state => state.error.message);
+
+  useEffect(() => {
+    dispatch(clearError());
+  }, [dispatch]);
 
   const handleImageFileInputChange = (event: ChangeEvent<HTMLInputElement>) => {
     const file = event.target.files?.[0];
 
     if (file) {
       const reader = new FileReader();
-
       reader.onloadend = () => {
         const newFile: ImageFile = {
           file: file,
@@ -38,24 +44,20 @@ function CreateCategoryForm({ submitBtnName, deleteBtnName, handleCloseModal }: 
   };
 
   const handleAddCategory: SubmitHandler<CategoryFormData> = async ({ name }) => {
-    // unwrap()
     try {
       const formData = new FormData();
       formData.append('name', name);
       if (selectedImageFile) {
         formData.append('img', selectedImageFile?.file || '');
       }
-      const response = await createCatagory(formData);
-      if ('error' in response) {
-        if ('status' in response.error) {
-          console.log(response.error.status);
-        }
-      }
-      if ('data' in response && handleCloseModal) {
-        handleCloseModal();
-      }
+      await createCatagory(formData).unwrap();
+      handleCloseModal();
     } catch (error) {
-      console.log(error);
+      if (error.status === 409) {
+        dispatch(setError('Категория с таким названием уже существует'));
+      } else {
+        dispatch(setError('При создании категории произошла ошибка'));
+      }
     }
   };
 
@@ -101,12 +103,8 @@ function CreateCategoryForm({ submitBtnName, deleteBtnName, handleCloseModal }: 
         <button type="submit" className="category-form__submit-btn" disabled={!isValid}>
           {submitBtnName}
         </button>
-        {deleteBtnName && (
-          <button type="button" className="category-form__delete-btn">
-            {deleteBtnName}
-          </button>
-        )}
       </div>
+      <span className="category-form__error-api">{errorApi}</span>
     </form>
   );
 }
