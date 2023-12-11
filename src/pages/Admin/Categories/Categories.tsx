@@ -9,7 +9,6 @@ import useTogglePopup from '../../../hooks/useTogglePopup';
 function Categories() {
   const { showModal, handleCloseModal, handleOpenModal } = useTogglePopup();
   const myCategories = useAppSelector(state => state.categories);
-
   return (
     <section className="categories">
       <div className="catagories__flex-box">

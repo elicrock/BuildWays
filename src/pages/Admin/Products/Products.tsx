@@ -13,7 +13,7 @@ function Products() {
   return (
     <section className="products">
       <div className="products__flex-box">
-        <h2 className="products__title">Все Товары</h2>
+        <h2 className="products__title">Товары</h2>
         <Modal text={'Создать товар'} classBtn="products__createBtn" titleModal="Создание товара"></Modal>
       </div>
       <div className="products__content">

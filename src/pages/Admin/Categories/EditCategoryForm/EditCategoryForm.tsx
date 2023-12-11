@@ -24,6 +24,7 @@ function EditCategoryForm({ category, submitBtnName, handleCloseModal }: EditCat
   } = useForm<CategoryFormData>({ mode: 'onChange' });
 
   const [selectedImageFile, setSelectedImageFile] = useState<ImageFile>();
+  const [imageSelected, setImageSelected] = useState(false);
   const [deleteCategory] = useDeleteCategoryMutation();
   const [editCategory] = useEditCategoryMutation();
   const dispatch = useAppDispatch();
@@ -41,7 +42,7 @@ function EditCategoryForm({ category, submitBtnName, handleCloseModal }: EditCat
 
   const handleImageFileInputChange = (event: ChangeEvent<HTMLInputElement>) => {
     const file = event.target.files?.[0];
-
+    setImageSelected(true);
     if (file) {
       const reader = new FileReader();
       reader.onloadend = () => {
@@ -128,7 +129,7 @@ function EditCategoryForm({ category, submitBtnName, handleCloseModal }: EditCat
         <span className="category-form__file-button-text">Добавить фото</span>
       </label>
       <div className="category-form__box-Btns">
-        <button type="submit" className="category-form__submit-btn" disabled={!isValid}>
+        <button type="submit" className="category-form__submit-btn" disabled={!isValid && !imageSelected}>
           {submitBtnName}
         </button>
         <button type="button" className="category-form__delete-btn" onClick={() => handleDeleteCategory(category.id)}>
