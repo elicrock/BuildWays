@@ -1,6 +1,11 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 import { Product } from '../types/productType';
 
+interface ProductsData {
+  count: number;
+  rows: Product[];
+}
+
 export const productApi = createApi({
   reducerPath: 'productApi',
   baseQuery: fetchBaseQuery({ baseUrl: 'http://localhost:3000/api/', credentials: 'include' }),
@@ -15,7 +20,7 @@ export const productApi = createApi({
         };
       },
     }),
-    getProducts: builder.query<Product[], void>({
+    getProducts: builder.query<ProductsData, void>({
       query: () => 'products',
     }),
   }),

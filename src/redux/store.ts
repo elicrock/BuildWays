@@ -1,6 +1,7 @@
 import { configureStore } from '@reduxjs/toolkit';
 import authReducer from './authSlice';
 import categorySlice from './categorySlice';
+import productSlice from './productSlice';
 import { authApi } from '../Api/authApi';
 import { categoryApi } from '../Api/categoryApi';
 import { productApi } from '../Api/productApi';
@@ -9,6 +10,7 @@ export const store = configureStore({
   reducer: {
     auth: authReducer,
     categories: categorySlice,
+    products: productSlice,
     [authApi.reducerPath]: authApi.reducer,
     [categoryApi.reducerPath]: categoryApi.reducer,
     [productApi.reducerPath]: productApi.reducer,

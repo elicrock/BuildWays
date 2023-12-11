@@ -5,6 +5,7 @@
   padding-top: 50px;
   display: flex;
   flex-direction: column;
+  gap: 30px;
 }
 
 .products__title {
@@ -37,4 +38,20 @@
 
 .products__createBtn:hover {
   opacity: 0.7;
+}
+
+.products__content {
+  display: flex;
+  align-items: flex-start;
+  gap: 25px;
+}
+
+.products__list {
+  grid-gap: 32px 20px;
+  display: grid;
+  gap: 32px 20px;
+  grid-template-columns: repeat(4, minmax(0, 300px));
+  justify-content: center;
+  list-style: none;
+  padding-bottom: 30px;
 }
