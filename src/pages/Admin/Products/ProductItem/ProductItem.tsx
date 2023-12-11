@@ -1,6 +1,6 @@
 import './ProductItem.css';
 import Modal from '../../../../components/Modal/Modal';
-import CreateCategoryForm from '../../CreateCategoryForm/CreateCategoryForm';
+import CreateCategoryForm from '../../Categories/CreateCategoryForm/CreateCategoryForm';
 import useTogglePopup from '../../../../hooks/useTogglePopup';
 import { Product } from '../../../../types/productType';
 
@@ -21,7 +21,7 @@ function ProductItem({ product, categoryName }: ProductItemProps) {
         handleCloseModal={handleCloseModal}
         handleOpenModal={handleOpenModal}
       >
-        <CreateCategoryForm submitBtnName="Редактировать" deleteBtnName="Удалить" handleCloseModal={handleCloseModal} />
+        <CreateCategoryForm submitBtnName="Редактировать" handleCloseModal={handleCloseModal} />
       </Modal>
       <h2 className="product-item__title">{product.name}</h2>
       <p className="product-item__subtitle">Категория: {categoryName}</p>
