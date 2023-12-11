@@ -28,7 +28,7 @@ function Categories() {
       <ul className="categories__list">
         {myCategories
           ? myCategories.map((category: Category) => <CategoryItem key={category.id} category={category} />)
-          : 'У вас пока что нету категорий'}
+          : 'У вас пока что нет категорий'}
       </ul>
     </section>
   );
