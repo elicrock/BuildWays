@@ -1,0 +1,153 @@
+.product-form {
+  gap: 15px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.product-form__label {
+  color: #8b8b8b;
+  display: flex;
+  flex-direction: column;
+  font-size: 12px;
+  font-weight: 400;
+  gap: 5px;
+  line-height: 12px;
+  padding-bottom: 10px;
+}
+
+.product-form__input {
+  padding: 0;
+  padding-bottom: 10px;
+  outline: none;
+  border: none;
+  border-bottom: 1px solid #212526;
+  background-color: initial;
+  color: black;
+  font-size: 16px;
+  font-weight: 500;
+  line-height: 17px;
+  transition: border-color 0.2s;
+}
+
+.product-form__input:focus {
+  border-color: #f05a00;
+}
+
+.product-form__input_error {
+  color: red;
+  font-size: 13px;
+  font-weight: 500;
+  line-height: 13px;
+}
+
+.product-form__price::-webkit-inner-spin-button,
+.product-form__price::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+.product-form__file {
+  opacity: 0;
+  visibility: hidden;
+  position: absolute;
+  left: 0px;
+}
+
+.product-form__image {
+  margin-bottom: 17px;
+  width: 160px;
+  height: 100px;
+  object-fit: cover;
+  border-radius: 8px;
+}
+
+.product-form__file-label {
+  width: 156px;
+  height: 40px;
+  background-color: initial;
+  color: #fff;
+  font-size: 1.125rem;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 5px;
+  border: 1px solid #f05a00;
+  cursor: pointer;
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 20px;
+  transition: background 0.3s, outline 0.3s, color 0.3s;
+}
+
+.product-form__file-label:hover {
+  opacity: 0.8;
+  background-color: #f05a00;
+}
+
+.product-form__file-label:hover .product-form__file-button-text {
+  color: #fff;
+}
+
+.product-form__file-button-text {
+  color: #f05a00;
+  line-height: 1;
+  margin-top: 1px;
+  cursor: pointer;
+  align-self: center;
+}
+
+.product-form__box-Btns {
+  padding-top: 10px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 10px;
+}
+
+.product-form__submit-btn,
+.product-form__delete-btn {
+  background: initial;
+  width: 50%;
+  border: none;
+  padding: 12px;
+  border-radius: 5px;
+  font-size: 14px;
+  font-weight: 600;
+  transition: background 0.3s, outline 0.3s, color 0.3s;
+  cursor: pointer;
+}
+
+.product-form__submit-btn {
+  outline: 1px solid rgb(14, 95, 14);
+  color: rgb(14, 95, 14);
+}
+
+.product-form__submit-btn:hover {
+  background: rgb(14, 95, 14);
+  color: #fff;
+}
+
+.product-form__submit-btn:disabled {
+  outline: 1px solid rgb(117, 117, 117);
+  color: rgba(117, 117, 117);
+  pointer-events: none;
+}
+
+.product-form__delete-btn {
+  outline: 1px solid rgb(170, 11, 11);
+  color: rgb(170, 11, 11);
+}
+
+.product-form__delete-btn:hover {
+  background: rgb(170, 11, 11);
+  color: #fff;
+}
+
+.product-form__error-api {
+  color: red;
+  font-size: 13px;
+  font-weight: 500;
+  line-height: 13px;
+}

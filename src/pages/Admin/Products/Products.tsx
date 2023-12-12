@@ -5,8 +5,11 @@ import Sidebar from '../../../components/Sidebar/Sidebar';
 import { useAppSelector } from '../../../hooks/redux';
 import { Category } from '../../../types/categoryType';
 import { Product } from '../../../types/productType';
+import CreateProductForm from '../Products/CreateProductForm/CreateProductForm';
+import useTogglePopup from '../../../hooks/useTogglePopup';
 
 function Products() {
+  const { showModal, handleCloseModal, handleOpenModal } = useTogglePopup();
   const myProducts = useAppSelector(state => state.products);
   const myCategories = useAppSelector(state => state.categories);
 
@@ -14,7 +17,16 @@ function Products() {
     <section className="products">
       <div className="products__flex-box">
         <h2 className="products__title">Все Товары</h2>
-        <Modal text={'Создать товар'} classBtn="products__createBtn" titleModal="Создание товара"></Modal>
+        <Modal
+          text={'Создать товар'}
+          classBtn="products__createBtn"
+          titleModal="Создание товара"
+          showModal={showModal}
+          handleCloseModal={handleCloseModal}
+          handleOpenModal={handleOpenModal}
+        >
+          <CreateProductForm submitBtnName="Создать" handleCloseModal={handleCloseModal} />
+        </Modal>
       </div>
       <div className="products__content">
         <Sidebar />
