@@ -32,8 +32,8 @@
   display: flex;
   align-items: center;
   width: 100%;
-  aspect-ratio: 1/0.7;
-  object-fit: cover;
+  aspect-ratio: 1/0.8;
+  object-fit: contain;
   transition: scale 0.3s ease-in-out;
 }
 

@@ -42,8 +42,9 @@
   width: 100%;
   /* aspect-ratio: 1/0.55; */
   height: 170px;
-  object-fit: contain;
+  object-fit: cover;
   align-self: center;
+  margin-top: auto;
 }
 
 .product-item__price {
