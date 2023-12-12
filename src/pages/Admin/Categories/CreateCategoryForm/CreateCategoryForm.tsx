@@ -62,7 +62,7 @@ function CreateCategoryForm({ submitBtnName, handleCloseModal }: CreateCategoryF
   };
 
   return (
-    <form className="category-form" name="createCatagory" onSubmit={handleSubmit(handleAddCategory)}>
+    <form className="category-form" name="editCatagory" onSubmit={handleSubmit(handleAddCategory)}>
       <label className="category-form__label" htmlFor="nameCategory">
         Название
         <input
