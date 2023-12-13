@@ -1,12 +1,12 @@
-import React, { ReactNode, useState, useEffect } from 'react';
 import './HomeCatalogyList.css';
-
+import { useState, useEffect } from 'react';
+import { Category } from '../../../types/categoryType';
+import ProductCardItem from '../../../components/ProductCardItem/ProductCardItem';
 interface HomeCatalogyListProps {
-  title: string;
-  children?: ReactNode;
+  category: Category;
 }
 
-function HomeCatalogyList({ title, children }: HomeCatalogyListProps) {
+function HomeCatalogyList({ category }: HomeCatalogyListProps) {
   const [visibleCards, setVisibleCards] = useState(4);
 
   useEffect(() => {
@@ -33,11 +33,17 @@ function HomeCatalogyList({ title, children }: HomeCatalogyListProps) {
   return (
     <div className="home-catalogy-list">
       <div className="home-catalogy-list__box-title">
-        <h2 className="home-catalogy-list__title">{title}</h2>
+        <h2 className="home-catalogy-list__title">{category.name}</h2>
         <button type="button" className="home-catalogy-list__slide-left-btn"></button>
         <button type="button" className="home-catalogy-list__slide-right-btn"></button>
       </div>
-      <ul className="home-catalogy-list__list">{React.Children.toArray(children).slice(0, visibleCards)}</ul>
+      {/* <ul className="home-catalogy-list__list">{React.Children.toArray(children).slice(0, visibleCards)}</ul> */}
+      <ul className="home-catalogy-list__list">
+        <ProductCardItem />
+        <ProductCardItem />
+        <ProductCardItem />
+        <ProductCardItem />
+      </ul>
     </div>
   );
 }

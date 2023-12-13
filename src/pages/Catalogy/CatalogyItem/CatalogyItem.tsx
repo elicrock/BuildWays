@@ -1,16 +1,16 @@
+import { Category } from '../../../types/categoryType';
 import './CatalogyItem.css';
 
 interface CatalogItemProps {
-  title: string;
-  src: string;
-  alt?: string;
+  category: Category;
 }
 
-function CatalogyItem({ title, src, alt }: CatalogItemProps) {
+function CatalogyItem({ category }: CatalogItemProps) {
+  const srcImage = `http://localhost:3000/${category.img}`;
   return (
-    <li className='catalogy__item'>
-      <img className='catalogy__image' src={src} alt={alt}></img>
-      <h2 className='catalogy__name'>{title}</h2>
+    <li className="catalogy__item">
+      <img className="catalogy__image" src={srcImage} alt={category.name}></img>
+      <h2 className="catalogy__name">{category.name}</h2>
     </li>
   );
 }

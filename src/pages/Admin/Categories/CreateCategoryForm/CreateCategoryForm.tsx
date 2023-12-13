@@ -1,8 +1,9 @@
 import './CreateCategoryForm.css';
-import { useState, useEffect, ChangeEvent } from 'react';
+import { useEffect } from 'react';
 import { useForm, SubmitHandler } from 'react-hook-form';
 import { useCreateCategoryMutation } from '../../../../Api/categoryApi';
-import { CategoryFormData, ImageFile } from '../../../../types/categoryType';
+import usePosterFileInput from '../../../../hooks/usePosterFileInput';
+import { CategoryFormData } from '../../../../types/categoryType';
 import { useAppSelector, useAppDispatch } from '../../../../hooks/redux';
 import { setError, clearError } from '../../../../redux/errorSlice';
 
@@ -17,31 +18,14 @@ function CreateCategoryForm({ submitBtnName, handleCloseModal }: CreateCategoryF
     handleSubmit,
     formState: { errors, isValid },
   } = useForm<CategoryFormData>({ mode: 'onChange' });
-
-  const [selectedImageFile, setSelectedImageFile] = useState<ImageFile>();
-  const [createCatagory] = useCreateCategoryMutation();
+  const { selectedImageFile, handlePosterFileInputChange } = usePosterFileInput();
+  const [createCatagory, { isLoading }] = useCreateCategoryMutation();
   const dispatch = useAppDispatch();
   const errorApi = useAppSelector(state => state.error.message);
 
   useEffect(() => {
     dispatch(clearError());
   }, [dispatch]);
-
-  const handleImageFileInputChange = (event: ChangeEvent<HTMLInputElement>) => {
-    const file = event.target.files?.[0];
-
-    if (file) {
-      const reader = new FileReader();
-      reader.onloadend = () => {
-        const newFile: ImageFile = {
-          file: file,
-          preview: reader.result as string,
-        };
-        setSelectedImageFile(newFile);
-      };
-      reader.readAsDataURL(file);
-    }
-  };
 
   const handleAddCategory: SubmitHandler<CategoryFormData> = async ({ name }) => {
     try {
@@ -70,6 +54,7 @@ function CreateCategoryForm({ submitBtnName, handleCloseModal }: CreateCategoryF
           id="nameCategory"
           placeholder="Категория"
           type="text"
+          disabled={isLoading}
           {...register('name', {
             required: 'Поле обязательно для заполнения',
             minLength: {
@@ -93,14 +78,14 @@ function CreateCategoryForm({ submitBtnName, handleCloseModal }: CreateCategoryF
         type="file"
         accept="image/*"
         id="inputFile"
-        onChange={handleImageFileInputChange}
+        onChange={handlePosterFileInputChange}
       />
       {selectedImageFile ? <img className="category-form__image" src={selectedImageFile.preview} /> : null}
       <label htmlFor="inputFile" className="category-form__file-label">
         <span className="category-form__file-button-text">Добавить фото</span>
       </label>
       <div className="category-form__box-Btns">
-        <button type="submit" className="category-form__submit-btn" disabled={!isValid}>
+        <button type="submit" className="category-form__submit-btn" disabled={!isValid || isLoading}>
           {submitBtnName}
         </button>
       </div>

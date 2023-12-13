@@ -52,7 +52,7 @@
   margin-bottom: 17px;
   width: 160px;
   height: 100px;
-  object-fit: cover;
+  object-fit: contain;
   border-radius: 8px;
 }
 
@@ -132,6 +132,11 @@
 .category-form__delete-btn {
   outline: 1px solid rgb(170, 11, 11);
   color: rgb(170, 11, 11);
+}
+.category-form__delete-btn:disabled {
+  outline: 1px solid rgb(117, 117, 117);
+  color: rgba(117, 117, 117);
+  pointer-events: none;
 }
 
 .category-form__delete-btn:hover {

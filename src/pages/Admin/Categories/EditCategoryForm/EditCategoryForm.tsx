@@ -1,9 +1,10 @@
 import './EditCategoryForm.css';
-import { useState, useEffect, ChangeEvent } from 'react';
+import { useEffect } from 'react';
 import { useForm, SubmitHandler } from 'react-hook-form';
 import { useDeleteCategoryMutation, useEditCategoryMutation } from '../../../../Api/categoryApi';
 import { Category } from '../../../../types/categoryType';
-import { CategoryFormData, ImageFile } from '../../../../types/categoryType';
+import { CategoryFormData } from '../../../../types/categoryType';
+import usePosterFileInput from '../../../../hooks/usePosterFileInput';
 import { useAppSelector, useAppDispatch } from '../../../../hooks/redux';
 import { setError, clearError } from '../../../../redux/errorSlice';
 import { updateCategory } from '../../../../redux/categorySlice';
@@ -23,10 +24,10 @@ function EditCategoryForm({ category, submitBtnName, handleCloseModal }: EditCat
     formState: { errors, isValid },
   } = useForm<CategoryFormData>({ mode: 'onChange' });
 
-  const [selectedImageFile, setSelectedImageFile] = useState<ImageFile>();
-  const [imageSelected, setImageSelected] = useState(false);
-  const [deleteCategory] = useDeleteCategoryMutation();
-  const [editCategory] = useEditCategoryMutation();
+  const { selectedImageFile, imageSelected, handlePosterFileInputChange } = usePosterFileInput();
+
+  const [deleteCategory, { isLoading: isLoadingDelete }] = useDeleteCategoryMutation();
+  const [editCategory, { isLoading }] = useEditCategoryMutation();
   const dispatch = useAppDispatch();
   const errorApi = useAppSelector(state => state.error.message);
 
@@ -39,22 +40,6 @@ function EditCategoryForm({ category, submitBtnName, handleCloseModal }: EditCat
   useEffect(() => {
     dispatch(clearError());
   }, [dispatch]);
-
-  const handleImageFileInputChange = (event: ChangeEvent<HTMLInputElement>) => {
-    const file = event.target.files?.[0];
-    setImageSelected(true);
-    if (file) {
-      const reader = new FileReader();
-      reader.onloadend = () => {
-        const newFile: ImageFile = {
-          file: file,
-          preview: reader.result as string,
-        };
-        setSelectedImageFile(newFile);
-      };
-      reader.readAsDataURL(file);
-    }
-  };
 
   const handleEditCategory: SubmitHandler<CategoryFormData> = async ({ name }) => {
     try {
@@ -95,6 +80,7 @@ function EditCategoryForm({ category, submitBtnName, handleCloseModal }: EditCat
           id="nameCategory"
           placeholder="Категория"
           type="text"
+          disabled={isLoading}
           {...register('name', {
             required: 'Поле обязательно для заполнения',
             minLength: {
@@ -118,7 +104,7 @@ function EditCategoryForm({ category, submitBtnName, handleCloseModal }: EditCat
         type="file"
         accept="image/*"
         id="inputFile"
-        onChange={handleImageFileInputChange}
+        onChange={handlePosterFileInputChange}
       />
       {selectedImageFile ? (
         <img className="category-form__image" src={selectedImageFile.preview} />
@@ -129,10 +115,19 @@ function EditCategoryForm({ category, submitBtnName, handleCloseModal }: EditCat
         <span className="category-form__file-button-text">Добавить фото</span>
       </label>
       <div className="category-form__box-Btns">
-        <button type="submit" className="category-form__submit-btn" disabled={!isValid && !imageSelected}>
+        <button
+          type="submit"
+          className="category-form__submit-btn"
+          disabled={(!isValid && !imageSelected) || isLoading}
+        >
           {submitBtnName}
         </button>
-        <button type="button" className="category-form__delete-btn" onClick={() => handleDeleteCategory(category.id)}>
+        <button
+          type="button"
+          className="category-form__delete-btn"
+          onClick={() => handleDeleteCategory(category.id)}
+          disabled={isLoading || isLoadingDelete}
+        >
           Удалить
         </button>
       </div>

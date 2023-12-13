@@ -22,9 +22,24 @@ import { setProducts } from '../../redux/productSlice';
 
 function App() {
   const dispatch = useAppDispatch();
-  const { data: userProfileData, isError, error, isLoading } = useGetUserProfileQuery();
-  const { data: myCategories, isError: categoriesIsError, error: categoriesError } = useGetCategoriesQuery();
-  const { data: myProducts, isError: productsIsError, error: productsError } = useGetProductsQuery();
+  const {
+    data: userProfileData,
+    isError: userIsError,
+    error: userError,
+    isLoading: isLoadingUser,
+  } = useGetUserProfileQuery();
+  const {
+    data: myCategories,
+    isError: categoriesIsError,
+    error: categoriesError,
+    isLoading: isLoadingCategories,
+  } = useGetCategoriesQuery();
+  const {
+    data: myProducts,
+    isError: productsIsError,
+    error: productsError,
+    isLoading: isLoadingProducts,
+  } = useGetProductsQuery();
   const isLoggedIn = useAppSelector(state => state.auth.isLoggedIn);
   const currentUser = useAppSelector(state => state.auth.currentUser);
 
@@ -34,7 +49,7 @@ function App() {
     } else if (categoriesIsError) {
       console.error('Произошла ошибка при получении категорий', categoriesError);
     }
-  }, [categoriesError, categoriesIsError, dispatch, error, myCategories]);
+  }, [categoriesError, categoriesIsError, dispatch, myCategories]);
 
   useEffect(() => {
     if (myProducts) {
@@ -42,19 +57,19 @@ function App() {
     } else if (productsIsError) {
       console.error('Произошла ошибка при получении товаров', productsError);
     }
-  }, [dispatch, myProducts, productsError, error, productsIsError]);
+  }, [dispatch, myProducts, productsError, productsIsError]);
 
   useEffect(() => {
     if (userProfileData) {
       dispatch(setUser(userProfileData));
       localStorage.setItem('isLoggedIn', JSON.stringify(true));
-    } else if (isError) {
-      console.error('Произошла ошибка при получении пользователя', error);
+    } else if (userIsError) {
+      console.error('Произошла ошибка при получении пользователя', userError);
       localStorage.removeItem('isLoggedIn');
     }
-  }, [dispatch, userProfileData, isError, error]);
+  }, [dispatch, userProfileData, userIsError, userError]);
 
-  if (isLoading) {
+  if (isLoadingUser && isLoadingCategories && isLoadingProducts) {
     return <Preloader />;
   }
 
