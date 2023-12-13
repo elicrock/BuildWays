@@ -20,6 +20,7 @@ function Products() {
         <Modal
           text={'Создать товар'}
           classBtn="products__createBtn"
+          classModal="modal__content_product"
           titleModal="Создание товара"
           showModal={showModal}
           handleCloseModal={handleCloseModal}

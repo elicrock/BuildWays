@@ -27,8 +27,13 @@
   padding: 34px 36px 37px;
 }
 
+.modal__content_product {
+  max-width: 650px;
+  padding: 30px;
+}
+
 .modal__flex-box {
-  padding-bottom: 56px;
+  padding-bottom: 40px;
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -59,6 +64,7 @@
   .modal__content {
     padding: 20px 18px;
   }
+
   .modal__title {
     font-size: 18px;
   }
