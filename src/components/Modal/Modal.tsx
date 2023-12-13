@@ -6,6 +6,7 @@ type ModalProps = {
   children?: ReactNode;
   text?: string;
   classBtn?: string;
+  classModal?: string;
   id?: number;
   titleModal?: string;
   showModal?: boolean;
@@ -13,7 +14,16 @@ type ModalProps = {
   handleCloseModal?: () => void;
 };
 
-function Modal({ children, text, classBtn, titleModal, showModal, handleOpenModal, handleCloseModal }: ModalProps) {
+function Modal({
+  children,
+  text,
+  classBtn,
+  classModal,
+  titleModal,
+  showModal,
+  handleOpenModal,
+  handleCloseModal,
+}: ModalProps) {
   return (
     <>
       <button onClick={handleOpenModal} className={classBtn}>
@@ -21,7 +31,12 @@ function Modal({ children, text, classBtn, titleModal, showModal, handleOpenModa
       </button>
       {showModal &&
         createPortal(
-          <ModalContent children={children} onClose={handleCloseModal} titleModal={titleModal} />,
+          <ModalContent
+            children={children}
+            onClose={handleCloseModal}
+            titleModal={titleModal}
+            classModal={classModal}
+          />,
           document.body,
         )}
     </>
