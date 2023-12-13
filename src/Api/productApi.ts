@@ -1,17 +1,15 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
-import { Product } from '../types/productType';
-
-interface ProductsData {
-  count: number;
-  rows: Product[];
-}
+import { ProductsData, ProductFormData } from '../types/productType';
 
 export const productApi = createApi({
   reducerPath: 'productApi',
   baseQuery: fetchBaseQuery({ baseUrl: 'http://localhost:3000/api/', credentials: 'include' }),
   endpoints: builder => ({
-    createProduct: builder.mutation({
-      query: (formData: Product) => {
+    getProducts: builder.query<ProductsData, void>({
+      query: () => 'products',
+    }),
+    createProduct: builder.mutation<unknown, unknown>({
+      query: (formData: ProductFormData) => {
         return {
           url: 'products',
           method: 'POST',
@@ -19,9 +17,6 @@ export const productApi = createApi({
           formData: true,
         };
       },
-    }),
-    getProducts: builder.query<ProductsData, void>({
-      query: () => 'products',
     }),
   }),
 });

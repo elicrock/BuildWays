@@ -1,9 +1,10 @@
 import './Sidebar.css';
+import { memo } from 'react';
 import SidebarItem from './SidebarItem/SidebarItem';
 import { useAppSelector } from '../../hooks/redux';
 import { Category } from '../../types/categoryType';
 
-function Sidebar() {
+const Sidebar = memo(function SideBar() {
   const myCategories = useAppSelector(state => state.categories);
 
   return (
@@ -16,6 +17,6 @@ function Sidebar() {
       </ul>
     </section>
   );
-}
+});
 
 export default Sidebar;

@@ -1,4 +1,5 @@
 import './ProductItem.css';
+import { memo } from 'react';
 import Modal from '../../../../components/Modal/Modal';
 import CreateCategoryForm from '../../Categories/CreateCategoryForm/CreateCategoryForm';
 import useTogglePopup from '../../../../hooks/useTogglePopup';
@@ -9,7 +10,7 @@ interface ProductItemProps {
   categoryName: string;
 }
 
-function ProductItem({ product, categoryName }: ProductItemProps) {
+const ProductItem = memo(function ProductItem({ product, categoryName }: ProductItemProps) {
   const { showModal, handleCloseModal, handleOpenModal } = useTogglePopup();
   const srcImage = `http://localhost:3000/${product.img}`;
   return (
@@ -29,6 +30,6 @@ function ProductItem({ product, categoryName }: ProductItemProps) {
       <span className="product-item__price">{product.price} ₽</span>
     </li>
   );
-}
+});
 
 export default ProductItem;

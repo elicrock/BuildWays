@@ -1,4 +1,5 @@
 import './CategoryItem.css';
+import { memo } from 'react';
 import Modal from '../../../../components/Modal/Modal';
 import EditCategoryForm from '../EditCategoryForm/EditCategoryForm';
 import { Category } from '../../../../types/categoryType';
@@ -8,7 +9,7 @@ interface CategoryItemProps {
   category: Category;
 }
 
-function CategoryItem({ category }: CategoryItemProps) {
+const CategoryItem = memo(function CategoryItem({ category }: CategoryItemProps) {
   const { showModal, handleCloseModal, handleOpenModal } = useTogglePopup();
   const srcImage = `http://localhost:3000/${category.img}`;
 
@@ -27,6 +28,6 @@ function CategoryItem({ category }: CategoryItemProps) {
       <h2 className="category-item__title">{category.name}</h2>
     </li>
   );
-}
+});
 
 export default CategoryItem;

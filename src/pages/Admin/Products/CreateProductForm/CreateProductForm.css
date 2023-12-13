@@ -8,7 +8,7 @@
 .product-form__box {
   display: flex;
   gap: 20px;
-  align-items: flex-end;
+  align-items: flex-start;
 }
 
 .product-form__label {
@@ -52,6 +52,20 @@
   line-height: 13px;
 }
 
+.product-form__select {
+  padding: 0;
+  padding-bottom: 3.5px;
+  outline: none;
+  border: none;
+  border-bottom: 1px solid #212526;
+  background-color: initial;
+  color: black;
+  font-size: 16px;
+  font-weight: 500;
+  line-height: 17px;
+  transition: border-color 0.2s;
+}
+
 .product-form__price::-webkit-inner-spin-button,
 .product-form__price::-webkit-outer-spin-button {
   -webkit-appearance: none;
@@ -84,7 +98,7 @@
   margin-bottom: 17px;
   width: 160px;
   height: 100px;
-  object-fit: cover;
+  object-fit: contain;
   border-radius: 8px;
 }
 

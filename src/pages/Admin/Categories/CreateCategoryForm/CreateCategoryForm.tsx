@@ -31,9 +31,8 @@ function CreateCategoryForm({ submitBtnName, handleCloseModal }: CreateCategoryF
     try {
       const formData = new FormData();
       formData.append('name', name);
-      if (selectedImageFile) {
-        formData.append('img', selectedImageFile?.file || '');
-      }
+      selectedImageFile && formData.append('img', selectedImageFile?.file || '');
+
       await createCatagory(formData).unwrap();
       handleCloseModal();
     } catch (error) {

@@ -1,30 +1,36 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useCallback } from 'react';
 
 function useTogglePopup() {
   const [showModal, setShowModal] = useState(false);
 
-  function handleOpenModal() {
+  const handleOpenModal = useCallback(() => {
     setShowModal(true);
-  }
+  }, []);
 
-  function handleCloseModal() {
+  const handleCloseModal = useCallback(() => {
     setShowModal(false);
-  }
+  }, []);
 
-  useEffect(() => {
-    function handleEscClose(evt: KeyboardEvent) {
+  const handleEscClose = useCallback(
+    (evt: KeyboardEvent) => {
       if (evt.key === 'Escape') {
         handleCloseModal();
       }
-    }
+    },
+    [handleCloseModal],
+  );
 
-    const handleCloseOverlayClick = (evt: MouseEvent) => {
+  const handleCloseOverlayClick = useCallback(
+    (evt: MouseEvent) => {
       const target = evt.target;
       if (target && (target as Element).classList.contains('modal')) {
         handleCloseModal();
       }
-    };
+    },
+    [handleCloseModal],
+  );
 
+  useEffect(() => {
     document.addEventListener('keydown', handleEscClose);
     document.addEventListener('mousedown', handleCloseOverlayClick);
 
@@ -32,7 +38,7 @@ function useTogglePopup() {
       document.removeEventListener('keydown', handleEscClose);
       document.removeEventListener('mousedown', handleCloseOverlayClick);
     };
-  }, []);
+  }, [handleCloseOverlayClick, handleEscClose]);
 
   return { showModal, setShowModal, handleOpenModal, handleCloseModal };
 }

@@ -1,8 +1,9 @@
 import './CreateProductForm.css';
-import { useState, useEffect, ChangeEvent } from 'react';
+import { useState, useEffect } from 'react';
 import { useForm, SubmitHandler } from 'react-hook-form';
-import { useCreateCategoryMutation } from '../../../../Api/categoryApi';
-import { CategoryFormData, ImageFile } from '../../../../types/categoryType';
+import { useCreateProductMutation } from '../../../../Api/productApi';
+import { ProductFormData } from '../../../../types/productType';
+import usePosterFileInput from '../../../../hooks/usePosterFileInput';
 import { useAppSelector, useAppDispatch } from '../../../../hooks/redux';
 import { setError, clearError } from '../../../../redux/errorSlice';
 
@@ -16,10 +17,10 @@ function CreateProductForm({ submitBtnName, handleCloseModal }: CreateProductFor
     register,
     handleSubmit,
     formState: { errors, isValid },
-  } = useForm<CategoryFormData>({ mode: 'onChange' });
+  } = useForm<ProductFormData>({ mode: 'onChange' });
 
-  const [selectedImageFile, setSelectedImageFile] = useState<ImageFile>();
-  const [createCatagory] = useCreateCategoryMutation();
+  const { selectedImageFile, handlePosterFileInputChange } = usePosterFileInput();
+  const [createProduct] = useCreateProductMutation();
   const dispatch = useAppDispatch();
   const errorApi = useAppSelector(state => state.error.message);
   const myCategories = useAppSelector(state => state.categories);
@@ -37,42 +38,29 @@ function CreateProductForm({ submitBtnName, handleCloseModal }: CreateProductFor
     dispatch(clearError());
   }, [dispatch]);
 
-  const handleImageFileInputChange = (event: ChangeEvent<HTMLInputElement>) => {
-    const file = event.target.files?.[0];
-
-    if (file) {
-      const reader = new FileReader();
-      reader.onloadend = () => {
-        const newFile: ImageFile = {
-          file: file,
-          preview: reader.result as string,
-        };
-        setSelectedImageFile(newFile);
-      };
-      reader.readAsDataURL(file);
-    }
-  };
-
-  const handleAddCategory: SubmitHandler<CategoryFormData> = async ({ name }) => {
+  const handleAddProduct: SubmitHandler<ProductFormData> = async ({ name, price, categoryId, description }) => {
     try {
       const formData = new FormData();
       formData.append('name', name);
-      if (selectedImageFile) {
-        formData.append('img', selectedImageFile?.file || '');
-      }
-      await createCatagory(formData).unwrap();
+      formData.append('categoryId', categoryId.toString());
+      formData.append('price', price.toString());
+      description && formData.append('description', description);
+      selectedImageFile && formData.append('img', selectedImageFile?.file || '');
+
+      await createProduct(formData).unwrap();
+
       handleCloseModal();
     } catch (error) {
       if (error.status === 409) {
-        dispatch(setError('Категория с таким названием уже существует'));
+        dispatch(setError('Продукт с таким названием уже существует'));
       } else {
-        dispatch(setError('При создании категории произошла ошибка'));
+        dispatch(setError('При создании продукта произошла ошибка'));
       }
     }
   };
 
   return (
-    <form className="product-form" name="createProduct" onSubmit={handleSubmit(handleAddCategory)}>
+    <form className="product-form" name="createProduct" onSubmit={handleSubmit(handleAddProduct)}>
       <div className="product-form__box">
         <label className="product-form__label" htmlFor="nameProduct">
           Название
@@ -102,13 +90,14 @@ function CreateProductForm({ submitBtnName, handleCloseModal }: CreateProductFor
         <label className="product-form__label" htmlFor="category">
           Категория
           <select
-            className="product-form__input"
+            className="product-form__select"
             id="category"
-            // {...register('categoryId', {
-            //   required: 'Поле обязательно для заполнения',
-            // })}
+            defaultValue=""
+            {...register('categoryId', {
+              required: 'Поле обязательно для заполнения',
+            })}
           >
-            <option value="" disabled selected>
+            <option value="" disabled>
               Выберите категорию
             </option>
             {myCategories.map(category => (
@@ -117,7 +106,6 @@ function CreateProductForm({ submitBtnName, handleCloseModal }: CreateProductFor
               </option>
             ))}
           </select>
-          <span className="product-form__input_error">{errors?.categoryId?.message}</span>
         </label>
       </div>
       <label className="product-form__label" htmlFor="price">
@@ -218,7 +206,7 @@ function CreateProductForm({ submitBtnName, handleCloseModal }: CreateProductFor
         type="file"
         accept="image/*"
         id="inputFile"
-        onChange={handleImageFileInputChange}
+        onChange={handlePosterFileInputChange}
       />
       {selectedImageFile ? <img className="product-form__image" src={selectedImageFile.preview} /> : null}
       <label htmlFor="inputFile" className="product-form__file-label">

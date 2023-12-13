@@ -13,3 +13,20 @@ export type Product = {
   updatedAt?: string;
   createdAt?: string;
 };
+
+export interface ProductsData {
+  count: number;
+  rows: Product[];
+}
+
+export type ProductFormData = {
+  name: string;
+  price: number | string;
+  categoryId: number | string;
+  description?: string;
+  img?: File | string | null | undefined;
+  parameters?: {
+    title: string;
+    description: string;
+  };
+};

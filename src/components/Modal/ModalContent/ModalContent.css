@@ -25,6 +25,8 @@
   max-width: 430px;
   width: 100%;
   padding: 34px 36px 37px;
+  overflow-y: auto;
+  max-height: 90vh;
 }
 
 .modal__content_product {
