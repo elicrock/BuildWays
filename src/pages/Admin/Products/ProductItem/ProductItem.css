@@ -1,0 +1,54 @@
+.product-item {
+  padding: 12px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  max-width: 310px;
+  width: 100%;
+  background-color: #fff;
+  position: relative;
+  overflow: hidden;
+}
+
+.product-item__add-editBtn {
+  width: 30px;
+  height: 28px;
+  border: none;
+  outline: none;
+  background: url('../../../../images/edit-icon.svg') no-repeat center;
+  background-size: 30px 28px;
+  cursor: pointer;
+  transition: scale 0.3s ease-in-out;
+  align-self: flex-end;
+}
+
+.product-item__title {
+  padding-top: 20px;
+  font-family: Raleway;
+  font-size: 16px;
+  line-height: 20px;
+  color: #000000;
+}
+
+.product-item__subtitle {
+  /* padding-top: 5px; */
+  font-family: Raleway;
+  font-size: 14px;
+  line-height: 20px;
+  color: #000000;
+}
+
+.product-item__image {
+  width: 100%;
+  /* aspect-ratio: 1/0.55; */
+  height: 170px;
+  object-fit: cover;
+  align-self: center;
+  margin-top: auto;
+}
+
+.product-item__price {
+  font-size: 16px;
+  font-weight: 600;
+  line-height: 24px;
+}

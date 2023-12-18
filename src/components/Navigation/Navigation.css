@@ -1,0 +1,84 @@
+.navigation {
+  background: #000;
+}
+
+.navigation__container {
+  max-width: 1300px;
+  min-height: 88px;
+  margin: 0 auto;
+  padding: 0 30px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.navigation__list {
+  display: flex;
+  align-items: center;
+  list-style: none;
+  gap: 60px;
+  padding: 10px 0;
+}
+
+.navigation__link {
+  color: #fff;
+  font-family: Raleway;
+  font-size: 16px;
+  font-weight: 500;
+  line-height: 20px;
+  text-decoration: none;
+  transition: opacity 0.2s;
+}
+
+.navigation__link:hover {
+  opacity: 0.7;
+}
+
+.navigation__catalogy {
+  background: url('../../images/burger-icon.svg') no-repeat 16px center;
+  padding: 16px;
+  padding-left: 55px;
+  border: 1px solid #F05A00;
+  border-radius: 5px;
+}
+
+@media screen and (max-width: 1300px) {
+  .navigation__container {
+    min-height: calc((100vw - 768px)/(1300 - 768) * (88 - 60) + 60px);
+  }
+
+  .navigation__link {
+    font-size: calc((100vw - 768px)/(1300 - 768) * (16 - 13) + 13px);
+  }
+
+  .navigation__catalogy {
+    padding: calc((100vw - 768px)/(1300 - 768) * (16 - 9) + 9px);
+    padding-left: calc((100vw - 768px)/(1300 - 768) * (55 - 40) + 40px);
+    background-size: calc((100vw - 768px)/(1300 - 768) * (24 - 20) + 20px);
+    background-position: calc((100vw - 768px)/(1300 - 768) * (16 - 9) + 9px);
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .navigation__container {
+    flex-direction: column-reverse;
+    padding: 20px;
+    gap: 30px;
+  }
+
+  .navigation__list {
+    gap: 30px;
+  }
+
+  .navigation__link {
+    font-size: 16px;
+  }
+
+  .navigation__catalogy {
+    padding: 10px;
+    padding-left: 42px;
+    background-size: 16px;
+    background-position: 14px;
+    font-size: 14px;
+  }
+}

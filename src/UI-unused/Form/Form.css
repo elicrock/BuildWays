@@ -1,0 +1,45 @@
+.form {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.form_buttons {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 10px;
+}
+
+.form__submit-btn,
+.form__delete-btn {
+  background: initial;
+  width: 50%;
+  border: none;
+  padding: 12px;
+  border-radius: 5px;
+  font-size: 14px;
+  font-weight: 600;
+  transition: background 0.3s, outline 0.3s, color 0.3s;
+  cursor: pointer;
+}
+
+.form__submit-btn {
+  outline: 1px solid rgb(14, 95, 14);
+  color: rgb(14, 95, 14);
+}
+
+.form__submit-btn:hover {
+  background: rgb(14, 95, 14);
+  color: #fff;
+}
+
+.form__delete-btn {
+  outline: 1px solid rgb(170, 11, 11);
+  color: rgb(170, 11, 11);
+}
+
+.form__delete-btn:hover {
+  background: rgb(170, 11, 11);
+  color: #fff;
+}

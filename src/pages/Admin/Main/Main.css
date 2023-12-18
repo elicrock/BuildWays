@@ -1,0 +1,11 @@
+.main__container {
+  max-width: 1300px;
+  margin: 0 auto;
+  padding: 0 30px;
+}
+
+.main__nav-list {
+  list-style: none;
+  display: flex;
+  justify-content: space-between;
+}

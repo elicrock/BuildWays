@@ -1,0 +1,140 @@
+.product {
+  padding: 80px 30px;
+}
+
+.product__container {
+  margin: 0 auto;
+  padding: 60px 50px;
+  max-width: 1300px;
+  background-color: #fff;
+  display: flex;
+  justify-content: space-between;
+}
+
+.product__image {
+  width: 360px;
+  height: 360px;
+  object-fit: cover;
+}
+
+.product__info {
+  display: flex;
+  flex-direction: column;
+  max-width: 529px;
+  gap: 20px;
+}
+
+.product__name {
+  font-family: Prosto One;
+  font-size: 30px;
+  font-weight: 400;
+  line-height: 32px;
+}
+
+.product__available {
+  color: #126935;
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 20px;
+}
+
+.product__description {
+  font-family: Raleway;
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 20px;
+}
+
+.product__price {
+  padding-top: 40px;
+  font-family: Prosto One;
+  font-size: 30px;
+  font-weight: 400;
+  line-height: 32px;
+}
+
+.product__flex-box {
+  padding-top: 20px;
+  display: flex;
+  align-items: center;
+  gap: 50px;
+}
+
+.product__add-cart {
+  width: 154px;
+  height: 50px;
+  border: none;
+  border-radius: 5px;
+  background-color: #f05a00;
+  color: #fff;
+  font-family: Raleway;
+  font-size: 16px;
+  font-weight: 500;
+  line-height: 20px;
+  cursor: pointer;
+}
+
+.product__add-cart:hover {
+  opacity: 0.7;
+}
+
+.product__add-favorite {
+  width: 50px;
+  height: 50px;
+  border: none;
+  background: url('../../images/product-item__favoriteBtn.svg') no-repeat;
+  cursor: pointer;
+  transition: scale 0.4s ease-in-out;
+}
+
+.product__add-favorite:hover {
+  scale: 1.2;
+}
+
+@media screen and (max-width: 1100px) {
+  .product__container {
+    padding: 40px 25px;
+    gap: 30px;
+  }
+  .product__image {
+    width: 250px;
+    height: 250px;
+  }
+
+  .product__name {
+    font-size: 24px;
+  }
+}
+
+@media screen and (max-width: 680px) {
+  .product__container {
+    flex-direction: column;
+    align-items: center;
+  }
+}
+
+@media screen and (max-width: 425px) {
+  .product {
+    padding: 40px 0px;
+    gap: 30px;
+  }
+  .product__image {
+    width: 190px;
+    height: 190px;
+  }
+  .product__name {
+    font-size: 20px;
+  }
+  .product__available {
+    font-size: 14px;
+  }
+
+  .product__price {
+    padding-top: 5px;
+    font-size: 20px;
+  }
+
+  .product__description {
+    font-size: 14px;
+  }
+}

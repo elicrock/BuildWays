@@ -1,0 +1,44 @@
+@font-face {
+  src: url('./ProstoOne/ProstoOne-Regular.woff2') format('woff2'),
+    url('./ProstoOne/ProstoOne-Regular.woff') format('woff'),
+    url('./ProstoOne/ProstoOne-Regular.woff2') format('truetype');
+  font-family: 'Prosto One';
+  font-style: normal;
+  font-weight: 400;
+}
+
+@font-face {
+  src: url('./Raleway/Raleway-Regular.woff2') format('woff2'),
+    url('./Raleway/Raleway-Regular.woff') format('woff'),
+    url('./Raleway/Raleway-Regular.ttf') format('truetype');
+  font-family: 'Raleway';
+  font-style: normal;
+  font-weight: 400;
+}
+
+@font-face {
+  src: url('./Raleway/Raleway-Medium.woff2') format('woff2'),
+    url('./Raleway/Raleway-Medium.woff') format('woff'),
+    url('./Raleway/Raleway-Medium.ttf') format('truetype');
+  font-family: 'Raleway';
+  font-style: normal;
+  font-weight: 500;
+}
+
+@font-face {
+  src: url('./Raleway/Raleway-SemiBold.woff2') format('woff2'),
+    url('./Raleway/Raleway-SemiBold.woff') format('woff'),
+    url('./Raleway/Raleway-SemiBold.ttf') format('truetype');
+  font-family: 'Raleway';
+  font-style: normal;
+  font-weight: 600;
+}
+
+@font-face {
+  src: url('./Raleway/Raleway-Bold.woff2') format('woff2'),
+    url('./Raleway/Raleway-Bold.woff') format('woff'),
+    url('./Raleway/Raleway-Bold.ttf') format('truetype');
+  font-family: 'Raleway';
+  font-style: normal;
+  font-weight: 700;
+}
