@@ -18,3 +18,7 @@
 .sidebar__item:hover {
   background-color: #f05a00;
 }
+
+.sidebar__item_active {
+  background-color: #f05a00;
+}

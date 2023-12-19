@@ -25,7 +25,6 @@ function EditCategoryForm({ category, submitBtnName, handleCloseModal }: EditCat
   } = useForm<CategoryFormData>({ mode: 'onChange' });
 
   const { selectedImageFile, imageSelected, handlePosterFileInputChange } = usePosterFileInput();
-
   const [deleteCategory, { isLoading: isLoadingDelete }] = useDeleteCategoryMutation();
   const [editCategory, { isLoading }] = useEditCategoryMutation();
   const dispatch = useAppDispatch();

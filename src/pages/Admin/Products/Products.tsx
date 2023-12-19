@@ -13,6 +13,8 @@ function Products() {
   const myProducts = useAppSelector(state => state.products);
   const myCategories = useAppSelector(state => state.categories);
 
+  console.log(myProducts);
+
   return (
     <section className="products">
       <div className="products__flex-box">

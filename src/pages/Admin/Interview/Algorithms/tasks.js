@@ -111,3 +111,29 @@ console.log(highestFrequency(['abc', 'def'])); // -> abc
 console.log(highestFrequency(['abc', 'abc', 'def', 'def', 'def', 'ghi', 'ghi', 'ghi', 'ghi'])); // -> ghi
 
 console.log(typeof false);
+
+function containsTinkoff(str) {
+  const targetChars = ['T', 'I', 'N', 'K', 'O', 'F'];
+  let countF = 0;
+
+  for (let i = 0; i < str.length; i++) {
+    const char = str[i].toUpperCase();
+
+    if (targetChars.includes(char)) {
+      if (char === 'F') {
+        countF++;
+        if (countF > 2) {
+          return 'no';
+        }
+      }
+    }
+  }
+
+  return targetChars.every(char => str.toUpperCase().includes(char)) ? 'yes' : 'no';
+}
+
+console.log(containsTinkoff('Tinkoff')); // yes
+console.log(containsTinkoff('TINKOFF')); // yes
+console.log(containsTinkoff('Some text with Tinkoff')); // yes
+console.log(containsTinkoff('ADSAKLDJADLAHSIDAOLD')); // no
+console.log(containsTinkoff('F F T O K I N')); // no
