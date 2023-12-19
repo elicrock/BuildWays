@@ -1,8 +1,5 @@
-.sidebar {
-  min-width: 270px;
-}
-
 .sidebar__list {
+  min-width: 270px;
   max-width: 310px;
   list-style: none;
   background-color: #212526;

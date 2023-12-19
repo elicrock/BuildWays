@@ -1,0 +1,64 @@
+.add-details {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  margin-bottom: 10px;
+}
+
+.add-details__add-btn {
+  background: initial;
+  width: fit-content;
+  border: none;
+  padding: 12px;
+  border-radius: 5px;
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+  outline: 1px solid #003481;
+  color: #003481;
+  transition: background 0.3s, outline 0.3s, color 0.3s;
+}
+
+.add-details__add-btn:hover {
+  background: #003481;
+  color: #fff;
+}
+
+.add-details__box {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.add-details__input {
+  padding: 8px;
+  outline: none;
+  border: none;
+  border: 1px solid #212526;
+  background-color: initial;
+  color: black;
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 17px;
+  transition: border-color 0.2s;
+  flex-basis: 40%;
+  border-radius: 4px;
+}
+
+.add-details__input:focus {
+  border-color: #f05a00;
+}
+
+.add-details__delete-btn {
+  width: 24px;
+  height: 24px;
+  border: none;
+  outline: none;
+  background: url('../../../../images/cross-icon.svg') no-repeat center/contain;
+  cursor: pointer;
+  transition: opacity 0.3s;
+}
+
+.add-details__delete-btn:hover {
+  opacity: 0.5;
+}
