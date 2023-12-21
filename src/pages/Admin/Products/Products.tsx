@@ -13,7 +13,10 @@ function Products() {
   const myProducts = useAppSelector(state => state.products);
   const myCategories = useAppSelector(state => state.categories);
 
-  console.log(myProducts);
+  const categoryNameMap: Record<number, Category> = {};
+  myCategories.forEach((category: Category) => {
+    categoryNameMap[category.id] = category;
+  });
 
   return (
     <section className="products">
@@ -35,16 +38,13 @@ function Products() {
         <Sidebar />
         <ul className="products__list">
           {myProducts && myProducts.rows
-            ? myProducts.rows.map((product: Product) => {
-                const category: Category | undefined = myCategories.find(item => item.id === product.categoryId);
-                return (
-                  <ProductItem
-                    key={product.id}
-                    product={product}
-                    categoryName={category ? category.name : 'Без категории'}
-                  />
-                );
-              })
+            ? myProducts.rows.map((product: Product) => (
+                <ProductItem
+                  key={product.id}
+                  product={product}
+                  categoryName={categoryNameMap[product.categoryId]?.name || 'Без категории'}
+                />
+              ))
             : 'У вас пока что нет товаров'}
         </ul>
       </div>

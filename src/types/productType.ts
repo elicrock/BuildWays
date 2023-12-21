@@ -9,6 +9,7 @@ export type Product = {
   img?: File | string | null | undefined;
   categoryId?: number;
   price?: number;
+  description?: string;
   selectedImageFile?: ImageFile;
   updatedAt?: string;
   createdAt?: string;

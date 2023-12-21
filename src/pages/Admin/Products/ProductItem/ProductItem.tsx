@@ -19,6 +19,7 @@ const ProductItem = memo(function ProductItem({ product, categoryName }: Product
       <Modal
         classBtn="product-item__add-editBtn"
         titleModal="Редактирование товара"
+        classModal="modal__content_product"
         showModal={showModal}
         handleCloseModal={handleCloseModal}
         handleOpenModal={handleOpenModal}

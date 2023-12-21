@@ -1,12 +1,14 @@
 import './Main.css';
 
-// import { Link } from 'react-router-dom';
-// import React from 'react';
-
 function Main() {
   return (
     <section className="main">
-      ????? ЧТО ТУТ СДЕЛАТЬ?! Последние товары добавленные, нужен будет отфильтрованный стейт!!!!
+      <h2 className="main__title">Welcome to Admin!</h2>
+      <p className="main__description">
+        Для получения роли Админа написать в телеграм <span>https://t.me/Garnett163</span> или{' '}
+        <span>https://t.me/elicrock</span>{' '}
+      </p>
+      <p>????? ЧТО ТУТ СДЕЛАТЬ?! Последние товары добавленные, нужен будет отфильтрованный стейт!!!!</p>
     </section>
   );
 }

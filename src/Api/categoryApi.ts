@@ -33,7 +33,7 @@ export const categoryApi = createApi({
       },
       invalidatesTags: [{ type: 'Categories', id: 'LIST' }],
     }),
-    editCategory: builder.mutation<unknown, { formData: FormData; id: number }>({
+    editCategory: builder.mutation<Category, { formData: FormData; id: number }>({
       query: ({ formData, id }) => {
         return {
           url: `categories/${id}`,

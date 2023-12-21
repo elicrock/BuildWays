@@ -44,19 +44,16 @@ function EditCategoryForm({ category, submitBtnName, handleCloseModal }: EditCat
     try {
       const formData = new FormData();
       formData.append('name', name);
-      if (selectedImageFile) {
-        formData.append('img', selectedImageFile?.file || '');
-      }
+      selectedImageFile && formData.append('img', selectedImageFile?.file || '');
+
       const response = await editCategory({ formData, id: category.id }).unwrap();
-      // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-      //@ts-ignore
-      dispatch(updateCategory(response.category));
+      dispatch(updateCategory(response));
       handleCloseModal();
     } catch (error) {
       if (error.status === 409) {
         dispatch(setError('Категория с таким названием уже существует'));
       } else {
-        dispatch(setError('При создании категории произошла ошибка'));
+        dispatch(setError('При редактировании категории произошла ошибка'));
       }
     }
   };
