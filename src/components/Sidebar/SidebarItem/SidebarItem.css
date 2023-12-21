@@ -15,6 +15,10 @@
   cursor: pointer;
 }
 
+.sidebar__item:last-of-type {
+  border: none;
+}
+
 .sidebar__item:hover {
   background-color: #f05a00;
 }
