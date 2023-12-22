@@ -1,8 +1,8 @@
 import './CreateProductForm.css';
-import { useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import { useForm, SubmitHandler } from 'react-hook-form';
 import { useCreateProductMutation } from '../../../../Api/productApi';
-import { ProductFormData } from '../../../../types/productType';
+import { ProductFormData, ParametersProduct } from '../../../../types/productType';
 import usePosterFileInput from '../../../../hooks/usePosterFileInput';
 import { useAppSelector, useAppDispatch } from '../../../../hooks/redux';
 import { setError, clearError } from '../../../../redux/errorSlice';
@@ -25,10 +25,23 @@ function CreateProductForm({ submitBtnName, handleCloseModal }: CreateProductFor
   const dispatch = useAppDispatch();
   const errorApi = useAppSelector(state => state.error.message);
   const myCategories = useAppSelector(state => state.categories);
+  const [parameters, setParameters] = useState<ParametersProduct[]>([]);
 
   useEffect(() => {
     dispatch(clearError());
   }, [dispatch]);
+
+  const addFieldParameters = () => {
+    setParameters([...parameters, { title: '', description: '' }]);
+  };
+
+  const deleteFieldParameters = (index: number) => {
+    setParameters(prevParameters => prevParameters.filter((_, i) => i !== index));
+  };
+
+  const handleChangeParameters = (key: string, value: string, index: number) => {
+    setParameters(prevParameters => prevParameters.map((item, i) => (i === index ? { ...item, [key]: value } : item)));
+  };
 
   const handleAddProduct: SubmitHandler<ProductFormData> = async ({ name, price, categoryId, description }) => {
     try {
@@ -38,9 +51,9 @@ function CreateProductForm({ submitBtnName, handleCloseModal }: CreateProductFor
       formData.append('price', price.toString());
       description && formData.append('description', description);
       selectedImageFile && formData.append('img', selectedImageFile?.file || '');
+      parameters && formData.append('parameters', JSON.stringify(parameters));
 
       await createProduct(formData).unwrap();
-
       handleCloseModal();
     } catch (error) {
       if (error.status === 409) {
@@ -139,7 +152,18 @@ function CreateProductForm({ submitBtnName, handleCloseModal }: CreateProductFor
         ></textarea>
         <span className="product-form__input_error">{errors?.description?.message}</span>
       </label>
-      <AddDetailsProduct />
+      <button className="product-form__add-details-btn" type="button" onClick={addFieldParameters}>
+        Добавить характеристику
+      </button>
+      {parameters.map((item, index) => (
+        <AddDetailsProduct
+          parameter={item}
+          key={index}
+          index={index}
+          deleteFieldParameters={deleteFieldParameters}
+          handleChangeParameters={handleChangeParameters}
+        />
+      ))}
       <input
         className="product-form__file"
         type="file"

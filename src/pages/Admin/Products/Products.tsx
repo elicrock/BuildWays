@@ -37,15 +37,17 @@ function Products() {
       <div className="products__content">
         <Sidebar />
         <ul className="products__list">
-          {myProducts && myProducts.rows
-            ? myProducts.rows.map((product: Product) => (
-                <ProductItem
-                  key={product.id}
-                  product={product}
-                  categoryName={categoryNameMap[product.categoryId]?.name || 'Без категории'}
-                />
-              ))
-            : 'У вас пока что нет товаров'}
+          {myProducts && myProducts.products ? (
+            myProducts.products.map((product: Product) => (
+              <ProductItem
+                key={product.id}
+                product={product}
+                categoryName={categoryNameMap[product.categoryId]?.name || 'Без категории'}
+              />
+            ))
+          ) : (
+            <h3>У вас пока что нет товаров</h3>
+          )}
         </ul>
       </div>
     </section>

@@ -7,10 +7,10 @@ export const productApi = createApi({
   baseQuery: fetchBaseQuery({ baseUrl: 'http://localhost:3000/api/', credentials: 'include' }),
   endpoints: builder => ({
     getProducts: builder.query<ProductsData, void>({
-      query: () => 'products',
+      query: () => 'products?limit=100',
       providesTags: result =>
         result
-          ? [...result.rows.map(({ id }) => ({ type: 'Products' as const, id })), { type: 'Products', id: 'LIST' }]
+          ? [...result.products.map(({ id }) => ({ type: 'Products' as const, id })), { type: 'Products', id: 'LIST' }]
           : [{ type: 'Products', id: 'LIST' }],
     }),
     createProduct: builder.mutation<unknown, unknown>({

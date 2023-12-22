@@ -5,25 +5,6 @@
   margin-bottom: 10px;
 }
 
-.add-details__add-btn {
-  background: initial;
-  width: fit-content;
-  border: none;
-  padding: 12px;
-  border-radius: 5px;
-  font-size: 14px;
-  font-weight: 500;
-  cursor: pointer;
-  outline: 1px solid #003481;
-  color: #003481;
-  transition: background 0.3s, outline 0.3s, color 0.3s;
-}
-
-.add-details__add-btn:hover {
-  background: #003481;
-  color: #fff;
-}
-
 .add-details__box {
   display: flex;
   justify-content: space-between;
