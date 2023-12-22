@@ -69,3 +69,9 @@
 .add-details__delete-btn:hover {
   opacity: 0.5;
 }
+
+@media screen and (max-width: 560px) {
+  .add-details__inputs-container {
+    flex-direction: column;
+  }
+}
