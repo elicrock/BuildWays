@@ -211,3 +211,13 @@
   font-weight: 500;
   line-height: 13px;
 }
+
+@media screen and (max-width: 490px) {
+  .product-form__box {
+    flex-direction: column;
+  }
+
+  .product-form__label {
+    width: 100%;
+  }
+}

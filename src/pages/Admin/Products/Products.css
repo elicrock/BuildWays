@@ -82,3 +82,14 @@
     align-items: center;
   }
 }
+
+@media screen and (max-width: 490px) {
+  .products__list {
+    grid-template-columns: repeat(1, minmax(0, 300px));
+  }
+
+  .products__flex-box {
+    flex-direction: column;
+    gap: 30px;
+  }
+}
