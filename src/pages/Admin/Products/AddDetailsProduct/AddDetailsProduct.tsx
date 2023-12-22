@@ -19,10 +19,11 @@ const AddDetailsProduct = memo(function AddDetailsProduct() {
       </button>
       {details.map(i => (
         <div className="add-details__box" key={i.number}>
-          <input className="add-details__input" id="detail" placeholder="Характеристика" type="text" />
+          <div className="add-details__inputs-container">
+            <input className="add-details__input" id="detail" placeholder="Характеристика" type="text" />
 
-          <input className="add-details__input" id="detailDescr" placeholder="Описание" type="text" />
-
+            <input className="add-details__input" id="detailDescr" placeholder="Описание" type="text" />
+          </div>
           <button className="add-details__delete-btn" type="button" onClick={() => deleteDetails(i.number)} />
         </div>
       ))}

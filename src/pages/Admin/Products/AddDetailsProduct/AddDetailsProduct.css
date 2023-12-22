@@ -28,6 +28,13 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
+  gap: 20px;
+}
+
+.add-details__inputs-container {
+  display: flex;
+  gap: 20px;
+  width: 100%;
 }
 
 .add-details__input {
@@ -41,7 +48,7 @@
   font-weight: 500;
   line-height: 17px;
   transition: border-color 0.2s;
-  flex-basis: 40%;
+  flex-basis: 50%;
   border-radius: 4px;
 }
 
