@@ -75,11 +75,12 @@
 .product-form__textarea {
   min-height: 100px;
   padding: 10px;
-  font-size: 14px;
+  font-size: 15px;
   outline: 1px solid #212526;
   border: none;
   border-radius: 5px;
   font-family: Raleway;
+  font-weight: 500;
   resize: none;
 }
 
