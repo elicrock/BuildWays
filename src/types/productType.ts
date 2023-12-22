@@ -13,11 +13,18 @@ export type Product = {
   selectedImageFile?: ImageFile;
   updatedAt?: string;
   createdAt?: string;
+  parameters?: ParametersProduct[];
 };
 
 export interface ProductsData {
   count: number;
-  rows: Product[];
+  products: Product[];
+}
+
+export interface ParametersProduct {
+  title: string;
+  description: string;
+  index?: number;
 }
 
 export type ProductFormData = {
@@ -26,8 +33,5 @@ export type ProductFormData = {
   categoryId: number | string;
   description?: string;
   img?: File | string | null | undefined;
-  parameters?: {
-    title: string;
-    description: string;
-  };
+  parameters?: ParametersProduct[];
 };

@@ -1,6 +1,6 @@
-import { useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import { useForm, SubmitHandler } from 'react-hook-form';
-import { Product, ProductFormData } from '../../../../types/productType';
+import { Product, ProductFormData, ParametersProduct } from '../../../../types/productType';
 import { useAppSelector, useAppDispatch } from '../../../../hooks/redux';
 import { useDeleteProductMutation, useEditProductMutation } from '../../../../Api/productApi';
 import usePosterFileInput from '../../../../hooks/usePosterFileInput';
@@ -29,6 +29,7 @@ function EditProductForm({ product, submitBtnName, handleCloseModal }: EditProdu
   const dispatch = useAppDispatch();
   const myCategories = useAppSelector(state => state.categories);
   const errorApi = useAppSelector(state => state.error.message);
+  const [parameters, setParameters] = useState<ParametersProduct[]>(product.parameters || []);
 
   useEffect(() => {
     setValue('name', product?.name || '');
@@ -41,6 +42,18 @@ function EditProductForm({ product, submitBtnName, handleCloseModal }: EditProdu
     dispatch(clearError());
   }, [dispatch]);
 
+  const addFieldParameters = () => {
+    setParameters([...parameters, { title: '', description: '' }]);
+  };
+
+  const deleteFieldParameters = (index: number) => {
+    setParameters(prevParameters => prevParameters.filter((_, i) => i !== index));
+  };
+
+  const handleChangeParameters = (key: string, value: string, index: number) => {
+    setParameters(prevParameters => prevParameters.map((item, i) => (i === index ? { ...item, [key]: value } : item)));
+  };
+
   const handleEditProduct: SubmitHandler<ProductFormData> = async ({ name, price, categoryId, description }) => {
     try {
       const formData = new FormData();
@@ -49,6 +62,7 @@ function EditProductForm({ product, submitBtnName, handleCloseModal }: EditProdu
       formData.append('price', price.toString());
       description && formData.append('description', description);
       selectedImageFile && formData.append('img', selectedImageFile?.file || '');
+      parameters && formData.append('parameters', JSON.stringify(parameters));
 
       const response = await editProduct({ formData, id: product.id }).unwrap();
 
@@ -72,9 +86,7 @@ function EditProductForm({ product, submitBtnName, handleCloseModal }: EditProdu
     }
   };
 
-  // const changeInfo = (key,value, number) => {
-  //     setDetails(details.map(i => i.number === number ? {...i, [key]: value} : i))
-  // }
+  // console.log(parameters);
 
   return (
     <form className="product-form" name="createProduct" onSubmit={handleSubmit(handleEditProduct)}>
@@ -164,7 +176,18 @@ function EditProductForm({ product, submitBtnName, handleCloseModal }: EditProdu
         ></textarea>
         <span className="product-form__input_error">{errors?.description?.message}</span>
       </label>
-      <AddDetailsProduct />
+      <button className="product-form__add-details-btn" type="button" onClick={addFieldParameters}>
+        Добавить характеристику
+      </button>
+      {parameters.map((item, index) => (
+        <AddDetailsProduct
+          parameter={item}
+          key={index}
+          index={index}
+          deleteFieldParameters={deleteFieldParameters}
+          handleChangeParameters={handleChangeParameters}
+        />
+      ))}
       <input
         className="product-form__file"
         type="file"
@@ -181,7 +204,12 @@ function EditProductForm({ product, submitBtnName, handleCloseModal }: EditProdu
         <span className="product-form__file-button-text">Добавить фото</span>
       </label>
       <div className="product-form__box-Btns">
-        <button type="submit" className="product-form__submit-btn" disabled={!isValid && !imageSelected}>
+        <button
+          type="submit"
+          className="product-form__submit-btn"
+          disabled={!isValid && !imageSelected}
+          // disabled={!isValid && !imageSelected && parameters.length < 0}
+        >
           {submitBtnName}
         </button>
         <button

@@ -3,7 +3,7 @@ import { Product } from '../types/productType';
 
 interface ProductsState {
   count: number;
-  rows: Product[];
+  products: Product[];
 }
 
 const productsSlice = createSlice({
@@ -16,7 +16,7 @@ const productsSlice = createSlice({
     updateProduct: (state, action: PayloadAction<Product>) => {
       return {
         ...state,
-        rows: state.rows.map(product => (product.id === action.payload.id ? action.payload : product)),
+        products: state.products.map(product => (product.id === action.payload.id ? action.payload : product)),
       };
     },
   },
