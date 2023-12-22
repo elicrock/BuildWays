@@ -30,6 +30,7 @@ function EditProductForm({ product, submitBtnName, handleCloseModal }: EditProdu
   const myCategories = useAppSelector(state => state.categories);
   const errorApi = useAppSelector(state => state.error.message);
   const [parameters, setParameters] = useState<ParametersProduct[]>(product.parameters || []);
+  const [hasChangeParams, setHasChangeParams] = useState(false);
 
   useEffect(() => {
     setValue('name', product?.name || '');
@@ -44,14 +45,17 @@ function EditProductForm({ product, submitBtnName, handleCloseModal }: EditProdu
 
   const addFieldParameters = () => {
     setParameters([...parameters, { title: '', description: '' }]);
+    setHasChangeParams(true);
   };
 
   const deleteFieldParameters = (index: number) => {
     setParameters(prevParameters => prevParameters.filter((_, i) => i !== index));
+    setHasChangeParams(true);
   };
 
   const handleChangeParameters = (key: string, value: string, index: number) => {
     setParameters(prevParameters => prevParameters.map((item, i) => (i === index ? { ...item, [key]: value } : item)));
+    setHasChangeParams(true);
   };
 
   const handleEditProduct: SubmitHandler<ProductFormData> = async ({ name, price, categoryId, description }) => {
@@ -207,8 +211,7 @@ function EditProductForm({ product, submitBtnName, handleCloseModal }: EditProdu
         <button
           type="submit"
           className="product-form__submit-btn"
-          disabled={!isValid && !imageSelected}
-          // disabled={!isValid && !imageSelected && parameters.length < 0}
+          disabled={!isValid && !imageSelected && !hasChangeParams}
         >
           {submitBtnName}
         </button>
