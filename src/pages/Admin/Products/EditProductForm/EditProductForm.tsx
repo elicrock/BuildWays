@@ -90,8 +90,6 @@ function EditProductForm({ product, submitBtnName, handleCloseModal }: EditProdu
     }
   };
 
-  // console.log(parameters);
-
   return (
     <form className="product-form" name="createProduct" onSubmit={handleSubmit(handleEditProduct)}>
       <div className="product-form__box">

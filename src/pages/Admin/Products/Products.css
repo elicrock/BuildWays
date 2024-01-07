@@ -52,13 +52,14 @@
   grid-template-columns: repeat(4, minmax(0, 300px));
   justify-content: center;
   list-style: none;
-  padding-bottom: 30px;
+  /* padding-bottom: 30px; */
 }
 
 @media screen and (max-width: 1300px) {
   .products__list {
     /* gap: 10px 20px; */
-    gap: calc((100vw - 1039px)/(1300px - 1039) * (32 - 20) + 20px) calc((100vw - 1039px)/(1300px - 1039) * (20 - 10) + 10px);
+    gap: calc((100vw - 1039px) / (1300px - 1039) * (32 - 20) + 20px)
+      calc((100vw - 1039px) / (1300px - 1039) * (20 - 10) + 10px);
   }
 }
 
