@@ -138,4 +138,49 @@ const bFunction = a();
 bFunction();
 
 //===============================================================
-// Функция sort
+// Функция sort (Пузырьковая сортировка)
+function bubbleSort(arr) {
+  const n = arr.length;
+
+  for (let i = 0; i < n - 1; i++) {
+    for (let j = 0; j < n - i - 1; j++) {
+      // Сравниваем соседние элементы и меняем их местами, если нужно
+      if (arr[j] > arr[j + 1]) {
+        var temp = arr[j];
+        arr[j] = arr[j + 1];
+        arr[j + 1] = temp;
+      }
+    }
+  }
+}
+
+// Пример использования
+var myArray = [64, 34, 25, 12, 22, 11, 90];
+bubbleSort(myArray);
+
+console.log('Отсортированный массив:', myArray);
+
+// Функция sort (Сортировка вставками)
+function insertionSort(arr) {
+  var n = arr.length;
+
+  for (var i = 1; i < n; i++) {
+    var currentElement = arr[i];
+    var j = i - 1;
+
+    // Сравниваем текущий элемент с предыдущими и переставляем, если необходимо
+    while (j >= 0 && arr[j] > currentElement) {
+      arr[j + 1] = arr[j];
+      j--;
+    }
+
+    // Вставляем текущий элемент на правильное место
+    arr[j + 1] = currentElement;
+  }
+}
+
+// Пример использования
+var myArray2 = [64, 34, 25, 12, 22, 11, 90];
+insertionSort(myArray2);
+
+console.log('Отсортированный массив:', myArray2);

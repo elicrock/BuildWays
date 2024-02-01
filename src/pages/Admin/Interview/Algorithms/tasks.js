@@ -137,3 +137,9 @@ console.log(containsTinkoff('TINKOFF')); // yes
 console.log(containsTinkoff('Some text with Tinkoff')); // yes
 console.log(containsTinkoff('ADSAKLDJADLAHSIDAOLD')); // no
 console.log(containsTinkoff('F F T O K I N')); // no
+
+document.onclick = function (event) {
+  alert(event.type);
+};
+
+document.body.dispatchEvent(new CustomEvent('click'));
