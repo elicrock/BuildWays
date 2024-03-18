@@ -143,3 +143,74 @@ document.onclick = function (event) {
 };
 
 document.body.dispatchEvent(new CustomEvent('click'));
+
+console.log(0 == undefined);
+
+const str1 = 'абв';
+const str2 = 'abc';
+
+const result = str1.localeCompare(str2);
+
+console.log(result);
+
+const rbg12312 = [1, 2, 3, 4, 5, 6, 7].toSorted((a, b) => {
+  return b - a;
+});
+
+console.log(rbg12312);
+
+// const text = 'apple banana apple orange';
+// const wordCount = {};
+
+// let increment = 1;
+
+// let currentWord = '';
+
+// for (let i = 0; i < text.length; i++) {
+//   const char = text[i];
+
+//   if (char === ' ') {
+//     // Если символ пробел, увеличиваем счетчик текущего слова
+//     if (currentWord in wordCount) {
+//       wordCount[currentWord] += increment;
+//     }
+//     // Инициализируем счетчик для нового слова
+//     increment = 1;
+//     currentWord = '';
+//   } else {
+//     // Увеличиваем счетчик символа
+//     increment++;
+
+//     currentWord += char;
+//   }
+// }
+
+// console.log('Результат:');
+
+// for (const word in wordCount) {
+//   console.log(word, '-', wordCount[word]);
+// }
+
+let s = 'apple banana orange apple';
+
+// Алгоритм подсчета кол-ва вхождений каждого слова
+let wordCounts = {};
+let wordStart = 0;
+for (let i = 0; i < s.length; i++) {
+  if (s[i] === ' ' || i === s.length - 1) {
+    let word = s.substring(wordStart, i + 1).trim();
+    if (word) {
+      if (word in wordCounts) {
+        wordCounts[word] += 1;
+      } else {
+        wordCounts[word] = 1;
+      }
+    }
+    wordStart = i + 1;
+  }
+}
+
+// Вывод результата на экран
+for (let word in wordCounts) {
+  console.log(`${word} - ${wordCounts[word]}`);
+}
