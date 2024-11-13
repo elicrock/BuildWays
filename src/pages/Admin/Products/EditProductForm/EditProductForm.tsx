@@ -91,7 +91,7 @@ function EditProductForm({ product, submitBtnName, handleCloseModal }: EditProdu
   };
 
   return (
-    <form className="product-form" name="createProduct" onSubmit={handleSubmit(handleEditProduct)}>
+    <form className="product-form" name="editProduct" onSubmit={handleSubmit(handleEditProduct)}>
       <div className="product-form__box">
         <label className="product-form__label" htmlFor="nameProduct">
           Название

@@ -214,3 +214,46 @@ for (let i = 0; i < s.length; i++) {
 for (let word in wordCounts) {
   console.log(`${word} - ${wordCounts[word]}`);
 }
+
+const obj = {
+  name: 'Colin',
+  prop: {
+    name: 'Rox',
+    getname: function () {
+      return this.name;
+    },
+  },
+  arrow: () => this.name,
+  arrowInsideFunction: function () {
+    return () => console.log(this.name);
+  },
+};
+
+// console.log(obj.prop.getname()); // 'Rox'
+
+const test = obj.prop.getname;
+console.log(test()); // undefined
+// console.log(test.call(obj.prop)); // 'Rox'
+// console.log(test.apply(obj)); // 'Colin'
+// console.log(test.bind(obj)); // [Function: bound getname]
+// console.log(test.bind(obj).bind(obj.prop)()); // 'Colin' НО ВТОРОЙ БАЙНД НЕ СРАБОТАЕТ
+// console.log(test.bind(obj)()); // 'Colin'
+
+console.log(obj.prop.arrow()); // undefined
+obj.prop.arrowInsideFunction()(); // undefined
+
+const array = [1, 1, [1, [1, 2], 1], [1]];
+
+function sumArray(arr) {
+  let sum = 0;
+  arr.forEach(element => {
+    if (Array.isArray(element)) {
+      sum = sum + sumArray(element); // Рекурсивный вызов для вложенных массивов
+    } else {
+      sum += element; // Добавляем числа к сумме
+    }
+  });
+  return sum;
+}
+
+console.log(sumArray(array));

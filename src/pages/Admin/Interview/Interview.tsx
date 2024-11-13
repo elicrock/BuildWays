@@ -130,20 +130,70 @@ function Interview() {
           браузере. Он обеспечивает плавное выполнение анимаций и оптимизирует использование ресурсов, связанных с
           отрисовкой.
         </li>
+        <li className="interview__item">
+          <span className="interview__item_number">14)</span>
+          Методы Promise - Promise.all(iterable) - возвращает новый Promise, который разрешается, когда все переданные
+          промисы в массиве разрешаются, или отклоняется, если хотя бы один из них отклоняется.
+          <br></br>
+          Promise.race(iterable) - возвращает новый Promise, который разрешается или отклоняется по результату самого
+          быстрого из переданных промисов.
+          <br></br>
+          Статические методы: Promise.allSettled(iterable) - возвращает новый Promise, который разрешается, когда все
+          переданные промисы в массиве завершены (разрешены или отклонены). Promise.any(iterable) - возвращает новый
+          Promise, который разрешается, когда хотя бы один из переданных промисов разрешается, или отклоняется, если все
+          промисы отклоняются.
+        </li>
+      </ul>
+      <h2>Вопросы по TypeScript</h2>
+      <ul className="interview__list">
+        <li className="interview__item">
+          <span className="interview__item_number">1)</span>
+          Utility Types: ----
+          <br></br>
+          Partial(Type) Создает тип, который делает все свойства указанного типа необязательными, помечая их как ?.
+          <br></br>
+          Required(Type): Создает тип, который делает все свойства указанного типа обязательными путем удаления ? из
+          всех свойств.
+          <br></br>
+          Readonly(Type): Создает тип, который делает все свойства указанного типа доступными только для чтения.
+          <br></br>
+          Pick(Type, Keys): Создает тип, содержащий только указанные свойства из исходного типа.
+          <br></br>
+          Record(Keys, Type): Создает тип, представляющий объект, где ключи типа Keys имеют тип Type.
+          <br></br>
+          Exclude(Type, ExcludedUnion): Создает тип, исключая из него все члены, которые являются подтипами
+          ExcludedUnion.
+          <br></br>
+          Omit(Type, Keys): Создает тип, исключая из него указанные свойства.
+          <br></br>
+          NonNullable(Type): Создает тип, исключая null и undefined из указанного типа.
+          <br></br>
+          ReturnType(Type): Извлекает тип возвращаемого значения функции.
+        </li>
       </ul>
       <h2>Вопросы по React</h2>
       <ul className="interview__list">
         <li className="interview__item">
-          <span className="interview__item_number">1)</span> Virtul DOM -{' '}
+          <span className="interview__item_number">1)</span> Fiber - когда у нас впервые строится дерево реакт
+          элементов, то для каждого элемента впервые создается Fiber Noda{' '}
         </li>
         <li className="interview__item">
-          <span className="interview__item_number">2)</span> Оптимизация в React(кеширование)-
+          <span className="interview__item_number">2)</span> Эвристика в React - алгоритмы которые строят в начале
+          CurrentTree а потом переходят в WorkInProgressTree имеют в среднем сложность O(n3). Поэтому есть 2 правила 1)
+          Элементы разных типов - разные деревья, принцип в кратце, что React удаляет компоненты и строит их заного а
+          просто пересоздает их. 2) Можно использовать key, чтобы пометить какие элементы будут стабильны в разных
+          рендерах.
+          <br></br>
+          За счет этих правил сложность O(n)
         </li>
         <li className="interview__item">
-          <span className="interview__item_number">3)</span> Расскажи про хуки -
+          <span className="interview__item_number">3)</span> Оптимизация в React(кеширование)-
         </li>
         <li className="interview__item">
-          <span className="interview__item_number">4)</span> useRef - Предназначен для сохранения и взаимодействия с
+          <span className="interview__item_number">4)</span> Расскажи про хуки -
+        </li>
+        <li className="interview__item">
+          <span className="interview__item_number">5)</span> useRef - Предназначен для сохранения и взаимодействия с
           изменяемыми значениями, которые не вызывают перерендеринг компонента.Хранение мутабельных значений: Вы можете
           использовать useRef для хранения переменных, которые не приводят к повторному рендерингу компонента. Часто
           используется для сохранения ссылок на DOM-элементы.

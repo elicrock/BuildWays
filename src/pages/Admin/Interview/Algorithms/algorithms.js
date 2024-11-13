@@ -94,3 +94,23 @@ function calculateRevenue(products) {
 
 const revenue = calculateRevenue(products);
 console.log('Сумма выручки:', revenue);
+
+// Динамическое программирования
+
+const cashInHouses = [4, 6, 7, 8, 16, 20];
+
+function robHouses(houses) {
+  if (houses.length === 0) return 0;
+  if (houses.length === 1) return houses[0];
+
+  let dp = Array(houses.length);
+  dp[0] = houses[0];
+  dp[1] = Math.max(houses[0], houses[1]);
+  for (let i = 2; i < houses.length; i++) {
+    dp[i] = Math.max(dp[i - 1], dp[i - 2] + houses[i]);
+  }
+
+  return dp[houses.length - 1];
+}
+
+console.log(robHouses(cashInHouses));
