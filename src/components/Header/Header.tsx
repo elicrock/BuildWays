@@ -11,13 +11,18 @@ function Header() {
       <div className="header__container">
         <a href="/" className="header__logo"></a>
         <ul className="header__list">
-          {isLoggedIn && currentUser?.role === 'ADMIN' && (
+          <li className="header__item">
+            <Link to="/admin" className="header__link header__link-admin">
+              Admin
+            </Link>
+          </li>
+          {/* {isLoggedIn && currentUser?.role === 'ADMIN' && (
             <li className="header__item">
               <Link to="/admin" className="header__link header__link-admin">
                 Admin
               </Link>
             </li>
-          )}
+          )} */}
           <li className="header__item">
             <Link to="/favorite" className="header__link header__link-favorite">
               <span className="header__counter">0</span>

@@ -83,7 +83,8 @@ function App() {
         <Route path="/user-profile" element={<ProtectedClientRouteElement element={<UserProfile />} />} />
         <Route path="/catalogy" element={<Catalogy />} />
         <Route path="/product" element={<ProductPage />} />
-        {isLoggedIn && currentUser?.role === 'ADMIN' && <Route path="/admin/*" element={<Admin />} />}
+        {/* {isLoggedIn && currentUser?.role === 'ADMIN' && <Route path="/admin/*" element={<Admin />} />}  */}
+        <Route path="/admin/*" element={<Admin />} />
         <Route path="*" element={<PageNotFound />} />
       </Routes>
     </div>
