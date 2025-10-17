@@ -1,11 +1,19 @@
-.main__container {
+.main {
   max-width: 1300px;
   margin: 0 auto;
   padding: 0 30px;
+  padding-top: 50px;
+  display: flex;
+  flex-direction: column;
 }
 
-.main__nav-list {
-  list-style: none;
-  display: flex;
-  justify-content: space-between;
+.main__title {
+  font-size: 30px;
+  text-align: center;
+}
+
+.main__description {
+  padding-top: 30px;
+  font-size: 20px;
+  font-weight: 600;
 }

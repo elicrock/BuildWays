@@ -3,7 +3,7 @@ import { Product } from '../types/productType';
 
 interface ProductsState {
   count: number;
-  rows: Product[];
+  products: Product[];
 }
 
 const productsSlice = createSlice({
@@ -13,9 +13,15 @@ const productsSlice = createSlice({
     setProducts: (_state, action: PayloadAction<ProductsState>) => {
       return action.payload;
     },
+    updateProduct: (state, action: PayloadAction<Product>) => {
+      return {
+        ...state,
+        products: state.products.map(product => (product.id === action.payload.id ? action.payload : product)),
+      };
+    },
   },
 });
 
-export const { setProducts } = productsSlice.actions;
+export const { setProducts, updateProduct } = productsSlice.actions;
 
 export default productsSlice.reducer;

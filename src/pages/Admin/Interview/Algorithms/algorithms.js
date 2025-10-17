@@ -45,3 +45,72 @@ function binarySearch(array, item) {
 const arraybinarySearch = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15];
 console.log(binarySearch(arraybinarySearch, 14));
 console.log(countBinary);
+
+function filterInputList(inputList) {
+  const filteredList = inputList.filter(function (item) {
+    return Number.isInteger(item) && item >= 0;
+  });
+
+  return filteredList;
+}
+
+const inputList = [1, '23', 3, '34324', 5, -2, 'orange'];
+const result = filterInputList(inputList);
+
+console.log(result);
+
+function accum(str) {
+  if (str.length === 0) {
+    return '';
+  }
+
+  const chars = str.split('');
+
+  const result = chars.map(function (char, index) {
+    return char.toUpperCase() + char.toLowerCase().repeat(index);
+  });
+
+  return result.join('-');
+}
+
+console.log(accum('abcd'));
+console.log(accum('RqaEzty'));
+console.log(accum('cwAt'));
+
+const products = [
+  { name: 'Футболка', price: 20, quantity: 2 },
+  { name: 'Джинсы', price: 50, quantity: 1 },
+  { name: 'Носки', price: 5, quantity: 10 },
+  { name: 'Штаны', price: 30, quantity: 1 },
+];
+
+function calculateRevenue(products) {
+  const totalRevenue = products.reduce((sum, product) => {
+    return sum + product.price * product.quantity;
+  }, 0);
+
+  return totalRevenue;
+}
+
+const revenue = calculateRevenue(products);
+console.log('Сумма выручки:', revenue);
+
+// Динамическое программирования
+
+const cashInHouses = [4, 6, 7, 8, 16, 20];
+
+function robHouses(houses) {
+  if (houses.length === 0) return 0;
+  if (houses.length === 1) return houses[0];
+
+  let dp = Array(houses.length);
+  dp[0] = houses[0];
+  dp[1] = Math.max(houses[0], houses[1]);
+  for (let i = 2; i < houses.length; i++) {
+    dp[i] = Math.max(dp[i - 1], dp[i - 2] + houses[i]);
+  }
+
+  return dp[houses.length - 1];
+}
+
+console.log(robHouses(cashInHouses));

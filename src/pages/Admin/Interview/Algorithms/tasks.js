@@ -111,3 +111,149 @@ console.log(highestFrequency(['abc', 'def'])); // -> abc
 console.log(highestFrequency(['abc', 'abc', 'def', 'def', 'def', 'ghi', 'ghi', 'ghi', 'ghi'])); // -> ghi
 
 console.log(typeof false);
+
+function containsTinkoff(str) {
+  const targetChars = ['T', 'I', 'N', 'K', 'O', 'F'];
+  let countF = 0;
+
+  for (let i = 0; i < str.length; i++) {
+    const char = str[i].toUpperCase();
+
+    if (targetChars.includes(char)) {
+      if (char === 'F') {
+        countF++;
+        if (countF > 2) {
+          return 'no';
+        }
+      }
+    }
+  }
+
+  return targetChars.every(char => str.toUpperCase().includes(char)) ? 'yes' : 'no';
+}
+
+console.log(containsTinkoff('Tinkoff')); // yes
+console.log(containsTinkoff('TINKOFF')); // yes
+console.log(containsTinkoff('Some text with Tinkoff')); // yes
+console.log(containsTinkoff('ADSAKLDJADLAHSIDAOLD')); // no
+console.log(containsTinkoff('F F T O K I N')); // no
+
+document.onclick = function (event) {
+  alert(event.type);
+};
+
+document.body.dispatchEvent(new CustomEvent('click'));
+
+console.log(0 == undefined);
+
+const str1 = 'абв';
+const str2 = 'abc';
+
+const result = str1.localeCompare(str2);
+
+console.log(result);
+
+const rbg12312 = [1, 2, 3, 4, 5, 6, 7].toSorted((a, b) => {
+  return b - a;
+});
+
+console.log(rbg12312);
+
+// const text = 'apple banana apple orange';
+// const wordCount = {};
+
+// let increment = 1;
+
+// let currentWord = '';
+
+// for (let i = 0; i < text.length; i++) {
+//   const char = text[i];
+
+//   if (char === ' ') {
+//     // Если символ пробел, увеличиваем счетчик текущего слова
+//     if (currentWord in wordCount) {
+//       wordCount[currentWord] += increment;
+//     }
+//     // Инициализируем счетчик для нового слова
+//     increment = 1;
+//     currentWord = '';
+//   } else {
+//     // Увеличиваем счетчик символа
+//     increment++;
+
+//     currentWord += char;
+//   }
+// }
+
+// console.log('Результат:');
+
+// for (const word in wordCount) {
+//   console.log(word, '-', wordCount[word]);
+// }
+
+let s = 'apple banana orange apple';
+
+// Алгоритм подсчета кол-ва вхождений каждого слова
+let wordCounts = {};
+let wordStart = 0;
+for (let i = 0; i < s.length; i++) {
+  if (s[i] === ' ' || i === s.length - 1) {
+    let word = s.substring(wordStart, i + 1).trim();
+    if (word) {
+      if (word in wordCounts) {
+        wordCounts[word] += 1;
+      } else {
+        wordCounts[word] = 1;
+      }
+    }
+    wordStart = i + 1;
+  }
+}
+
+// Вывод результата на экран
+for (let word in wordCounts) {
+  console.log(`${word} - ${wordCounts[word]}`);
+}
+
+const obj = {
+  name: 'Colin',
+  prop: {
+    name: 'Rox',
+    getname: function () {
+      return this.name;
+    },
+  },
+  arrow: () => this.name,
+  arrowInsideFunction: function () {
+    return () => console.log(this.name);
+  },
+};
+
+// console.log(obj.prop.getname()); // 'Rox'
+
+const test = obj.prop.getname;
+console.log(test()); // undefined
+// console.log(test.call(obj.prop)); // 'Rox'
+// console.log(test.apply(obj)); // 'Colin'
+// console.log(test.bind(obj)); // [Function: bound getname]
+// console.log(test.bind(obj).bind(obj.prop)()); // 'Colin' НО ВТОРОЙ БАЙНД НЕ СРАБОТАЕТ
+// console.log(test.bind(obj)()); // 'Colin'
+
+console.log(obj.prop.arrow()); // undefined
+obj.prop.arrowInsideFunction()(); // undefined
+
+const array = [1, 1, [1, [1, 2], 1], [1]];
+
+function sumArray(arr) {
+  let sum = 0;
+  arr.forEach(element => {
+    if (Array.isArray(element)) {
+      sum = sum + sumArray(element); // Рекурсивный вызов для вложенных массивов
+    } else {
+      sum += element; // Добавляем числа к сумме
+    }
+  });
+  return sum;
+}
+
+console.log(sumArray(array));

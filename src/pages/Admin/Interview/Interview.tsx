@@ -31,7 +31,9 @@ function Interview() {
         </li>
         <li className="interview__item">
           <span className="interview__item_number">3)</span> Как можно хранить информацию в браузере - cookie(сервер
-          отдает, 4КБ каждый), localStorage(от 5 до 10 МБ), sessionStorage(от 5 до 10 МБ)
+          отдает, 4КБ каждый), localStorage(от 5 до 10 МБ), sessionStorage(от 5 до 10 МБ). IndexedDB – это встроенная
+          база данных, более мощная, чем localStorage. Хранит практически любые значения по ключам, несколько типов
+          ключей Поддерживает транзакции для надёжности. Поддерживает запросы в диапазоне ключей и индексы.
         </li>
         <li className="interview__item">
           <span className="interview__item_number">4)</span> Что такое трехстороннее рукопожатие - Шаг 1: Отправка (SYN)
@@ -50,15 +52,17 @@ function Interview() {
           <span className="interview__item_number">1)</span> Замыкание - Функция сохраняет доступ к переменным из своего
           внешнего контекста, даже после завершения выполнения этого контекста. Замыкания часто используются для
           создания частных переменных, создания функций с сохраненными контекстами или передачи данных между функциями
-          без использования глобальных переменных.{' '}
+          без использования глобальных переменных. Полезно для Инкапсуляция — скрываем внутреннюю реализацию, Сохраняем
+          состояние между вызовами функции.
         </li>
         <li className="interview__item">
           <span className="interview__item_number">2)</span> Event Loop - Это концепция выполнения асинхронного кода в
           браузере, потому что JS является однопоточным. Задачи поподают в CallStack и выполняются по очереди. Первым
-          делом весь синхронный код, потом МикроТаски(Промисы), потом МакроТаски(SetInterval, SetTimiout).
+          делом весь синхронный код, потом МикроТаски(Промисы), потом МакроТаски(SetInterval, SetTimeout).
         </li>
         <li className="interview__item">
-          <span className="interview__item_number">3)</span> Context this - Значение this зависит от того, как
+          <span className="interview__item_number">3)</span> Context this - это всегда значение ключевого слова this,
+          которое является ссылкой на объект, который запустил метод (функцию).Значение this зависит от того, как
           вызывается функция, и оно может быть определено неявно или явно. Неявный контекст - Если функция вызывается
           как метод объекта, то this будет ссылаться на сам объект, к которому принадлежит метод. Явный контекст -
           Методы call, apply и bind позволяют явно задать значение this для функции. Глобальный - ссылается на window
@@ -78,7 +82,8 @@ function Interview() {
           <span className="interview__item_number">6)</span> Копирование объектов - Есть поверхностное копирование и
           глубокое. При поверхностном, мы скопируем первый слой ключей, вложенные будут отображаться как object и иметь
           ссылки на первый объект Spread оператор (...) или Object.assign(). Глубокое копирование можно реализовать с
-          помощью JSON.parse(JSON.stringify(object)), но не поддерживает вложенные функции, выведет function or null
+          помощью JSON.parse(JSON.stringify(object)), но не поддерживает вложенные функции, выведет function or null.
+          Глубокое копирование стало возможным с помощью функции structuredClone!!
         </li>
         <li className="interview__item">
           <span className="interview__item_number">7)</span> Set и Map - Set - новый тип данных который позволяет
@@ -113,22 +118,135 @@ function Interview() {
           и тех же входных данных функция всегда возвращает одинаковый результат. Нет никаких скрытых состояний или
           побочных эффектов, которые могли бы изменять вывод функции. Отсутствие побочных эффектов (No Side Effects):
           Функция не должна влиять на внешнюю среду. Это означает, что она не изменяет переменные вне своей области
-          видимости, не вызывает запросы к серверу, не взаимодействует с базой данных и т. д.
+          видимости, не вызывает запросы к серверу, не взаимодействует с базой данных и т. д. Пример Reducer!!
+        </li>
+        <li className="interview__item">
+          <span className="interview__item_number">12)</span> Методы массивов, Новые которые иммутабельные - toSorted(),
+          toReversed(),toSpliced(), with(index, value) - Он возвращает новый массив, в котором элемент по заданному
+          индексу заменен заданным значением. Slice тоже иммутабельный.
+        </li>
+        <li className="interview__item">
+          <span className="interview__item_number">13)</span> requestAnimationFrame - это метод в JavaScript, который
+          используется для планирования выполнения анимаций и других задач, связанных с обновлением интерфейса в
+          браузере. Он обеспечивает плавное выполнение анимаций и оптимизирует использование ресурсов, связанных с
+          отрисовкой.
+        </li>
+        <li className="interview__item">
+          <span className="interview__item_number">14)</span>
+          Методы Promise - Promise.all(iterable) - возвращает новый Promise, который разрешается, когда все переданные
+          промисы в массиве разрешаются, или отклоняется, если хотя бы один из них отклоняется.
+          <br></br>
+          Promise.race(iterable) - возвращает новый Promise, который разрешается или отклоняется по результату самого
+          быстрого из переданных промисов.
+          <br></br>
+          Статические методы: Promise.allSettled(iterable) - возвращает новый Promise, который разрешается, когда все
+          переданные промисы в массиве завершены (разрешены или отклонены). Promise.any(iterable) - возвращает новый
+          Promise, который разрешается, когда хотя бы один из переданных промисов разрешается, или отклоняется, если все
+          промисы отклоняются.
+        </li>
+      </ul>
+      <h2>Вопросы по TypeScript</h2>
+      <ul className="interview__list">
+        <li className="interview__item">
+          <span className="interview__item_number">1)</span>
+          JS слабая типизаци, в ран тайме, TS-сложная и статическая(на этапе компиляции) + структурная (одинаковые поля)
+        </li>
+        <li className="interview__item">
+          <span className="interview__item_number">2)</span> Generic - аргумент для типа функции интерфейса, дает
+          гибкость. Пример - useState
+        </li>
+        <li className="interview__item">
+          <span className="interview__item_number">3)</span>
+          Различие между type и interface - type - можно указывать литералы и явное значение, ункальное
+          название.interface - можно делать extends, производительность лучше чем у type с пересечением
+        </li>
+        <li className="interview__item">
+          <span className="interview__item_number">4)</span>
+          Mapped types позволяет создовать типы на основе существующих, путем трансформации их свойств.
+        </li>
+        <li className="interview__item">
+          <span className="interview__item_number">5)</span>
+          Assert — это statement, который проверяет булево выражение. Если выражение истинно, выполнение продолжается.
+          Если ложно — выбрасывается ошибка.
+        </li>
+        <li className="interview__item">
+          <span className="interview__item_number">6)</span>
+          Infer - вытащить параметр или return тип из функции.
+        </li>
+        <li className="interview__item">
+          <span className="interview__item_number">7)</span>
+          Utility Types: ----
+          <br></br>
+          Partial(Type) Создает тип, который делает все свойства указанного типа необязательными, помечая их как ?.
+          <br></br>
+          Required(Type): Создает тип, который делает все свойства указанного типа обязательными путем удаления ? из
+          всех свойств.
+          <br></br>
+          Readonly(Type): Создает тип, который делает все свойства указанного типа доступными только для чтения.
+          <br></br>
+          Pick(Type, Keys): Создает тип, содержащий только указанные свойства из исходного типа.
+          <br></br>
+          Record(Keys, Type): Создает тип, представляющий объект, где ключи типа Keys имеют тип Type.
+          <br></br>
+          Exclude(Type, ExcludedUnion): Создает тип, исключая из него все члены, которые являются подтипами
+          ExcludedUnion.
+          <br></br>
+          Omit(Type, Keys): Создает тип, исключая из него указанные свойства.
+          <br></br>
+          NonNullable(Type): Создает тип, исключая null и undefined из указанного типа.
+          <br></br>
+          ReturnType(Type): Извлекает тип возвращаемого значения функции.
         </li>
       </ul>
       <h2>Вопросы по React</h2>
       <ul className="interview__list">
         <li className="interview__item">
-          <span className="interview__item_number">1)</span> Virtul DOM -{' '}
+          <span className="interview__item_number">1)</span>
+          JSX - это расширение синтаксиса для JavaScript, которое позволяет вам писать HTML-подобный код прямо внутри
+          JavaScript-файлов. React экранирует все значения, встроенные в JSX, перед тем как отрендерить их. Это
+          означает, что невозможно внедрить XSS-атаки путем простой вставки пользовательского контента. Компиляция в
+          эффективный код.
         </li>
         <li className="interview__item">
-          <span className="interview__item_number">2)</span> Оптимизация в React(кеширование)-
+          <span className="interview__item_number">2)</span>
+          Классовые компоненты — это ES6-классы, которые расширяют React.Component и используют методы жизненного цикла.
+          Функциональные компоненты — это обычные JavaScript-функции, которые возвращают JSX.
         </li>
         <li className="interview__item">
-          <span className="interview__item_number">3)</span> Расскажи про хуки -
+          <span className="interview__item_number">3)</span>
+          Props (properties) — это входные параметры, которые компонент получает от родительского компонента. Их можно
+          сравнить с аргументами функции. Если дочерний компонент изменяет props, это создает: непредсказуемое
+          поведение, нарушение архитектуры React. Потеря оптимизаций — нарушение поверхностного сравнения
         </li>
         <li className="interview__item">
-          <span className="interview__item_number">4)</span> useRef - Предназначен для сохранения и взаимодействия с
+          <span className="interview__item_number">4)</span>Без ключей React перерисовывает весь список при любом
+          изменении. С ключами React понимает, какой именно элемент изменился, и обновляет только его.
+        </li>
+        <li className="interview__item">
+          <span className="interview__item_number">1)</span> Fiber - когда у нас впервые строится дерево реакт
+          элементов, то для каждого элемента впервые создается Fiber Noda
+        </li>
+        <li className="interview__item">
+          <span className="interview__item_number">2)</span> Эвристика в React - алгоритмы которые строят в начале
+          CurrentTree а потом переходят в WorkInProgressTree имеют в среднем сложность O(n3). Поэтому есть 2 правила 1)
+          Элементы разных типов - разные деревья, принцип в кратце, что React удаляет компоненты и строит их заного а
+          просто пересоздает их. 2) Можно использовать key, чтобы пометить какие элементы будут стабильны в разных
+          рендерах.
+          <br></br>
+          За счет этих правил сложность O(n)
+        </li>
+        <li className="interview__item">
+          <span className="interview__item_number">3)</span> Оптимизация в React(кеширование)-
+        </li>
+        <li className="interview__item">
+          <span className="interview__item_number">4)</span> Расскажи про хуки в React
+          <br />
+          useEffect это хук в React, который предназначен для выполнения side-эффектов в функциональных компонентах.
+          Side-эффекты могут быть, например, выполнение запросов HTTP, изменение состояний компонента или обновление
+          DOM-элементов.
+        </li>
+        <li className="interview__item">
+          <span className="interview__item_number">5)</span> useRef - Предназначен для сохранения и взаимодействия с
           изменяемыми значениями, которые не вызывают перерендеринг компонента.Хранение мутабельных значений: Вы можете
           использовать useRef для хранения переменных, которые не приводят к повторному рендерингу компонента. Часто
           используется для сохранения ссылок на DOM-элементы.
@@ -142,6 +260,55 @@ function Interview() {
         <li className="interview__item">
           <span className="interview__item_number">6)</span> uselayoutEffect - Cрабатывает синхронно после всех
           изменений в DOM и перед тем, как браузер выполнит перерисовку экрана.
+        </li>
+      </ul>
+      <h2>Вопросы по Vue</h2>
+      <ul>
+        <li className="interview__item">
+          <span className="interview__item_number">1)</span>Vue 2 использует Object.defineProperty(определяет новое или
+          изменяет существующее свойство объекта и возвращает этот объект.) с ограничениями. Object.defineProperty
+          применяется только к существующим свойствам при инициализации. Новые свойства не имеют геттеров/сеттеров.
+          this.$set и this.$delete помогает добавить/удалить свойства.
+          <br />
+          Vue 3 использует Proxy, который обеспечивает полное контроль над свойствами. Proxy может быть использован для
+          чтения, записи и удаления свойств.
+        </li>
+        <li className="interview__item">
+          <span className="interview__item_number">2)</span>
+          Composition API - обеспечивающий лучшую организацию кода, переиспользование логики и поддержку TypeScript
+        </li>
+        <li className="interview__item">
+          <span className="interview__item_number">3)</span>
+          v-model — это директива для двустороннего связывания данных (two-way binding) между формой ввода и данными
+          компонента. Синтаксический сахар для :value + @input="message = $event.target.value".
+        </li>
+        <li className="interview__item">
+          <span className="interview__item_number">4)</span>
+          Директивы: <br />
+          v-if / v-else-if / v-else - Когда элемент должен полностью добавляться/удаляться из DOM, в зависимости от
+          условий.
+          <br />
+          v-show - Условное отображение через CSS display: none.
+          <br /> v-for - Директива для рендеринга элементов списка.
+          <br /> v-bind - Директива для привязки атрибутов HTML к компоненту. Привязка всех свойств объекта и пропсов.
+          Передача пропсов в дочерние компоненты
+          <br /> v-slot - Директива для рендеринга содержимого слота внутри компонента.
+          <br />
+          v-memo - Директива для оптимизации рендеринга компонента.
+        </li>
+        <li className="interview__item">
+          <span className="interview__item_number">5)</span>
+          Жизненный цикл компонента: <br />
+          created — инициализация данных, API запросы. <br /> mounted — работа с DOM, сторонние библиотеки
+          <br /> updated — операции после обновления DOM (осторожно infinite loop) <br />
+          beforeUnmount — очистка ресурсов, отмена подписок
+        </li>
+        <li className="interview__item">
+          <span className="interview__item_number">6)</span>
+          Computed - вычисляемые свойства, которые вычисляются на основе других свойств. Возвращают значения,
+          кэшируются.Синхронные. <br />
+          Watch - наблюдатель, который следит за изменением свойств. Могут быть асинхронные + не кешируются.
+          Используются для сайд эффектов(подписки, таймеры, асихронные запросы)
         </li>
       </ul>
     </section>

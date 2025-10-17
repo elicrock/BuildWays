@@ -1,9 +1,10 @@
 import './ProductItem.css';
 import { memo } from 'react';
 import Modal from '../../../../components/Modal/Modal';
-import CreateCategoryForm from '../../Categories/CreateCategoryForm/CreateCategoryForm';
 import useTogglePopup from '../../../../hooks/useTogglePopup';
 import { Product } from '../../../../types/productType';
+
+import EditProductForm from '../EditProductForm/EditProductForm';
 
 interface ProductItemProps {
   product: Product;
@@ -18,11 +19,12 @@ const ProductItem = memo(function ProductItem({ product, categoryName }: Product
       <Modal
         classBtn="product-item__add-editBtn"
         titleModal="Редактирование товара"
+        classModal="modal__content_product"
         showModal={showModal}
         handleCloseModal={handleCloseModal}
         handleOpenModal={handleOpenModal}
       >
-        <CreateCategoryForm submitBtnName="Редактировать" handleCloseModal={handleCloseModal} />
+        <EditProductForm submitBtnName="Редактировать" handleCloseModal={handleCloseModal} product={product} />
       </Modal>
       <h2 className="product-item__title">{product.name}</h2>
       <p className="product-item__subtitle">Категория: {categoryName}</p>

@@ -1,31 +1,43 @@
-import './CreateProductForm.css';
 import { useState, useEffect } from 'react';
 import { useForm, SubmitHandler } from 'react-hook-form';
-import { useCreateProductMutation } from '../../../../Api/productApi';
-import { ProductFormData, ParametersProduct } from '../../../../types/productType';
-import usePosterFileInput from '../../../../hooks/usePosterFileInput';
+import { Product, ProductFormData, ParametersProduct } from '../../../../types/productType';
 import { useAppSelector, useAppDispatch } from '../../../../hooks/redux';
-import { setError, clearError } from '../../../../redux/errorSlice';
+import { useDeleteProductMutation, useEditProductMutation } from '../../../../Api/productApi';
+import usePosterFileInput from '../../../../hooks/usePosterFileInput';
 import AddDetailsProduct from '../AddDetailsProduct/AddDetailsProduct';
+import { setError, clearError } from '../../../../redux/errorSlice';
+import { updateProduct } from '../../../../redux/productSlice';
 
-type CreateProductFormProps = {
+type EditProductFormProps = {
+  product: Product;
   submitBtnName?: string;
   handleCloseModal?: () => void;
 };
 
-function CreateProductForm({ submitBtnName, handleCloseModal }: CreateProductFormProps) {
+function EditProductForm({ product, submitBtnName, handleCloseModal }: EditProductFormProps) {
+  const srcImage = `http://localhost:3000/${product.img}`;
   const {
     register,
     handleSubmit,
+    setValue,
     formState: { errors, isValid },
   } = useForm<ProductFormData>({ mode: 'onChange' });
 
-  const { selectedImageFile, handlePosterFileInputChange } = usePosterFileInput();
-  const [createProduct] = useCreateProductMutation();
+  const { selectedImageFile, imageSelected, handlePosterFileInputChange } = usePosterFileInput();
+  const [deleteProduct, { isLoading: isLoadingDelete }] = useDeleteProductMutation();
+  const [editProduct, { isLoading }] = useEditProductMutation();
   const dispatch = useAppDispatch();
-  const errorApi = useAppSelector(state => state.error.message);
   const myCategories = useAppSelector(state => state.categories);
-  const [parameters, setParameters] = useState<ParametersProduct[]>([]);
+  const errorApi = useAppSelector(state => state.error.message);
+  const [parameters, setParameters] = useState<ParametersProduct[]>(product.parameters || []);
+  const [hasChangeParams, setHasChangeParams] = useState(false);
+
+  useEffect(() => {
+    setValue('name', product?.name || '');
+    setValue('categoryId', product?.categoryId || '');
+    setValue('price', product?.price || '');
+    setValue('description', product?.description || '');
+  }, [product, setValue]);
 
   useEffect(() => {
     dispatch(clearError());
@@ -33,17 +45,20 @@ function CreateProductForm({ submitBtnName, handleCloseModal }: CreateProductFor
 
   const addFieldParameters = () => {
     setParameters([...parameters, { title: '', description: '' }]);
+    setHasChangeParams(true);
   };
 
   const deleteFieldParameters = (index: number) => {
     setParameters(prevParameters => prevParameters.filter((_, i) => i !== index));
+    setHasChangeParams(true);
   };
 
   const handleChangeParameters = (key: string, value: string, index: number) => {
     setParameters(prevParameters => prevParameters.map((item, i) => (i === index ? { ...item, [key]: value } : item)));
+    setHasChangeParams(true);
   };
 
-  const handleAddProduct: SubmitHandler<ProductFormData> = async ({ name, price, categoryId, description }) => {
+  const handleEditProduct: SubmitHandler<ProductFormData> = async ({ name, price, categoryId, description }) => {
     try {
       const formData = new FormData();
       formData.append('name', name);
@@ -53,19 +68,30 @@ function CreateProductForm({ submitBtnName, handleCloseModal }: CreateProductFor
       selectedImageFile && formData.append('img', selectedImageFile?.file || '');
       parameters && formData.append('parameters', JSON.stringify(parameters));
 
-      await createProduct(formData).unwrap();
+      const response = await editProduct({ formData, id: product.id }).unwrap();
+
+      dispatch(updateProduct(response));
       handleCloseModal();
     } catch (error) {
       if (error.status === 409) {
-        dispatch(setError('Продукт с таким названием уже существует'));
+        dispatch(setError('Товар с таким названием уже существует'));
       } else {
-        dispatch(setError('При создании продукта произошла ошибка'));
+        dispatch(setError('При редактировании товара произошла ошибка'));
       }
     }
   };
 
+  const handleDeleteProduct = async (id: number) => {
+    try {
+      await deleteProduct(id).unwrap();
+      handleCloseModal();
+    } catch (error) {
+      dispatch(setError('Произошла ошибка при удалении'));
+    }
+  };
+
   return (
-    <form className="product-form" name="createProduct" onSubmit={handleSubmit(handleAddProduct)}>
+    <form className="product-form" name="editProduct" onSubmit={handleSubmit(handleEditProduct)}>
       <div className="product-form__box">
         <label className="product-form__label" htmlFor="nameProduct">
           Название
@@ -171,13 +197,29 @@ function CreateProductForm({ submitBtnName, handleCloseModal }: CreateProductFor
         id="inputFile"
         onChange={handlePosterFileInputChange}
       />
-      {selectedImageFile ? <img className="product-form__image" src={selectedImageFile.preview} /> : null}
+      {selectedImageFile ? (
+        <img className="product-form__image" src={selectedImageFile.preview} />
+      ) : (
+        <img className="product-form__image" src={srcImage} alt="Product" />
+      )}
       <label htmlFor="inputFile" className="product-form__file-label">
         <span className="product-form__file-button-text">Добавить фото</span>
       </label>
       <div className="product-form__box-Btns">
-        <button type="submit" className="product-form__submit-btn" disabled={!isValid}>
+        <button
+          type="submit"
+          className="product-form__submit-btn"
+          disabled={!isValid && !imageSelected && !hasChangeParams}
+        >
           {submitBtnName}
+        </button>
+        <button
+          type="button"
+          className="product-form__delete-btn"
+          onClick={() => handleDeleteProduct(product.id)}
+          disabled={isLoading || isLoadingDelete}
+        >
+          Удалить
         </button>
       </div>
       <span className="product-form__error-api">{errorApi}</span>
@@ -185,4 +227,4 @@ function CreateProductForm({ submitBtnName, handleCloseModal }: CreateProductFor
   );
 }
 
-export default CreateProductForm;
+export default EditProductForm;

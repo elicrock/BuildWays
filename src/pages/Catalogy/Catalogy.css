@@ -6,7 +6,7 @@
 }
 
 .catalogy__container {
-  padding: 0 70px 50px 70px;
+  padding: 0 30px 50px 30px;
 }
 
 .catalogy__title {
@@ -31,6 +31,7 @@
   .catalogy__list {
     grid-template-columns: repeat(2, minmax(0, 310px));
   }
+
   .catalogy__container {
     padding: 0 50px 40px 50px;
   }
@@ -41,6 +42,7 @@
     grid-template-columns: repeat(1, minmax(0, 310px));
     justify-content: center;
   }
+
   .catalogy__container {
     padding: 0 15px 30px 15px;
   }
